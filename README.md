@@ -34,6 +34,7 @@ Read in this order for the full picture.
 | [Business Model Canvas to Business Architecture Blueprint](./Business%20Model%20Canvas%20to%20Business%20Architecture%20Blueprint.md) | Value, stakeholders, capabilities, and boundaries |
 | [Requirements document map](./requirements-document-map.md) | Diagram of how the documents and epics relate |
 | [Product backlog](./product-backlog.md) | Prioritized user stories (P0 to P2) across all epics |
+| [Tech stack and architecture](./tech-stack.md) | Proposed Google Cloud stack, security posture, and Mermaid architecture diagram |
 
 ## Epics
 
