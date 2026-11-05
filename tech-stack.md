@@ -6,7 +6,40 @@ This is a proposed baseline for the solution architecture diagram. It is an AI-g
 
 The proposed stack is event-driven and serverless-first on Google Cloud. Cloud Run and Pub/Sub handle asynchronous batch processing, Cloud SQL for PostgreSQL holds transactional payroll data, BigQuery handles audit and analytics, and Vertex AI with Gemini provides assistive schema mapping. Security rests on VPC Service Controls, customer-managed encryption keys, tenant isolation, and Sensitive Data Protection, because the data includes tax IDs and bank details.
 
-## Architecture diagram
+## Architecture overview (one view)
+
+```mermaid
+flowchart LR
+    U["Users<br/>Admins, specialists, auditors"] --> E["Edge<br/>Identity Platform, Cloud Armor,<br/>Load Balancer, SPA on CDN"]
+    E --> A["API layer<br/>API Gateway / Apigee"]
+
+    subgraph CORE["Cloud Run services (Epics 1 to 6)"]
+        direction LR
+        B1["1 Batch"] --> B2["2 Mapping"] --> B3["3 Validate<br/>and simulate"]
+        B3 -->|"eligible"| B4["4 Activate<br/>(partial commit)"]
+        B3 -->|"errors"| B5["5 Remediate"]
+        B5 -->|"corrected"| B3
+        B4 --> B6["6 Results<br/>and audit"]
+        B5 --> B6
+    end
+
+    A --> B1
+    A --> B5
+    A --> B6
+
+    ORCH["Orchestration<br/>Workflows, Pub/Sub, Cloud Tasks,<br/>Dataflow"] -.-> CORE
+    AI["AI<br/>Gemini on Vertex AI,<br/>vector search, Model Armor"] -.->|"suggests only"| B2
+    ENG["Payroll and statutory engines"] <-->|"dry run and activation"| CORE
+
+    CORE --> D["Data<br/>Cloud Storage, Cloud SQL / AlloyDB,<br/>Firestore, Redis, BigQuery, Looker"]
+
+    SEC["Security: IAM, KMS keys, VPC Service Controls,<br/>Sensitive Data Protection, Audit Logs, Security Command Center"]
+    OPS["Operations: Terraform, Cloud Build, Cloud Deploy,<br/>Artifact Registry, Cloud Monitoring"]
+    D --- SEC
+    D --- OPS
+```
+
+## Architecture diagram (detailed)
 
 The diagram shows the layers of the solution and how the six epics flow through them.
 
