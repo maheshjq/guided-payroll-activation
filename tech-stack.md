@@ -6,6 +6,77 @@ This is a proposed baseline for the solution architecture diagram. It is an AI-g
 
 The proposed stack is event-driven and serverless-first on Google Cloud. Cloud Run and Pub/Sub handle asynchronous batch processing, Cloud SQL for PostgreSQL holds transactional payroll data, BigQuery handles audit and analytics, and Vertex AI with Gemini provides assistive schema mapping. Security rests on VPC Service Controls, customer-managed encryption keys, tenant isolation, and Sensitive Data Protection, because the data includes tax IDs and bank details.
 
+## Solution architecture (layered view)
+
+![Solution architecture diagram](./docs/solution-architecture.svg)
+
+The same view as a Mermaid diagram, which stays editable as text:
+
+```mermaid
+flowchart TB
+    USERS["Payroll administrators · Implementation specialists · Auditors"]
+
+    subgraph EDGE["Edge and access"]
+        direction LR
+        WEB["Web app<br/>Angular or React, AG Grid, CDN"]
+        IDP["Identity Platform<br/>SSO via SAML and OIDC"]
+        LB["Cloud Armor + Load Balancer<br/>WAF, DDoS, rate limits"]
+        GW["API Gateway or Apigee<br/>auth, quotas, routing"]
+    end
+
+    subgraph SVC["Cloud Run services, one per epic"]
+        direction LR
+        E1["Epic 1<br/>Prepare batch"]
+        E2["Epic 2<br/>Map data"]
+        E3["Epic 3<br/>Validate, simulate"]
+        E4["Epic 4<br/>Activate<br/>(partial commit)"]
+        E6["Epic 6<br/>Results and audit"]
+        E5["Epic 5<br/>Remediate"]
+        E1 --> E2 --> E3
+        E3 -->|"eligible"| E4
+        E4 -->|"outcomes"| E6
+        E3 -->|"errors"| E5
+        E5 -->|"corrected"| E3
+        E5 -->|"outcomes"| E6
+    end
+
+    AI["AI assist: Gemini on Vertex AI<br/>vector search, Model Armor, masked inputs"]
+    ENG["Payroll and statutory engines<br/>dry run and activation"]
+
+    ORCH["Orchestration<br/>Eventarc, Cloud Workflows, Pub/Sub + dead-letter,<br/>Cloud Tasks, Dataflow"]
+
+    subgraph DATA["Data"]
+        direction LR
+        GCS["Cloud Storage<br/>landing, quarantine, processed"]
+        SQL["Cloud SQL or AlloyDB<br/>system of record"]
+        FS["Firestore<br/>remediation queue, live status"]
+        RED["Memorystore Redis<br/>reference lookups"]
+        BQ["BigQuery + Looker<br/>audit trail, history, KPIs"]
+    end
+
+    SEC["Security and governance, applied to every layer<br/>IAM, Cloud KMS keys, VPC Service Controls, Sensitive Data Protection,<br/>Audit Logs, Security Command Center, Secret Manager"]
+    OPS["Operations and delivery<br/>Terraform, Cloud Build, Cloud Deploy,<br/>Artifact Registry + Binary Authorization, Cloud Monitoring"]
+
+    USERS --> EDGE
+    EDGE -->|"REST calls, tenant scoped"| SVC
+    AI -.->|"suggests only"| E2
+    E3 <-.->|"dry run"| ENG
+    E4 <-.->|"activate"| ENG
+    ORCH ==>|"drives every stage"| SVC
+    SVC <-->|"read and write"| DATA
+    DATA --- SEC
+    SEC --- OPS
+
+    classDef epic fill:#E6F4F4,stroke:#0A6C6C,color:#13222D
+    classDef err fill:#FBEBDF,stroke:#B2501A,color:#13222D
+    classDef ai fill:#EEEAFA,stroke:#5E46B0,color:#13222D
+    classDef ext fill:#FFFFFF,stroke:#566877,stroke-dasharray:3 3,color:#13222D
+    class E1,E2,E3,E4,E6 epic
+    class E5 err
+    class AI ai
+    class ENG ext
+```
+
 ## Architecture overview (one view)
 
 ```mermaid

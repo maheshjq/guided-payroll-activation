@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 712" role="img" aria-label="Layered solution architecture: users reach an edge layer and an API gateway, then six Cloud Run epic services (batch, mapping, validate and simulate, activate, remediate, results and audit), driven by orchestration, storing data in Cloud Storage, Cloud SQL or AlloyDB, Firestore, Redis and BigQuery, with security and operations applied across all layers.">
+        <style>
+svg{--bg:#FFFFFF;--surface:#FFFFFF;--band:#E7EDF1;--ink:#13222D;--muted:#566877;--line:#BCC8D1;--flow:#0A6C6C;--exception:#B2501A;--ai:#5E46B0}
+@media (prefers-color-scheme: dark){svg{--bg:#0F1A22;--surface:#17262F;--band:#1B2C37;--ink:#E4ECF1;--muted:#93A6B3;--line:#34495A;--flow:#3FC1C1;--exception:#F09A62;--ai:#A894F0}}
+.bg{fill:var(--bg)}
+.band{fill:var(--band);stroke:none}.group{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:4 4}
+.box{fill:var(--surface);stroke:var(--line);stroke-width:1}.box.epic{stroke:var(--flow);stroke-width:1.5}.box.err{stroke:var(--exception);stroke-width:1.5}.box.ai{stroke:var(--ai);stroke-width:1.5}.box.ext{stroke:var(--muted);stroke-dasharray:2 3}
+text{fill:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:12px}
+.t-h{font-weight:600;font-size:12.5px}.t-s{fill:var(--muted);font-size:10.5px}
+.t-k{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;fill:var(--flow);letter-spacing:.06em}.t-k.err{fill:var(--exception)}.t-k.ai{fill:var(--ai)}
+.t-band{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;fill:var(--muted);letter-spacing:.05em}.t-lab{font-size:10.5px;fill:var(--muted)}
+.ln{stroke:var(--flow);stroke-width:2;fill:none}.ln.ex{stroke:var(--exception)}.ln.ai{stroke:var(--ai);stroke-dasharray:5 3}.ln.ext{stroke:var(--muted);stroke-dasharray:2 3}.ln.thin{stroke:var(--muted);stroke-width:1.5}
+.mk-flow{fill:var(--flow)}.mk-ex{fill:var(--exception)}.mk-ai{fill:var(--ai)}.mk-th{fill:var(--muted)}
+</style><rect class="bg" width="1000" height="712"/><defs>
+          <marker id="a-flow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="mk-flow" points="0,0 10,5 0,10"/></marker>
+          <marker id="a-ex" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="mk-ex" points="0,0 10,5 0,10"/></marker>
+          <marker id="a-ai" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="mk-ai" points="0,0 10,5 0,10"/></marker>
+          <marker id="a-th" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="mk-th" points="0,0 10,5 0,10"/></marker>
+        </defs>
+
+        <!-- users -->
+        <rect class="box" x="240" y="8" width="170" height="30" rx="4"/><text x="325" y="27" text-anchor="middle">Payroll administrators</text>
+        <rect class="box" x="425" y="8" width="190" height="30" rx="4"/><text x="520" y="27" text-anchor="middle">Implementation specialists</text>
+        <rect class="box" x="630" y="8" width="130" height="30" rx="4"/><text x="695" y="27" text-anchor="middle">Auditors</text>
+        <line class="ln thin" x1="500" y1="38" x2="500" y2="62" marker-end="url(#a-th)"/>
+
+        <!-- edge -->
+        <rect class="band" x="10" y="62" width="980" height="70" rx="6"/>
+        <text class="t-band" x="24" y="77">EDGE AND ACCESS</text>
+        <rect class="box" x="25" y="86" width="220" height="38" rx="4"/><text class="t-h" x="35" y="101">Web app</text><text class="t-s" x="35" y="116">Angular or React, AG Grid, CDN</text>
+        <rect class="box" x="265" y="86" width="220" height="38" rx="4"/><text class="t-h" x="275" y="101">Identity Platform</text><text class="t-s" x="275" y="116">SSO via SAML and OIDC</text>
+        <rect class="box" x="505" y="86" width="220" height="38" rx="4"/><text class="t-h" x="515" y="101">Cloud Armor + Load Balancer</text><text class="t-s" x="515" y="116">WAF, DDoS, rate limits</text>
+        <rect class="box" x="745" y="86" width="220" height="38" rx="4"/><text class="t-h" x="755" y="101">API Gateway or Apigee</text><text class="t-s" x="755" y="116">auth, quotas, routing</text>
+        <line class="ln thin" x1="500" y1="132" x2="500" y2="160" marker-end="url(#a-th)"/>
+        <text class="t-lab" x="510" y="150">REST calls, tenant scoped</text>
+
+        <!-- epic services -->
+        <rect class="group" x="10" y="160" width="980" height="230" rx="6"/>
+        <text class="t-band" x="24" y="177">CLOUD RUN SERVICES, ONE PER EPIC</text>
+
+        <rect class="box epic" x="25" y="190" width="150" height="62" rx="4"/><text class="t-k" x="35" y="206">EPIC 1</text><text class="t-h" x="35" y="224">Prepare batch</text><text class="t-s" x="35" y="241">upload, context</text>
+        <rect class="box epic" x="205" y="190" width="150" height="62" rx="4"/><text class="t-k" x="215" y="206">EPIC 2</text><text class="t-h" x="215" y="224">Map data</text><text class="t-s" x="215" y="241">schema, org context</text>
+        <rect class="box epic" x="385" y="190" width="150" height="62" rx="4"/><text class="t-k" x="395" y="206">EPIC 3</text><text class="t-h" x="395" y="224">Validate, simulate</text><text class="t-s" x="395" y="241">dry run, rules</text>
+        <rect class="box epic" x="605" y="190" width="150" height="62" rx="4"/><text class="t-k" x="615" y="206">EPIC 4</text><text class="t-h" x="615" y="224">Activate</text><text class="t-s" x="615" y="241">partial commit</text>
+        <rect class="box epic" x="815" y="190" width="160" height="62" rx="4"/><text class="t-k" x="825" y="206">EPIC 6</text><text class="t-h" x="825" y="224">Results and audit</text><text class="t-s" x="825" y="241">history, KPIs</text>
+        <rect class="box err" x="385" y="296" width="150" height="62" rx="4"/><text class="t-k err" x="395" y="312">EPIC 5</text><text class="t-h" x="395" y="330">Remediate</text><text class="t-s" x="395" y="347">fix, bulk edit</text>
+
+        <line class="ln" x1="175" y1="221" x2="205" y2="221" marker-end="url(#a-flow)"/>
+        <line class="ln" x1="355" y1="221" x2="385" y2="221" marker-end="url(#a-flow)"/>
+        <line class="ln" x1="535" y1="221" x2="605" y2="221" marker-end="url(#a-flow)"/><text class="t-lab" x="570" y="214" text-anchor="middle">eligible</text>
+        <line class="ln" x1="755" y1="221" x2="815" y2="221" marker-end="url(#a-flow)"/><text class="t-lab" x="785" y="214" text-anchor="middle">outcomes</text>
+        <line class="ln ex" x1="425" y1="252" x2="425" y2="296" marker-end="url(#a-ex)"/><text class="t-lab" x="418" y="278" text-anchor="end">errors</text>
+        <line class="ln" x1="495" y1="296" x2="495" y2="252" marker-end="url(#a-flow)"/><text class="t-lab" x="503" y="278">corrected</text>
+        <polyline class="ln ex" points="460,358 460,376 895,376 895,252" marker-end="url(#a-ex)"/><text class="t-lab" x="700" y="370" text-anchor="middle">outcomes</text>
+
+        <rect class="box ai" x="25" y="296" width="330" height="62" rx="4"/><text class="t-k ai" x="35" y="312">AI ASSIST</text><text class="t-h" x="35" y="330">Gemini on Vertex AI</text><text class="t-s" x="35" y="347">vector search, Model Armor, masked inputs</text>
+        <line class="ln ai" x1="280" y1="296" x2="280" y2="252" marker-end="url(#a-ai)"/><text class="t-lab" x="288" y="278">suggests only</text>
+
+        <rect class="box ext" x="605" y="296" width="150" height="62" rx="4"/><text class="t-h" x="615" y="312">Payroll and statutory</text><text class="t-h" x="615" y="327">engines</text><text class="t-s" x="615" y="347">dry run and activation</text>
+        <line class="ln ext" x1="680" y1="252" x2="680" y2="296" marker-start="url(#a-th)" marker-end="url(#a-th)"/><text class="t-lab" x="688" y="278">calls</text>
+
+        <!-- orchestration -->
+        <rect class="band" x="10" y="404" width="980" height="44" rx="6"/>
+        <text class="t-band" x="24" y="420">ORCHESTRATION</text>
+        <text class="t-lab" x="976" y="420" text-anchor="end">drives every stage asynchronously</text>
+        <text class="t-s" x="24" y="438">Eventarc, Cloud Workflows, Pub/Sub with dead-letter topics, Cloud Tasks retries, Dataflow for large files</text>
+        <line class="ln thin" x1="500" y1="448" x2="500" y2="470" marker-start="url(#a-th)" marker-end="url(#a-th)"/><text class="t-lab" x="510" y="463">read and write</text>
+
+        <!-- data -->
+        <rect class="band" x="10" y="470" width="980" height="84" rx="6"/>
+        <text class="t-band" x="24" y="486">DATA</text>
+        <rect class="box" x="25" y="496" width="180" height="46" rx="4"/><text class="t-h" x="35" y="514">Cloud Storage</text><text class="t-s" x="35" y="531">landing, quarantine, processed</text>
+        <rect class="box" x="215" y="496" width="180" height="46" rx="4"/><text class="t-h" x="225" y="514">Cloud SQL or AlloyDB</text><text class="t-s" x="225" y="531">system of record, row security</text>
+        <rect class="box" x="405" y="496" width="180" height="46" rx="4"/><text class="t-h" x="415" y="514">Firestore</text><text class="t-s" x="415" y="531">remediation queue, live status</text>
+        <rect class="box" x="595" y="496" width="180" height="46" rx="4"/><text class="t-h" x="605" y="514">Memorystore Redis</text><text class="t-s" x="605" y="531">tax and pay code lookups</text>
+        <rect class="box" x="785" y="496" width="180" height="46" rx="4"/><text class="t-h" x="795" y="514">BigQuery + Looker</text><text class="t-s" x="795" y="531">audit trail, history, KPIs</text>
+
+        <!-- security -->
+        <rect class="band" x="10" y="570" width="980" height="66" rx="6"/>
+        <text class="t-band" x="24" y="586">SECURITY AND GOVERNANCE, APPLIED TO EVERY LAYER</text>
+        <text class="t-s" x="24" y="606">IAM and workload identity · Cloud KMS keys (CMEK or EKM) · VPC Service Controls · Sensitive Data Protection</text>
+        <text class="t-s" x="24" y="623">Cloud Audit Logs with retention locks · Security Command Center · Secret Manager · tenant isolation</text>
+
+        <!-- ops -->
+        <rect class="band" x="10" y="650" width="980" height="48" rx="6"/>
+        <text class="t-band" x="24" y="666">OPERATIONS AND DELIVERY</text>
+        <text class="t-s" x="24" y="685">Terraform · Cloud Build and Cloud Deploy · Artifact Registry with Binary Authorization · Cloud Monitoring, Logging, Trace</text>
+      </svg>
