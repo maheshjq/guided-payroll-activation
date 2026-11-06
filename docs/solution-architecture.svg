@@ -1,110 +1,116 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560 835" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="Guided payroll activation solution architecture on Google Cloud: source systems feed ingestion services, a Python FastAPI service layer behind an API gateway serves a React frontend, with Pub/Sub, Workflows, Dataflow, Vertex AI, Cloud SQL, Cloud Storage, Firestore and BigQuery, plus observability and security layers.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560 860" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="Guided payroll activation solution architecture on Google Cloud: source systems feed ingestion services, a Python FastAPI service layer behind an API gateway serves a React frontend, with Pub/Sub, Workflows, Dataflow, Vertex AI, Cloud SQL, Cloud Storage, Firestore and BigQuery, plus observability and security layers.">
 <defs><marker id="m" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#1F4E9E"/></marker></defs>
-<rect width="1560" height="835" fill="#FFFFFF"/>
+<rect width="1560" height="860" fill="#FFFFFF"/>
 <rect x="420" y="10" width="720" height="44" rx="6" fill="#0B4DA8"/>
 <text x="780" y="38" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Guided Payroll Activation: Solution Architecture on Google Cloud</text>
 <rect x="20" y="90" width="220" height="350" rx="8" fill="#EEF4FC" stroke="#0B4DA8" stroke-width="1.5"/>
 <path d="M20,98 a8,8 0 0 1 8,-8 h204 a8,8 0 0 1 8,8 v36 h-220 z" fill="#0B4DA8"/>
 <text x="130" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">Source systems</text><text x="130" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">(external)</text>
-<rect x="35" y="150" width="190" height="56" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="130.0" y="174" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">HRIS and ERP exports</text>
-<text x="130.0" y="190" text-anchor="middle" font-size="10.5" fill="#44566B">CSV, Excel, API</text>
+<rect x="35" y="150" width="190" height="56" rx="7" fill="#FFFFFF" stroke="#2E6BC6"/>
+<g transform="translate(38.0,166)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></g>
+<text x="143" y="174" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">HRIS and ERP exports</text><text x="143" y="190" text-anchor="middle" font-size="10.5" fill="#44566B">CSV, Excel, API</text>
 <polyline points="225,178 250,178" fill="none" stroke="#1F4E9E" stroke-width="1.8"/>
-<rect x="35" y="220" width="190" height="56" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="130.0" y="244" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Legacy payroll extracts</text>
-<text x="130.0" y="260" text-anchor="middle" font-size="10.5" fill="#44566B">SFTP, flat files</text>
+<rect x="35" y="220" width="190" height="56" rx="7" fill="#FFFFFF" stroke="#2E6BC6"/>
+<g transform="translate(38.0,236)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="1"/></g>
+<text x="143" y="244" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Legacy payroll extracts</text><text x="143" y="260" text-anchor="middle" font-size="10.5" fill="#44566B">SFTP, flat files</text>
 <polyline points="225,248 250,248" fill="none" stroke="#1F4E9E" stroke-width="1.8"/>
-<rect x="35" y="290" width="190" height="56" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="130.0" y="314" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Org and entity structure</text>
-<text x="130.0" y="330" text-anchor="middle" font-size="10.5" fill="#44566B">entities, jurisdictions</text>
+<rect x="35" y="290" width="190" height="56" rx="7" fill="#FFFFFF" stroke="#2E6BC6"/>
+<g transform="translate(38.0,306)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.5 12h4M11.5 12L17 6.5M11.5 12L17 17.5"/></g>
+<text x="143" y="314" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Org and entity structure</text><text x="143" y="330" text-anchor="middle" font-size="10.5" fill="#44566B">entities, jurisdictions</text>
 <polyline points="225,318 250,318" fill="none" stroke="#1F4E9E" stroke-width="1.8"/>
-<rect x="35" y="360" width="190" height="56" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="130.0" y="384" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Pay codes and benefits</text>
-<text x="130.0" y="400" text-anchor="middle" font-size="10.5" fill="#44566B">plans, deductions</text>
+<rect x="35" y="360" width="190" height="56" rx="7" fill="#FFFFFF" stroke="#2E6BC6"/>
+<g transform="translate(38.0,376)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM8.5 13l2.5 2.5 4.5-5"/></g>
+<text x="143" y="384" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Pay codes and benefits</text><text x="143" y="400" text-anchor="middle" font-size="10.5" fill="#44566B">plans, deductions</text>
 <polyline points="225,388 250,388" fill="none" stroke="#1F4E9E" stroke-width="1.8"/>
 <polyline points="250,178 250,388" fill="none" stroke="#1F4E9E" stroke-width="1.8"/>
 <polyline points="250,283 270,283" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
 <rect x="270" y="223" width="120" height="120" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
-<text x="330.0" y="256" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Ingestion</text>
-<text x="330.0" y="272" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Services</text>
-<text x="330.0" y="288" text-anchor="middle" font-size="10.5" fill="#44566B">upload, SFTP,</text>
-<text x="330.0" y="302" text-anchor="middle" font-size="10.5" fill="#44566B">API connectors,</text>
-<text x="330.0" y="318" text-anchor="middle" font-size="10.5" fill="#44566B">Eventarc</text>
-<rect x="410" y="80" width="980" height="550" rx="10" fill="#FFFFFF" stroke="#3B7DD8" stroke-width="2"/>
+<g transform="translate(318.0,231)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></g>
+<text x="330.0" y="270" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Ingestion</text>
+<text x="330.0" y="286" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Services</text>
+<text x="330.0" y="302" text-anchor="middle" font-size="10.5" fill="#44566B">upload, SFTP,</text>
+<text x="330.0" y="316" text-anchor="middle" font-size="10.5" fill="#44566B">API connectors,</text>
+<text x="330.0" y="332" text-anchor="middle" font-size="10.5" fill="#44566B">Eventarc</text>
+<rect x="410" y="80" width="980" height="556" rx="10" fill="#FFFFFF" stroke="#3B7DD8" stroke-width="2"/>
 <circle cx="436" cy="100" r="7" fill="#4285F4"/>
 <circle cx="450" cy="95" r="7" fill="#EA4335"/>
 <circle cx="462" cy="100" r="7" fill="#FBBC05"/>
 <circle cx="449" cy="106" r="7" fill="#34A853"/>
 <text x="480" y="108" font-size="21" font-weight="600" fill="#4A5568">Google Cloud Platform</text>
+<polyline points="390,283 430,283" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
 <rect x="430" y="130" width="260" height="190" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
 <text x="560.0" y="228" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47"> </text>
-<text x="560" y="152" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0E2A47">Python FastAPI services</text>
-<polyline points="390,283 430,283" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
-<text x="560" y="168" text-anchor="middle" font-size="10.5" fill="#44566B">Cloud Run, one service per epic</text>
-<rect x="442" y="186" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/>
-<text x="498" y="204" text-anchor="middle" font-size="11.5" fill="#0E2A47">1 Batch</text>
-<rect x="568" y="186" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/>
-<text x="624" y="204" text-anchor="middle" font-size="11.5" fill="#0E2A47">2 Mapping</text>
-<rect x="442" y="224" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/>
-<text x="498" y="242" text-anchor="middle" font-size="11.5" fill="#0E2A47">3 Validate</text>
-<rect x="568" y="224" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/>
-<text x="624" y="242" text-anchor="middle" font-size="11.5" fill="#0E2A47">4 Activate</text>
-<rect x="442" y="262" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/>
-<text x="498" y="280" text-anchor="middle" font-size="11.5" fill="#0E2A47">5 Remediate</text>
-<rect x="568" y="262" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/>
-<text x="624" y="280" text-anchor="middle" font-size="11.5" fill="#0E2A47">6 Results</text>
+<g transform="translate(442.0,136)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 5l-4 14"/></g>
+<text x="566" y="153" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0E2A47">Python FastAPI services</text>
+<text x="566" y="169" text-anchor="middle" font-size="10.5" fill="#44566B">Cloud Run, one service per epic</text>
+<rect x="442" y="186" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/><text x="498" y="204" text-anchor="middle" font-size="11.5" fill="#0E2A47">1 Batch</text>
+<rect x="568" y="186" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/><text x="624" y="204" text-anchor="middle" font-size="11.5" fill="#0E2A47">2 Mapping</text>
+<rect x="442" y="224" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/><text x="498" y="242" text-anchor="middle" font-size="11.5" fill="#0E2A47">3 Validate</text>
+<rect x="568" y="224" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/><text x="624" y="242" text-anchor="middle" font-size="11.5" fill="#0E2A47">4 Activate</text>
+<rect x="442" y="262" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/><text x="498" y="280" text-anchor="middle" font-size="11.5" fill="#0E2A47">5 Remediate</text>
+<rect x="568" y="262" width="112" height="28" rx="5" fill="#FFFFFF" stroke="#2E6BC6"/><text x="624" y="280" text-anchor="middle" font-size="11.5" fill="#0E2A47">6 Results</text>
 <text x="560" y="311" text-anchor="middle" font-size="10" fill="#44566B">business logic, orchestration, integration</text>
 <rect x="740" y="140" width="170" height="140" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
-<text x="825.0" y="184" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Google Cloud</text>
-<text x="825.0" y="198" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">API Gateway</text>
-<text x="825.0" y="214" text-anchor="middle" font-size="10.5" fill="#44566B">secure access, routing,</text>
-<text x="825.0" y="230" text-anchor="middle" font-size="10.5" fill="#44566B">Cloud Armor,</text>
-<text x="825.0" y="244" text-anchor="middle" font-size="10.5" fill="#44566B">Identity Platform SSO</text>
+<g transform="translate(813.0,148)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.5 12h4M11.5 12L17 6.5M11.5 12L17 17.5"/></g>
+<text x="825.0" y="198" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Google Cloud</text>
+<text x="825.0" y="212" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">API Gateway</text>
+<text x="825.0" y="228" text-anchor="middle" font-size="10.5" fill="#44566B">secure access, routing,</text>
+<text x="825.0" y="244" text-anchor="middle" font-size="10.5" fill="#44566B">Cloud Armor,</text>
+<text x="825.0" y="258" text-anchor="middle" font-size="10.5" fill="#44566B">Identity Platform SSO</text>
 <rect x="1010" y="140" width="190" height="140" rx="7" fill="#E9F8DD" stroke="#5FA52B" stroke-width="1.5"/>
-<text x="1105.0" y="191" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">React frontend</text>
-<text x="1105.0" y="207" text-anchor="middle" font-size="10.5" fill="#44566B">TypeScript, AG Grid</text>
-<text x="1105.0" y="222" text-anchor="middle" font-size="10.5" fill="#44566B">Axios, Cloud CDN</text>
-<text x="1105.0" y="237" text-anchor="middle" font-size="10.5" fill="#44566B">batch and remediation UI</text>
+<g transform="translate(1093.0,148)" color="#3F8A12" stroke="#3F8A12" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></g>
+<text x="1105.0" y="205" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">React frontend</text>
+<text x="1105.0" y="221" text-anchor="middle" font-size="10.5" fill="#44566B">TypeScript, AG Grid</text>
+<text x="1105.0" y="236" text-anchor="middle" font-size="10.5" fill="#44566B">Axios, Cloud CDN</text>
+<text x="1105.0" y="251" text-anchor="middle" font-size="10.5" fill="#44566B">batch and remediation UI</text>
 <polyline points="690,210 740,210" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-start="url(#m)" marker-end="url(#m)"/>
 <polyline points="910,210 1010,210" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-start="url(#m)" marker-end="url(#m)"/>
 <text x="960" y="190" text-anchor="middle" font-size="10.5" fill="#44566B">REST using</text>
 <text x="960" y="203" text-anchor="middle" font-size="10.5" fill="#44566B">Axios</text>
 <rect x="1410" y="140" width="140" height="90" rx="7" fill="#E9F8DD" stroke="#5FA52B" stroke-width="1.5"/>
-<text x="1480.0" y="174" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Users</text>
-<text x="1480.0" y="190" text-anchor="middle" font-size="10.5" fill="#44566B">payroll admins,</text>
-<text x="1480.0" y="204" text-anchor="middle" font-size="10.5" fill="#44566B">specialists, auditors</text>
+<g transform="translate(1468.0,148)" color="#3F8A12" stroke="#3F8A12" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.5 3.5-7 8-7s8 2.5 8 7"/></g>
+<text x="1480.0" y="188" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Users</text>
+<text x="1480.0" y="204" text-anchor="middle" font-size="10.5" fill="#44566B">payroll admins,</text>
+<text x="1480.0" y="218" text-anchor="middle" font-size="10.5" fill="#44566B">specialists, auditors</text>
 <polyline points="1410,210 1200,210" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
 <text x="1305" y="203" text-anchor="middle" font-size="10.5" fill="#44566B">HTTPS, SSO</text>
 <rect x="1410" y="260" width="140" height="90" rx="7" fill="#F7F8FA" stroke="#6B7785" stroke-width="1.5" stroke-dasharray="3 3"/>
-<text x="1480.0" y="294" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Payroll and</text>
-<text x="1480.0" y="308" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">statutory engines</text>
-<text x="1480.0" y="324" text-anchor="middle" font-size="10.5" fill="#44566B">dry run, activation</text>
+<g transform="translate(1468.0,268)" color="#5A6675" stroke="#5A6675" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7z"/><path d="M12 12l8.5-5M12 12L3.5 7M12 12v10"/></g>
+<text x="1480.0" y="308" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Payroll and</text>
+<text x="1480.0" y="322" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">statutory engines</text>
+<text x="1480.0" y="338" text-anchor="middle" font-size="10.5" fill="#44566B">dry run, activation</text>
 <polyline points="690,300 1410,300" fill="none" stroke="#1F4E9E" stroke-width="1.8" stroke-dasharray="5 4" marker-start="url(#m)" marker-end="url(#m)"/>
 <text x="1050" y="293" text-anchor="middle" font-size="10.5" fill="#44566B">dry run and activation calls</text>
-<rect x="430" y="380" width="130" height="80" rx="7" fill="#EFE9FB" stroke="#7A5BC7" stroke-width="1.5"/>
-<text x="495.0" y="408" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Pub/Sub</text>
-<text x="495.0" y="424" text-anchor="middle" font-size="10.5" fill="#44566B">Event streaming</text>
-<text x="495.0" y="440" text-anchor="middle" font-size="10.5" fill="#44566B">dead-letter topics</text>
-<rect x="580" y="380" width="130" height="80" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
-<text x="645.0" y="408" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Cloud Workflows</text>
-<text x="645.0" y="424" text-anchor="middle" font-size="10.5" fill="#44566B">batch lifecycle</text>
-<text x="645.0" y="440" text-anchor="middle" font-size="10.5" fill="#44566B">orchestration</text>
-<rect x="730" y="380" width="130" height="80" rx="7" fill="#E9F8DD" stroke="#5FA52B" stroke-width="1.5"/>
-<text x="795.0" y="408" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Vertex AI</text>
-<text x="795.0" y="424" text-anchor="middle" font-size="10.5" fill="#44566B">Gemini mapping</text>
-<text x="795.0" y="440" text-anchor="middle" font-size="10.5" fill="#44566B">vector search</text>
-<rect x="880" y="380" width="130" height="80" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
-<text x="945.0" y="408" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Cloud Storage</text>
-<text x="945.0" y="424" text-anchor="middle" font-size="10.5" fill="#44566B">landing, quarantine</text>
-<text x="945.0" y="440" text-anchor="middle" font-size="10.5" fill="#44566B">processed files</text>
-<rect x="1030" y="380" width="130" height="80" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
-<text x="1095.0" y="408" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Cloud SQL</text>
-<text x="1095.0" y="424" text-anchor="middle" font-size="10.5" fill="#44566B">PostgreSQL / AlloyDB</text>
-<text x="1095.0" y="440" text-anchor="middle" font-size="10.5" fill="#44566B">system of record</text>
-<rect x="1180" y="380" width="130" height="80" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
-<text x="1245.0" y="408" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Firestore</text>
-<text x="1245.0" y="424" text-anchor="middle" font-size="10.5" fill="#44566B">remediation queue</text>
-<text x="1245.0" y="440" text-anchor="middle" font-size="10.5" fill="#44566B">live status</text>
+<rect x="430" y="380" width="130" height="96" rx="7" fill="#EFE9FB" stroke="#7A5BC7" stroke-width="1.5"/>
+<g transform="translate(483.0,388)" color="#6A49C0" stroke="#6A49C0" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><circle cx="4.5" cy="5" r="1.8"/><circle cx="19.5" cy="5" r="1.8"/><circle cx="4.5" cy="19" r="1.8"/><circle cx="19.5" cy="19" r="1.8"/><path d="M6 6.2l4.3 4.2M18 6.2l-4.3 4.2M6 17.8l4.3-4.2M18 17.8l-4.3-4.2"/></g>
+<text x="495.0" y="430" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Pub/Sub</text>
+<text x="495.0" y="446" text-anchor="middle" font-size="10.5" fill="#44566B">Event streaming</text>
+<text x="495.0" y="462" text-anchor="middle" font-size="10.5" fill="#44566B">dead-letter topics</text>
+<rect x="580" y="380" width="130" height="96" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
+<g transform="translate(633.0,388)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="7" height="5" rx="1"/><rect x="15" y="9.5" width="7" height="5" rx="1"/><rect x="2" y="16" width="7" height="5" rx="1"/><path d="M9 5.5h3.5V12H15M9 18.5h3.5V12"/></g>
+<text x="645.0" y="430" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Cloud Workflows</text>
+<text x="645.0" y="446" text-anchor="middle" font-size="10.5" fill="#44566B">batch lifecycle</text>
+<text x="645.0" y="462" text-anchor="middle" font-size="10.5" fill="#44566B">orchestration</text>
+<rect x="730" y="380" width="130" height="96" rx="7" fill="#E9F8DD" stroke="#5FA52B" stroke-width="1.5"/>
+<g transform="translate(783.0,388)" color="#3F8A12" stroke="#3F8A12" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c.8 5.2 4.8 9.2 10 10-5.2.8-9.2 4.8-10 10-.8-5.2-4.8-9.2-10-10 5.2-.8 9.2-4.8 10-10z"/></g>
+<text x="795.0" y="430" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Vertex AI</text>
+<text x="795.0" y="446" text-anchor="middle" font-size="10.5" fill="#44566B">Gemini mapping</text>
+<text x="795.0" y="462" text-anchor="middle" font-size="10.5" fill="#44566B">vector search</text>
+<rect x="880" y="380" width="130" height="96" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
+<g transform="translate(933.0,388)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16l-1.6 12.5a2 2 0 0 1-2 1.5H7.6a2 2 0 0 1-2-1.5z"/><ellipse cx="12" cy="7" rx="8" ry="2.5"/></g>
+<text x="945.0" y="430" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Cloud Storage</text>
+<text x="945.0" y="446" text-anchor="middle" font-size="10.5" fill="#44566B">landing, quarantine</text>
+<text x="945.0" y="462" text-anchor="middle" font-size="10.5" fill="#44566B">processed files</text>
+<rect x="1030" y="380" width="130" height="96" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
+<g transform="translate(1083.0,388)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></g>
+<text x="1095.0" y="430" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Cloud SQL</text>
+<text x="1095.0" y="446" text-anchor="middle" font-size="10.5" fill="#44566B">PostgreSQL / AlloyDB</text>
+<text x="1095.0" y="462" text-anchor="middle" font-size="10.5" fill="#44566B">system of record</text>
+<rect x="1180" y="380" width="130" height="96" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
+<g transform="translate(1233.0,388)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></g>
+<text x="1245.0" y="430" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Firestore</text>
+<text x="1245.0" y="446" text-anchor="middle" font-size="10.5" fill="#44566B">remediation queue</text>
+<text x="1245.0" y="462" text-anchor="middle" font-size="10.5" fill="#44566B">live status</text>
 <polyline points="495,320 495,380" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
 <polyline points="645,320 645,380" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
 <polyline points="675,320 675,362 1245,362" fill="none" stroke="#1F4E9E" stroke-width="1.8"/>
@@ -113,72 +119,87 @@
 <polyline points="1095,362 1095,380" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
 <polyline points="1245,362 1245,380" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
 <text x="1000" y="355" text-anchor="middle" font-size="10.5" fill="#44566B">reads, writes, AI calls</text>
-<rect x="430" y="500" width="130" height="90" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
-<text x="495.0" y="534" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Dataflow</text>
-<text x="495.0" y="550" text-anchor="middle" font-size="10.5" fill="#44566B">Validation pipelines</text>
-<text x="495.0" y="564" text-anchor="middle" font-size="10.5" fill="#44566B">large-file parsing</text>
-<rect x="580" y="500" width="130" height="90" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
-<text x="645.0" y="534" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Cloud Tasks</text>
-<text x="645.0" y="550" text-anchor="middle" font-size="10.5" fill="#44566B">Retry and</text>
-<text x="645.0" y="564" text-anchor="middle" font-size="10.5" fill="#44566B">reprocessing</text>
-<rect x="730" y="500" width="130" height="90" rx="7" fill="#E9F8DD" stroke="#5FA52B" stroke-width="1.5"/>
-<text x="795.0" y="526" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">AI guardrails</text>
-<text x="795.0" y="542" text-anchor="middle" font-size="10.5" fill="#44566B">Model Armor,</text>
-<text x="795.0" y="557" text-anchor="middle" font-size="10.5" fill="#44566B">Sensitive Data</text>
-<text x="795.0" y="572" text-anchor="middle" font-size="10.5" fill="#44566B">Protection masking</text>
-<rect x="880" y="500" width="130" height="90" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
-<text x="945.0" y="534" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Memorystore</text>
-<text x="945.0" y="550" text-anchor="middle" font-size="10.5" fill="#44566B">Redis cache</text>
-<text x="945.0" y="564" text-anchor="middle" font-size="10.5" fill="#44566B">tax, pay code lookups</text>
-<rect x="1030" y="500" width="130" height="90" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
-<text x="1095.0" y="534" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">BigQuery + Looker</text>
-<text x="1095.0" y="550" text-anchor="middle" font-size="10.5" fill="#44566B">audit trail, history</text>
-<text x="1095.0" y="564" text-anchor="middle" font-size="10.5" fill="#44566B">KPI dashboards</text>
-<rect x="1180" y="500" width="130" height="90" rx="7" fill="#EFE9FB" stroke="#7A5BC7" stroke-width="1.5"/>
-<text x="1245.0" y="534" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Notification</text>
-<text x="1245.0" y="550" text-anchor="middle" font-size="10.5" fill="#44566B">services</text>
-<text x="1245.0" y="564" text-anchor="middle" font-size="10.5" fill="#44566B">exception alerts</text>
-<polyline points="495,460 495,500" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
-<polyline points="645,460 645,500" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
-<polyline points="795,500 795,460" fill="none" stroke="#1F4E9E" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#m)"/>
-<polyline points="1095,460 1095,500" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
-<polyline points="1245,460 1245,500" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
-<rect x="1410" y="500" width="140" height="90" rx="7" fill="#F7F8FA" stroke="#6B7785" stroke-width="1.5" stroke-dasharray="3 3"/>
-<text x="1480.0" y="534" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Email, Google Chat,</text>
-<text x="1480.0" y="548" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">PagerDuty</text>
-<text x="1480.0" y="564" text-anchor="middle" font-size="10.5" fill="#44566B">exception alerts</text>
-<polyline points="1310,545 1410,545" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
-<rect x="410" y="660" width="470" height="100" rx="8" fill="#EEF4FC" stroke="#2E6BC6" stroke-width="1.5" stroke-dasharray="6 4"/>
-<text x="424" y="682" font-size="15" font-weight="700" fill="#0E2A47">Observability</text>
-<rect x="424" y="692" width="140" height="58" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="494.0" y="717" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Cloud Monitoring</text>
-<text x="494.0" y="733" text-anchor="middle" font-size="10.5" fill="#44566B">metrics and alerts</text>
-<rect x="574" y="692" width="140" height="58" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="644.0" y="717" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Cloud Logging</text>
-<text x="644.0" y="733" text-anchor="middle" font-size="10.5" fill="#44566B">logs and traces</text>
-<rect x="724" y="692" width="140" height="58" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="794.0" y="717" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Cloud Audit Logs</text>
-<text x="794.0" y="733" text-anchor="middle" font-size="10.5" fill="#44566B">audit and compliance</text>
-<rect x="900" y="660" width="650" height="100" rx="8" fill="#EEF8E8" stroke="#5FA52B" stroke-width="1.5" stroke-dasharray="6 4"/>
-<text x="914" y="682" font-size="15" font-weight="700" fill="#0E2A47">Security</text>
-<rect x="914" y="692" width="118" height="58" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="973.0" y="717" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">IAM</text>
-<text x="973.0" y="733" text-anchor="middle" font-size="10.5" fill="#44566B">workload identity</text>
-<rect x="1040" y="692" width="118" height="58" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="1099.0" y="717" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Cloud KMS</text>
-<text x="1099.0" y="733" text-anchor="middle" font-size="10.5" fill="#44566B">CMEK, EKM keys</text>
-<rect x="1166" y="692" width="118" height="58" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="1225.0" y="717" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">VPC Service</text>
-<text x="1225.0" y="733" text-anchor="middle" font-size="10.5" fill="#44566B">Controls</text>
-<rect x="1292" y="692" width="118" height="58" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="1351.0" y="717" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Sensitive Data</text>
-<text x="1351.0" y="733" text-anchor="middle" font-size="10.5" fill="#44566B">Protection</text>
-<rect x="1418" y="692" width="118" height="58" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
-<text x="1477.0" y="717" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Security</text>
-<text x="1477.0" y="733" text-anchor="middle" font-size="10.5" fill="#44566B">Command Center</text>
-<polyline points="645,660 645,630" fill="none" stroke="#1F4E9E" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#m)"/>
-<polyline points="1000,660 1000,630" fill="none" stroke="#1F4E9E" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#m)"/>
-<polyline points="1370,660 1370,630" fill="none" stroke="#1F4E9E" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#m)"/>
-<rect x="410" y="775" width="1140" height="44" rx="6" fill="#F1F3F6" stroke="#C9D1DA"/>
-<text x="980" y="802" text-anchor="middle" font-size="11.5" fill="#0E2A47">Delivery: Terraform, Cloud Build, Cloud Deploy, Artifact Registry, Binary Authorization. Tenant isolation: row-level security and per-tenant keys.</text>
+<rect x="430" y="516" width="130" height="100" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
+<g transform="translate(483.0,524)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h14M13 4l4 4-4 4M21 16H7M11 12l-4 4 4 4"/></g>
+<text x="495.0" y="568" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Dataflow</text>
+<text x="495.0" y="584" text-anchor="middle" font-size="10.5" fill="#44566B">Validation pipelines</text>
+<text x="495.0" y="600" text-anchor="middle" font-size="10.5" fill="#44566B">large-file parsing</text>
+<rect x="580" y="516" width="130" height="100" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
+<g transform="translate(633.0,524)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20 4v5h-5"/></g>
+<text x="645.0" y="568" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Cloud Tasks</text>
+<text x="645.0" y="584" text-anchor="middle" font-size="10.5" fill="#44566B">Retry and</text>
+<text x="645.0" y="600" text-anchor="middle" font-size="10.5" fill="#44566B">reprocessing</text>
+<rect x="730" y="516" width="130" height="100" rx="7" fill="#E9F8DD" stroke="#5FA52B" stroke-width="1.5"/>
+<g transform="translate(783.0,524)" color="#3F8A12" stroke="#3F8A12" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/></g>
+<text x="795.0" y="561" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">AI guardrails</text>
+<text x="795.0" y="577" text-anchor="middle" font-size="10.5" fill="#44566B">Model Armor,</text>
+<text x="795.0" y="592" text-anchor="middle" font-size="10.5" fill="#44566B">Sensitive Data</text>
+<text x="795.0" y="607" text-anchor="middle" font-size="10.5" fill="#44566B">Protection masking</text>
+<rect x="880" y="516" width="130" height="100" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
+<g transform="translate(933.0,524)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M13 6l-4 7h4l-2 5 5-8h-4z"/></g>
+<text x="945.0" y="568" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Memorystore</text>
+<text x="945.0" y="584" text-anchor="middle" font-size="10.5" fill="#44566B">Redis cache</text>
+<text x="945.0" y="600" text-anchor="middle" font-size="10.5" fill="#44566B">tax, pay code lookups</text>
+<rect x="1030" y="516" width="130" height="100" rx="7" fill="#E8F1FC" stroke="#2E6BC6" stroke-width="1.5"/>
+<g transform="translate(1083.0,524)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="7"/><path d="M16 16l5 5M8 12.5v-2M10.5 12.5v-4.5M13 12.5v-3"/></g>
+<text x="1095.0" y="568" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">BigQuery + Looker</text>
+<text x="1095.0" y="584" text-anchor="middle" font-size="10.5" fill="#44566B">audit trail, history</text>
+<text x="1095.0" y="600" text-anchor="middle" font-size="10.5" fill="#44566B">KPI dashboards</text>
+<rect x="1180" y="516" width="130" height="100" rx="7" fill="#EFE9FB" stroke="#7A5BC7" stroke-width="1.5"/>
+<g transform="translate(1233.0,524)" color="#6A49C0" stroke="#6A49C0" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4z"/><path d="M10 21a2 2 0 0 0 4 0"/></g>
+<text x="1245.0" y="568" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Notification</text>
+<text x="1245.0" y="584" text-anchor="middle" font-size="10.5" fill="#44566B">services</text>
+<text x="1245.0" y="600" text-anchor="middle" font-size="10.5" fill="#44566B">exception alerts</text>
+<polyline points="495,476 495,516" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
+<polyline points="645,476 645,516" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
+<polyline points="795,516 795,476" fill="none" stroke="#1F4E9E" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#m)"/>
+<polyline points="1095,476 1095,516" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
+<polyline points="1245,476 1245,516" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
+<rect x="1410" y="516" width="140" height="100" rx="7" fill="#F7F8FA" stroke="#6B7785" stroke-width="1.5" stroke-dasharray="3 3"/>
+<g transform="translate(1468.0,524)" color="#5A6675" stroke="#5A6675" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></g>
+<text x="1480.0" y="568" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">Email, Google Chat,</text>
+<text x="1480.0" y="584" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2A47">PagerDuty</text>
+<text x="1480.0" y="600" text-anchor="middle" font-size="10.5" fill="#44566B">exception alerts</text>
+<polyline points="1310,566 1410,566" fill="none" stroke="#1F4E9E" stroke-width="1.8" marker-end="url(#m)"/>
+<rect x="410" y="668" width="470" height="118" rx="8" fill="#EEF4FC" stroke="#2E6BC6" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="424" y="690" font-size="15" font-weight="700" fill="#0E2A47">Observability</text>
+<rect x="424" y="700" width="140" height="76" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
+<g transform="translate(482.0,708)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M5 14l4-4 3 3 5-6M8 21h8"/></g>
+<text x="494.0" y="748" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Cloud Monitoring</text>
+<text x="494.0" y="764" text-anchor="middle" font-size="10.5" fill="#44566B">metrics and alerts</text>
+<rect x="574" y="700" width="140" height="76" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
+<g transform="translate(632.0,708)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="1"/></g>
+<text x="644.0" y="748" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Cloud Logging</text>
+<text x="644.0" y="764" text-anchor="middle" font-size="10.5" fill="#44566B">logs and traces</text>
+<rect x="724" y="700" width="140" height="76" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
+<g transform="translate(782.0,708)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM8.5 13l2.5 2.5 4.5-5"/></g>
+<text x="794.0" y="748" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Cloud Audit Logs</text>
+<text x="794.0" y="764" text-anchor="middle" font-size="10.5" fill="#44566B">audit, compliance</text>
+<rect x="900" y="668" width="650" height="118" rx="8" fill="#EEF8E8" stroke="#5FA52B" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="914" y="690" font-size="15" font-weight="700" fill="#0E2A47">Security</text>
+<rect x="914" y="700" width="118" height="76" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
+<g transform="translate(961.0,708)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.8 2.8-6 6.5-6 1.5 0 2.8.4 3.8 1"/><circle cx="17.5" cy="15.5" r="2.5"/><path d="M19.5 17.5L22 20"/></g>
+<text x="973.0" y="748" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">IAM</text>
+<text x="973.0" y="764" text-anchor="middle" font-size="10.5" fill="#44566B">workload identity</text>
+<rect x="1040" y="700" width="118" height="76" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
+<g transform="translate(1087.0,708)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="14" r="4.5"/><path d="M11.5 11L21 3M17 7l3 3"/></g>
+<text x="1099.0" y="748" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Cloud KMS</text>
+<text x="1099.0" y="764" text-anchor="middle" font-size="10.5" fill="#44566B">CMEK, EKM keys</text>
+<rect x="1166" y="700" width="118" height="76" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
+<g transform="translate(1213.0,708)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3" stroke-dasharray="3 2.5"/><rect x="8" y="11" width="8" height="6" rx="1"/><path d="M10 11V9a2 2 0 0 1 4 0v2"/></g>
+<text x="1225.0" y="748" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">VPC Service</text>
+<text x="1225.0" y="764" text-anchor="middle" font-size="10.5" fill="#44566B">Controls</text>
+<rect x="1292" y="700" width="118" height="76" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
+<g transform="translate(1339.0,708)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 20L20 4"/></g>
+<text x="1351.0" y="748" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Sensitive Data</text>
+<text x="1351.0" y="764" text-anchor="middle" font-size="10.5" fill="#44566B">Protection</text>
+<rect x="1418" y="700" width="118" height="76" rx="7" fill="#FFFFFF" stroke="#2E6BC6" stroke-width="1"/>
+<g transform="translate(1465.0,708)" color="#2E6BC6" stroke="#2E6BC6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></g>
+<text x="1477.0" y="748" text-anchor="middle" font-size="12" font-weight="700" fill="#0E2A47">Security</text>
+<text x="1477.0" y="764" text-anchor="middle" font-size="10.5" fill="#44566B">Command Center</text>
+<polyline points="645,668 645,636" fill="none" stroke="#1F4E9E" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#m)"/>
+<polyline points="1000,668 1000,636" fill="none" stroke="#1F4E9E" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#m)"/>
+<polyline points="1370,668 1370,636" fill="none" stroke="#1F4E9E" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#m)"/>
+<rect x="410" y="798" width="1140" height="44" rx="6" fill="#F1F3F6" stroke="#C9D1DA"/>
+<text x="980" y="825" text-anchor="middle" font-size="11.5" fill="#0E2A47">Delivery: Terraform, Cloud Build, Cloud Deploy, Artifact Registry, Binary Authorization. Tenant isolation: row-level security and per-tenant keys.</text>
 </svg>
