@@ -10,7 +10,7 @@ The proposed stack is event-driven and serverless-first on Google Cloud. Cloud R
 
 ![Solution architecture diagram](./docs/solution-architecture.svg)
 
-The diagram uses the selected stack: React with Axios on the frontend, Python FastAPI on Cloud Run for the six epic services, and Google Cloud managed services for messaging, data, AI, observability, and security.
+The diagram is large, so open the SVG file directly to zoom. It maps the six epics to a pipeline, with orchestration, a learning loop, the data layer, security, and delivery below it. It uses the selected stack: React with Axios on the frontend, Python FastAPI on Cloud Run for the six epic services, and Google Cloud managed services for messaging, data, AI, observability, and security.
 
 The same view as a Mermaid diagram, which stays editable as text:
 
