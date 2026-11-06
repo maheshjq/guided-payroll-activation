@@ -6,9 +6,11 @@ This is a proposed baseline for the solution architecture diagram. It is an AI-g
 
 The proposed stack is event-driven and serverless-first on Google Cloud. Cloud Run and Pub/Sub handle asynchronous batch processing, Cloud SQL for PostgreSQL holds transactional payroll data, BigQuery handles audit and analytics, and Vertex AI with Gemini provides assistive schema mapping. Security rests on VPC Service Controls, customer-managed encryption keys, tenant isolation, and Sensitive Data Protection, because the data includes tax IDs and bank details.
 
-## Solution architecture (layered view)
+## Solution architecture (enterprise view)
 
 ![Solution architecture diagram](./docs/solution-architecture.svg)
+
+The diagram uses the selected stack: React with Axios on the frontend, Python FastAPI on Cloud Run for the six epic services, and Google Cloud managed services for messaging, data, AI, observability, and security.
 
 The same view as a Mermaid diagram, which stays editable as text:
 
@@ -18,7 +20,7 @@ flowchart TB
 
     subgraph EDGE["Edge and access"]
         direction LR
-        WEB["Web app<br/>Angular or React, AG Grid, CDN"]
+        WEB["Web app<br/>React, AG Grid, CDN"]
         IDP["Identity Platform<br/>SSO via SAML and OIDC"]
         LB["Cloud Armor + Load Balancer<br/>WAF, DDoS, rate limits"]
         GW["API Gateway or Apigee<br/>auth, quotas, routing"]
@@ -125,7 +127,7 @@ flowchart TB
     subgraph EDGE["Edge and access"]
         IDP["Identity Platform<br/>SSO via SAML / OIDC"]
         LB["Global External Application Load Balancer<br/>+ Cloud Armor (WAF, DDoS, rate limiting)"]
-        CDN["Cloud CDN + Cloud Storage<br/>Angular / React SPA"]
+        CDN["Cloud CDN + Cloud Storage<br/>React SPA"]
         APIGW["API Gateway or Apigee"]
     end
 
@@ -235,14 +237,14 @@ flowchart TB
 
 ## Frontend
 
-- Angular or React with TypeScript, served from Cloud Storage behind Cloud CDN and the Global External Application Load Balancer. Angular suits teams that want a structured enterprise framework.
+- Selected: React with TypeScript, calling the backend over REST with Axios, served from Cloud Storage behind Cloud CDN and the Global External Application Load Balancer.
 - Material UI components and a virtualized data grid such as AG Grid for cell-level error display and bulk edits across thousands of rows.
 - Real-time batch progress and remediation queue updates through Firestore listeners or Server-Sent Events from Cloud Run.
 - Identity Platform for sign-in, with SSO through SAML and OIDC for client identity providers.
 
 ## Backend and integration
 
-- Cloud Run services in Java (Spring Boot), Go, or Node.js (NestJS), organized by domain: batch, mapping, validation, activation, remediation, and results and audit.
+- Selected: Python FastAPI services on Cloud Run, organized by domain: batch, mapping, validation, activation, remediation, and results and audit.
 - API Gateway or Apigee as the front door. Apigee is the better choice if external partner APIs, quotas, and monetization are needed.
 - Pub/Sub for events between stages, with dead-letter topics for failed records.
 - Cloud Tasks for per-record or per-chunk retries, and Cloud Workflows for orchestrating the batch lifecycle.
