@@ -36,6 +36,7 @@ Read in this order for the full picture.
 | [Product backlog](./product-backlog.md) | Prioritized user stories (P0 to P2) across all epics |
 | [Tech stack and architecture](./tech-stack.md) | Proposed Google Cloud stack, security posture, and architecture diagrams |
 | [Solution architecture diagram](./docs/solution-architecture.svg) | Layered one-page diagram (SVG) |
+| [Claude Code task prompts](./docs/prompts/) | Ready-to-run prompts for Task 01, Task 02, and the operational blueprint, in that order |
 
 ## Epics
 

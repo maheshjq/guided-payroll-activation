@@ -2,6 +2,8 @@
 
 Status: DRAFT for your review. Paste everything below the line into Claude Code. Edit the "Scope choice" section first if you want a different epic.
 
+Run order: Task 01 prompt, then Task 02 prompt, then this one (see `task-01-business-foundation-prompt.md` and `task-02-business-architecture-prompt.md`). This prompt uses the IDs and registers those tasks create, so check that the files in docs/business/ and docs/architecture/ exist before running it.
+
 Why this task is next: the repository already holds the problem statement, business architecture blueprint, six epics, a backlog, and a draft tech stack. It does not yet hold the user journey, workflow, and decision model for a prioritized epic, which was step 5 of the original prompt chain. This is the equivalent of Task 3 in the learning document: operational blueprint, requirements, and decision modelling.
 
 ---
@@ -21,7 +23,8 @@ This is the existing repository guided-payroll-activation. Read CLAUDE.md and RE
 2. Business Model Canvas to Business Architecture Blueprint.md
 3. product-backlog.md and epic-01 to epic-06 files
 4. requirements-document-map.md
-5. tech-stack.md and docs/solution-architecture.svg (draft, for context only)
+5. docs/business/ (BIZ-001 to BIZ-007) and docs/architecture/ (ARC-001 to ARC-007), once approved
+6. tech-stack.md and docs/solution-architecture.svg (draft, for context only)
 
 Do not change the problem statement. Do not change other baseline files without recording a proposed change and its rationale in the new register. Do not invent client names, baselines, or figures.
 
@@ -33,7 +36,7 @@ Cover the P0 path of the product: the P0 stories PA-01 to PA-05, PA-07 to PA-13,
 
 Stage 1, workspace verification: confirm you are in the repository on the assigned branch, list the baseline files, and report anything unexpected. Do not create a new repository or branch.
 
-Stage 2, current-state and future-state journey: for the payroll administrator and the implementation specialist, document the current wizard-based journey (labelled provisional where actual client processes are unknown) and the proposed future-state journey, with pain points mapped to the six bottlenecks in the problem statement. Produce readable Mermaid diagrams, including a swimlane-style workflow for the end-to-end P0 path.
+Stage 2, current-state and future-state journey: for the payroll administrator and the implementation specialist, document the current wizard-based journey (labelled provisional where actual client processes are unknown) and the proposed future-state journey, with pain points mapped to the five bottlenecks (BN-01 to BN-05) in the problem statement. Produce readable Mermaid diagrams, including a swimlane-style workflow for the end-to-end P0 path.
 
 Stage 3, state model: define the lifecycle states and allowed transitions for a batch and for an individual record (for example draft, mapped, validated, simulated, eligible, exception, activated, failed, retried). Show how one failing record is isolated without blocking the batch, how retries stay idempotent, and how corrected records re-enter validation alone.
 
@@ -63,7 +66,7 @@ Use Markdown for readable documents, YAML for structured models, and Mermaid for
 
 ## 6. Identifiers and traceability
 
-Use stable IDs: EPIC-01 to EPIC-06 for epics, PA-xx for the existing stories, BN-01 to BN-06 for the six bottlenecks in the problem statement, REQ-F-001 and REQ-NF-001 for requirements, DEC-001 for decisions, AI-001 for AI uses, RSK-001 for risks, ASM-001 for assumptions, OQ-001 for open questions.
+Use stable IDs: EPIC-01 to EPIC-06 for epics, PA-xx for the existing stories, BN-01 to BN-05 for the five bottlenecks in the problem statement, REQ-F-001 and REQ-NF-001 for requirements, DEC-001 for decisions, AI-001 for AI uses, RSK-001 for risks, ASM-001 for assumptions, OQ-001 for open questions.
 
 Ensure at minimum: every pain point links to a bottleneck; every requirement links to a story and a target metric; every AI use links to a problem and an oversight control; every risk has a mitigation and an owner role; every assumption is recorded with how it will be validated.
 
