@@ -23,8 +23,6 @@ This is the existing repository guided-payroll-activation. Read CLAUDE.md and RE
 4. requirements-document-map.md
 5. tech-stack.md (context only; do not design architecture in this task)
 
-Also read docs/learning/Task_01_Comprehensive_Business_First_AI_Native_Guide.docx.md as a method example only. It describes a different project (bank onboarding). Do not copy its content, domain, or figures into this project.
-
 Do not invent client names, baselines, targets, regulations, or money figures. Where information is missing, record an assumption, open question, or open decision.
 
 ## 3. Execution protocol

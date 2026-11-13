@@ -4,7 +4,7 @@ Status: DRAFT for your review. Paste everything below the line into Claude Code.
 
 Run order: Task 01 prompt, then Task 02 prompt, then this one (see `task-01-business-foundation-prompt.md` and `task-02-business-architecture-prompt.md`). This prompt uses the IDs and registers those tasks create, so check that the files in docs/business/ and docs/architecture/ exist before running it.
 
-Why this task is next: the repository already holds the problem statement, business architecture blueprint, six epics, a backlog, and a draft tech stack. It does not yet hold the user journey, workflow, and decision model for a prioritized epic, which was step 5 of the original prompt chain. This is the equivalent of Task 3 in the learning document: operational blueprint, requirements, and decision modelling.
+Why this task is next: the repository already holds the problem statement, business architecture blueprint, six epics, a backlog, and a draft tech stack. It does not yet hold the user journey, workflow, and decision model for a prioritized epic, which was step 5 of the original prompt chain. This task covers the operational blueprint, requirements, and decision modelling.
 
 ---
 
