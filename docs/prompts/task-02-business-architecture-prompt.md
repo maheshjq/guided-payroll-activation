@@ -15,7 +15,7 @@ Act as a Senior Enterprise Business Architect and Payroll Domain Analyst. Do the
 
 ## 2. Preconditions
 
-Before doing anything, confirm that these Task 01 files exist in docs/business/: BIZ-001 to BIZ-007, and validation/task-01-completion-record.md. If any is missing, STOP and say so. Treat the following as the approved working baseline, provided I accept them in this session or the completion record shows my acceptance: BIZ-001 (problem), BIZ-006 (AI opportunity assessment and boundary rules AIB-001 and onward, binding), BIZ-007 (scope and boundaries). If acceptance is not clear, ask me before proceeding.
+Before doing anything, confirm that these Task 01 files exist in docs/business/: BIZ-001 to BIZ-008, and validation/task-01-completion-record.md. If any is missing, STOP and say so. Treat the following as the approved working baseline, provided I accept them in this session or the completion record shows my acceptance: BIZ-001 (problem), BIZ-007 (AI opportunity assessment and boundary rules AIB-001 and onward, binding), BIZ-008 (scope and boundaries). If acceptance is not clear, ask me before proceeding.
 
 Also read CLAUDE.md, README.md, Problem statement.md, the Business Model Canvas to Business Architecture Blueprint.md, product-backlog.md, and the epic files. The existing blueprint's capabilities and value stream are a starting point to be structured, not overwritten.
 

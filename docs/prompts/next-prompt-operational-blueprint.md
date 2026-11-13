@@ -23,7 +23,7 @@ This is the existing repository guided-payroll-activation. Read CLAUDE.md and RE
 2. Business Model Canvas to Business Architecture Blueprint.md
 3. product-backlog.md and epic-01 to epic-06 files
 4. requirements-document-map.md
-5. docs/business/ (BIZ-001 to BIZ-007) and docs/architecture/ (ARC-001 to ARC-007), once approved
+5. docs/business/ (BIZ-001 to BIZ-008) and docs/architecture/ (ARC-001 to ARC-007), once approved
 6. tech-stack.md and docs/solution-architecture.svg (draft, for context only)
 
 Do not change the problem statement. Do not change other baseline files without recording a proposed change and its rationale in the new register. Do not invent client names, baselines, or figures.
@@ -36,7 +36,7 @@ Cover the P0 path of the product: the P0 stories PA-01 to PA-05, PA-07 to PA-13,
 
 Stage 1, workspace verification: confirm you are in the repository on the assigned branch, list the baseline files, and report anything unexpected. Do not create a new repository or branch.
 
-Stage 2, current-state and future-state journey: for the payroll administrator and the implementation specialist, document the current wizard-based journey (labelled provisional where actual client processes are unknown) and the proposed future-state journey, with pain points mapped to the five bottlenecks (BN-01 to BN-05) in the problem statement. Produce readable Mermaid diagrams, including a swimlane-style workflow for the end-to-end P0 path.
+Stage 2, current-state and future-state journey: for the payroll administrator and the implementation specialist, refine the high-level journeys in BIZ-006 into detailed current-state (labelled provisional where actual client processes are unknown) and future-state journeys, with pain points mapped to the five bottlenecks (BN-01 to BN-05) in the problem statement. Produce readable Mermaid diagrams, including a swimlane-style workflow for the end-to-end P0 path.
 
 Stage 3, state model: define the lifecycle states and allowed transitions for a batch and for an individual record (for example draft, mapped, validated, simulated, eligible, exception, activated, failed, retried). Show how one failing record is isolated without blocking the batch, how retries stay idempotent, and how corrected records re-enter validation alone.
 
