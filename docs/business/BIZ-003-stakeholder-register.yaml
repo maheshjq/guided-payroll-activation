@@ -1,0 +1,210 @@
+# BIZ-003 Stakeholder register
+# Status DRAFT. Roles with basis BASELINE are named in a baseline document.
+# Roles with basis DERIVED are implied by a baseline statement.
+# Roles with basis ASSUMPTION are inferred and must be confirmed.
+artifact_id: BIZ-003
+title: Stakeholder register
+status: DRAFT
+task: TASK-01
+sources:
+  - Business Model Canvas to Business Architecture Blueprint.md section 3, roles and governance
+  - Problem statement.md sections 1 and 4
+  - epic-01 to epic-06, primary users
+  - product-backlog.md, PA-11 and PA-16
+stakeholders:
+  - id: STK-001
+    name: Client payroll administrator
+    category: Primary user
+    basis: BASELINE
+    source: Blueprint section 3; primary user in epic-01 to epic-06
+    responsibilities:
+      - Prepare and review activation data
+      - Resolve surfaced mapping, context and validation issues
+      - Initiate or approve activation according to the product authorization model
+    business_needs:
+      - Activate a large cohort without restarting the batch for isolated errors
+      - Understand exactly which record and field is wrong and why
+      - Correct repeated errors efficiently
+    decision_authority: Initiates or approves activation according to the product authorization model, which is not yet defined (DEC-007)
+    journey_stages: [JS-01, JS-02, JS-03, JS-04, JS-05, JS-06, JS-07, JS-08, JS-09, JS-10, JS-11, JS-12, JS-13]
+    capabilities: [CAP-001, CAP-002, CAP-003, CAP-004, CAP-005, CAP-006, CAP-007]
+    validation_status: CONFIRMED_IN_BASELINE
+    status: DRAFT
+  - id: STK-002
+    name: Implementation specialist
+    category: Primary user
+    basis: BASELINE
+    source: Blueprint section 3; primary user in epic-01 to epic-06
+    responsibilities:
+      - Support customer onboarding
+      - Handle complex exceptions
+    business_needs:
+      - Fewer routine hand-holding touchpoints
+      - Clear diagnostics when an exception does need intervention
+    decision_authority: Not defined in the baseline; the role supports rather than approves (DEC-007)
+    journey_stages: [JS-03, JS-04, JS-05, JS-10, JS-11, JS-13]
+    capabilities: [CAP-002, CAP-003, CAP-006]
+    validation_status: CONFIRMED_IN_BASELINE
+    notes: Reducing support touchpoints is a target, not a removal of this role
+    status: DRAFT
+  - id: STK-003
+    name: Payroll or compliance owner
+    category: Governance
+    basis: BASELINE
+    source: Blueprint section 3; primary user in epic-03
+    responsibilities:
+      - Confirm applicable validation rules
+      - Confirm the meaning of activation-blocking conditions
+    business_needs:
+      - Controls preserved under partial commit
+      - Failed checks that cannot be silently bypassed
+    decision_authority: Confirms validation rules and blocking conditions (DEC-006, DEC-015)
+    journey_stages: [JS-06, JS-07, JS-09]
+    capabilities: [CAP-003, CAP-004, CAP-005]
+    validation_status: CONFIRMED_IN_BASELINE
+    status: DRAFT
+  - id: STK-004
+    name: Product or engineering owner
+    category: Delivery
+    basis: BASELINE
+    source: Blueprint section 3
+    responsibilities:
+      - Deliver and operate the guided activation capability and its diagnostics
+    business_needs:
+      - Measurable outcomes against the program targets
+      - Clear decisions on scope, rules and authorization before build
+    decision_authority: Owns delivery and operation; does not own payroll or compliance rules
+    journey_stages: [JS-08, JS-12]
+    capabilities: [CAP-005, CAP-007]
+    validation_status: CONFIRMED_IN_BASELINE
+    status: DRAFT
+  - id: STK-005
+    name: Payroll operations user
+    category: Primary user
+    basis: BASELINE
+    source: Primary user in epic-04; PA-11
+    responsibilities:
+      - Recover interrupted processing safely
+    business_needs:
+      - Retries that never create duplicate activation effects
+    decision_authority: Not defined in the baseline (DEC-007)
+    journey_stages: [JS-08, JS-09]
+    capabilities: [CAP-005]
+    validation_status: CONFIRMED_IN_BASELINE
+    status: DRAFT
+  - id: STK-006
+    name: Authorized payroll or compliance reviewer
+    category: Governance
+    basis: BASELINE
+    source: Primary user in epic-06; PA-16
+    responsibilities:
+      - Investigate how a profile reached its final state
+    business_needs:
+      - Mapping changes, corrections, validation results and outcomes recorded in context
+    decision_authority: Reviews history; approval rights not defined (DEC-007, DEC-008)
+    journey_stages: [JS-12]
+    capabilities: [CAP-007]
+    validation_status: CONFIRMED_IN_BASELINE
+    status: DRAFT
+  - id: STK-007
+    name: Client organization
+    category: Customer
+    basis: DERIVED
+    source: Problem statement.md section 4, client go-live and client exposure
+    responsibilities:
+      - Supply employee data and organizational context
+    business_needs:
+      - Timely go-live
+      - Correct first payroll
+    decision_authority: Commercial acceptance of go-live; not modelled further in Task 01
+    journey_stages: [JS-01, JS-13]
+    capabilities: [CAP-001]
+    validation_status: DERIVED_FROM_BASELINE
+    status: DRAFT
+  - id: STK-008
+    name: Payroll provider
+    category: Business
+    basis: DERIVED
+    source: Problem statement.md section 4, provider exposure, onboarding cost and revenue recognition
+    responsibilities:
+      - Offer and operate the payroll product, including guided activation
+    business_needs:
+      - Lower onboarding cost
+      - Lower regulatory exposure
+      - Lower early churn
+    decision_authority: Business-case approval through a sponsor who is not yet named (OQ-001)
+    journey_stages: [JS-12]
+    capabilities: [CAP-007]
+    validation_status: DERIVED_FROM_BASELINE
+    status: DRAFT
+  - id: STK-009
+    name: Employees whose profiles are activated
+    category: Affected party
+    basis: DERIVED
+    source: Problem statement.md section 4, incorrect wage disbursements and missing deductions
+    responsibilities:
+      - None in the activation workflow
+    business_needs:
+      - Correct pay, deductions and tax treatment from the first pay cycle
+      - Protection of identity, compensation, tax and banking data
+    decision_authority: None
+    journey_stages: [JS-13]
+    capabilities: [CAP-004]
+    validation_status: DERIVED_FROM_BASELINE
+    status: DRAFT
+  - id: STK-010
+    name: Business sponsor
+    category: Governance
+    basis: ASSUMPTION
+    source: Inferred; no baseline names who approves the business case
+    responsibilities:
+      - Approve the business case and the program targets
+    business_needs:
+      - Evidence-based value case
+    decision_authority: Assumed final business-case approval (OQ-001)
+    journey_stages: []
+    capabilities: []
+    validation_status: ASSUMPTION
+    status: DRAFT
+  - id: STK-011
+    name: Data protection or privacy owner
+    category: Governance
+    basis: ASSUMPTION
+    source: Inferred from blueprint section 3, information handled, and its reference to approved privacy controls
+    responsibilities:
+      - Confirm access, masking and retention requirements for activation data
+    business_needs:
+      - Sensitive data limited to what activation needs
+    decision_authority: Assumed approval of privacy and retention controls (OQ-007, DEC-008)
+    journey_stages: [JS-12]
+    capabilities: [CAP-007]
+    validation_status: ASSUMPTION
+    status: DRAFT
+  - id: STK-012
+    name: Information security owner
+    category: Governance
+    basis: ASSUMPTION
+    source: Inferred from blueprint section 1 constraints on protecting employee, tax and banking data
+    responsibilities:
+      - Confirm security controls for activation data and any AI component
+    business_needs:
+      - No unrestricted access to payroll systems or personal data
+    decision_authority: Assumed approval of security controls (OQ-007)
+    journey_stages: []
+    capabilities: []
+    validation_status: ASSUMPTION
+    status: DRAFT
+  - id: STK-013
+    name: Customer success or account owner
+    category: Business
+    basis: ASSUMPTION
+    source: Inferred from Problem statement.md section 4, early churn and brand trust
+    responsibilities:
+      - Monitor client confidence during the first weeks after go-live
+    business_needs:
+      - Early warning of activation friction
+    decision_authority: None assumed
+    journey_stages: [JS-13]
+    capabilities: []
+    validation_status: ASSUMPTION
+    status: DRAFT
