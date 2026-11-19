@@ -1,0 +1,354 @@
+# ARC-004 Capability ownership and accountability
+# Status DRAFT. Every assignment is a proposal (basis ASSUMPTION) for confirmation.
+# Role IDs are from BIZ-003 only. Assignments using STK-010 to STK-013 rely on inferred roles.
+artifact_id: ARC-004
+title: Capability ownership and accountability
+status: DRAFT
+task: TASK-02
+sources:
+  - BIZ-003
+  - Business Model Canvas to Business Architecture Blueprint.md section 3, roles and governance
+  - BIZ-005 decisions
+ownership:
+  - capability: CAP-001
+    owning_role: STK-004
+    accountable_role: STK-004
+    consulted_roles: [STK-001, STK-002]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: The product or engineering owner delivers and operates the guided activation capability (Blueprint section 3)
+    confirm_by: STK-004
+  - capability: CAP-002
+    owning_role: STK-004
+    accountable_role: STK-003
+    consulted_roles: [STK-001, STK-002]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: Required fields and pay-code mappings are decided by the payroll or compliance owner (DEC-012)
+    confirm_by: STK-004
+  - capability: CAP-003
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-001, STK-002, STK-004]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: Inheritance rules and the hierarchy source are payroll or compliance decisions (DEC-013)
+    confirm_by: STK-004
+  - capability: CAP-004
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-001, STK-004]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: The payroll or compliance owner confirms validation rules and blocking conditions (Blueprint section 3)
+    confirm_by: STK-004
+  - capability: CAP-005
+    owning_role: STK-004
+    accountable_role: STK-004
+    consulted_roles: [STK-001, STK-003, STK-005]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: The product or engineering owner operates processing; the payroll or compliance owner is consulted on controls
+    confirm_by: STK-004
+  - capability: CAP-006
+    owning_role: STK-004
+    accountable_role: STK-001
+    consulted_roles: [STK-002, STK-003]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: The payroll administrator resolves surfaced issues (Blueprint section 3)
+    confirm_by: STK-004
+  - capability: CAP-007
+    owning_role: STK-004
+    accountable_role: STK-004
+    consulted_roles: [STK-006, STK-011]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: true
+    rationale: The product or engineering owner operates diagnostics (Blueprint section 3)
+    confirm_by: STK-004
+  - capability: CAP-008
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004, STK-012]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: true
+    rationale: Permissions and approvals are decided by the payroll or compliance owner (DEC-007)
+    confirm_by: STK-004
+  - capability: CAP-009
+    owning_role: STK-011
+    accountable_role: STK-011
+    consulted_roles: [STK-012, STK-004]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: true
+    rationale: Assumed data protection owner (STK-011), itself an inferred role
+    confirm_by: STK-004
+  - capability: CAP-010
+    owning_role: STK-004
+    accountable_role: STK-004
+    consulted_roles: [STK-002]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: Product capability performed by the administrator
+    confirm_by: STK-004
+  - capability: CAP-011
+    owning_role: STK-004
+    accountable_role: STK-004
+    consulted_roles: [STK-002]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: Product capability; the client organization supplies the data
+    confirm_by: STK-004
+  - capability: CAP-012
+    owning_role: STK-004
+    accountable_role: STK-004
+    consulted_roles: [STK-002, STK-003]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: Required context is a product decision (DEC-010); context includes jurisdiction, so compliance is consulted
+    confirm_by: STK-004
+  - capability: CAP-013
+    owning_role: STK-004
+    accountable_role: STK-003
+    consulted_roles: [STK-002]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: As CAP-002
+    confirm_by: STK-004
+  - capability: CAP-014
+    owning_role: STK-004
+    accountable_role: STK-003
+    consulted_roles: [STK-002]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: As CAP-002
+    confirm_by: STK-004
+  - capability: CAP-015
+    owning_role: STK-004
+    accountable_role: STK-001
+    consulted_roles: [STK-003]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: The administrator approves mappings
+    confirm_by: STK-004
+  - capability: CAP-016
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: As CAP-003
+    confirm_by: STK-004
+  - capability: CAP-017
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: As CAP-003; no jurisdiction is assumed (DEC-001)
+    confirm_by: STK-004
+  - capability: CAP-018
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-002]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: Resolution of entity ambiguity is a compliance concern
+    confirm_by: STK-004
+  - capability: CAP-019
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: As CAP-004
+    confirm_by: STK-004
+  - capability: CAP-020
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: The classification is undecided (DEC-006) and belongs to the payroll or compliance owner
+    confirm_by: STK-004
+  - capability: CAP-021
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: What the dry run reproduces is a compliance decision (DEC-016)
+    confirm_by: STK-004
+  - capability: CAP-022
+    owning_role: STK-004
+    accountable_role: STK-004
+    consulted_roles: [STK-005]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: As CAP-005
+    confirm_by: STK-004
+  - capability: CAP-023
+    owning_role: STK-004
+    accountable_role: STK-003
+    consulted_roles: [STK-005]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: Eligibility correctness belongs to the payroll or compliance owner
+    confirm_by: STK-004
+  - capability: CAP-024
+    owning_role: STK-004
+    accountable_role: STK-004
+    consulted_roles: [STK-003]
+    performed_by: STK-005
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: Retry semantics are a product decision (DEC-017); payroll operations performs recovery
+    confirm_by: STK-004
+  - capability: CAP-025
+    owning_role: STK-004
+    accountable_role: STK-004
+    consulted_roles: [STK-002]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: Diagnostics are a product capability
+    confirm_by: STK-004
+  - capability: CAP-026
+    owning_role: STK-004
+    accountable_role: STK-001
+    consulted_roles: [STK-002]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: The administrator is accountable for corrections they make
+    confirm_by: STK-004
+  - capability: CAP-027
+    owning_role: STK-004
+    accountable_role: STK-003
+    consulted_roles: [STK-002]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: Bulk changes to payroll data need compliance accountability (DEC-019)
+    confirm_by: STK-004
+  - capability: CAP-028
+    owning_role: STK-004
+    accountable_role: STK-004
+    consulted_roles: [STK-002]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: As CAP-007
+    confirm_by: STK-004
+  - capability: CAP-029
+    owning_role: STK-004
+    accountable_role: STK-006
+    consulted_roles: [STK-003, STK-011]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: true
+    rationale: Required events are undecided (DEC-008)
+    confirm_by: STK-004
+  - capability: CAP-030
+    owning_role: STK-004
+    accountable_role: STK-010
+    consulted_roles: [STK-002]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: true
+    rationale: Assumed business sponsor (STK-010), itself an inferred role
+    confirm_by: STK-004
+  - capability: CAP-031
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004]
+    performed_by: STK-001
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: The authorization model is undecided (DEC-007)
+    confirm_by: STK-004
+  - capability: CAP-032
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-001, STK-011]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: true
+    rationale: Which corrections need authorization is undecided (DEC-007)
+    confirm_by: STK-004
+  - capability: CAP-033
+    owning_role: STK-011
+    accountable_role: STK-011
+    consulted_roles: [STK-012, STK-004]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: true
+    rationale: As CAP-009; roles and visibility are undecided (DEC-008)
+    confirm_by: STK-004
+  - capability: CAP-034
+    owning_role: STK-011
+    accountable_role: STK-011
+    consulted_roles: [STK-004]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: true
+    rationale: As CAP-009; retention periods are undecided and not assumed (DEC-008, OOS-017)
+    confirm_by: STK-004
+  - capability: CAP-035
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: As CAP-019
+    confirm_by: STK-004
+  - capability: CAP-036
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: As CAP-019; rules depend on DEC-001 and DEC-015
+    confirm_by: STK-004
+  - capability: CAP-037
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: false
+    rationale: As CAP-019
+    confirm_by: STK-004
+  - capability: CAP-038
+    owning_role: STK-003
+    accountable_role: STK-003
+    consulted_roles: [STK-004, STK-011]
+    performed_by: null
+    basis: ASSUMPTION
+    relies_on_inferred_role: true
+    rationale: As CAP-019; banking data is sensitive, so data protection is consulted
+    confirm_by: STK-004
