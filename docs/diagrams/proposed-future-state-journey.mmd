@@ -1,0 +1,44 @@
+flowchart TD
+    %% Proposed future-state activation journey. DRAFT.
+    %% Every stage traces to an epic and to the value stream in the blueprint section 3.
+    %% The remediation loop follows requirements-document-map.md.
+    subgraph E1["EPIC-01 Prepare a guided activation batch"]
+        JS01["JS-01 Batch initiation and identification"]
+        JS02["JS-02 Source data upload and inspection"]
+    end
+    subgraph E2["EPIC-02 Map data and resolve activation context"]
+        JS03["JS-03 Field mapping review"]
+        JS04["JS-04 Pay code mapping resolution"]
+        JS05["JS-05 Entity and jurisdiction assignment"]
+    end
+    subgraph E3["EPIC-03 Validate and simulate"]
+        JS06{"JS-06 Pre-activation validation"}
+        JS07{"JS-07 Dry-run simulation"}
+    end
+    subgraph E4["EPIC-04 Process asynchronously and partially activate"]
+        JS08["JS-08 Asynchronous processing and progress tracking"]
+        JS09["JS-09 Partial activation of eligible records"]
+    end
+    subgraph E5["EPIC-05 Remediate activation exceptions"]
+        JS10["JS-10 Exception triage and diagnostics"]
+        JS11["JS-11 Correction, bulk fix and revalidation"]
+    end
+    subgraph E6["EPIC-06 Review activation results and history"]
+        JS12["JS-12 Outcome review and history"]
+        JS13["JS-13 Hand-off to first live payroll, boundary, see DEC-021"]
+    end
+    JS01 --> JS02 --> JS03 --> JS04 --> JS05 --> JS06
+    JS06 -->|"Passed required checks"| JS07
+    JS06 -->|"Records with errors"| JS10
+    JS07 -->|"Eligible records"| JS08
+    JS07 -->|"Simulation conflicts"| JS10
+    JS08 --> JS09
+    JS09 -->|"Record-level failure isolated"| JS10
+    JS10 --> JS11
+    JS11 -->|"Corrected records revalidated"| JS06
+    JS09 --> JS12
+    JS11 -.->|"Unresolved records stay visible"| JS12
+    JS12 --> JS13
+    AIX["Optional AI assistance, suggests only: AI-001, AI-002, AI-003"] -.-> JS03
+    AIX -.-> JS04
+    AIX -.-> JS10
