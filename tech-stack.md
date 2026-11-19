@@ -10,7 +10,7 @@ The proposed stack is event-driven and serverless-first on Google Cloud. Cloud R
 
 ![Solution architecture diagram](./docs/solution-architecture.svg)
 
-The diagram is large, so open the SVG file directly to zoom. It maps the six epics to a pipeline, with orchestration, a learning loop, the data layer, security, and delivery below it. It uses the selected stack: React with Axios on the frontend, Python FastAPI on Cloud Run for the six epic services, and Google Cloud managed services for messaging, data, AI, observability, and security.
+The diagram is large, so open the SVG file directly to zoom. It maps the six epics to a pipeline, with orchestration, a learning loop, the data layer, security, and delivery below it. It uses the proposed stack: React with Axios on the frontend, Python FastAPI on Cloud Run for the six epic services, and Google Cloud managed services for messaging, data, AI, observability, and security.
 
 The same view as a Mermaid diagram, which stays editable as text:
 
@@ -237,14 +237,14 @@ flowchart TB
 
 ## Frontend
 
-- Selected: React with TypeScript, calling the backend over REST with Axios, served from Cloud Storage behind Cloud CDN and the Global External Application Load Balancer.
+- Proposed: React with TypeScript, calling the backend over REST with Axios, served from Cloud Storage behind Cloud CDN and the Global External Application Load Balancer.
 - Material UI components and a virtualized data grid such as AG Grid for cell-level error display and bulk edits across thousands of rows.
 - Real-time batch progress and remediation queue updates through Firestore listeners or Server-Sent Events from Cloud Run.
 - Identity Platform for sign-in, with SSO through SAML and OIDC for client identity providers.
 
 ## Backend and integration
 
-- Selected: Python FastAPI services on Cloud Run, organized by domain: batch, mapping, validation, activation, remediation, and results and audit.
+- Proposed: Python FastAPI services on Cloud Run, organized by domain: batch, mapping, validation, activation, remediation, and results and audit.
 - API Gateway or Apigee as the front door. Apigee is the better choice if external partner APIs, quotas, and monetization are needed.
 - Pub/Sub for events between stages, with dead-letter topics for failed records.
 - Cloud Tasks for per-record or per-chunk retries, and Cloud Workflows for orchestrating the batch lifecycle.

@@ -26,7 +26,7 @@ Start with `README.md`, which lists every document in reading order.
 - Target metrics are 65% faster activation, 75% fewer support touchpoints per 1,000 activations, and a 99.8% first-time-right rate. Baselines are not yet agreed, so call them targets.
 - AI only suggests, mainly for mappings in Epic 2. People approve, and deterministic rules decide validity. Never describe AI as approving or activating records.
 - Validation errors must isolate to the failing record. A bad record never blocks the whole batch, and corrected records are revalidated on their own.
-- Selected stack: Google Cloud, React with TypeScript and Axios, Python FastAPI on Cloud Run, Pub/Sub, Cloud SQL or AlloyDB, BigQuery, and Vertex AI with Gemini. Security uses VPC Service Controls, customer-managed keys, and Sensitive Data Protection.
+- Proposed stack (a proposal, not a constraint, per DEC-022): Google Cloud, React with TypeScript and Axios, Python FastAPI on Cloud Run, Pub/Sub, Cloud SQL or AlloyDB, BigQuery, and Vertex AI with Gemini. Security uses VPC Service Controls, customer-managed keys, and Sensitive Data Protection.
 
 ## Writing style
 
