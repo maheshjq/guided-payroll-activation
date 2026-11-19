@@ -1,0 +1,644 @@
+# ARC-003 Traceability matrix
+# Status DRAFT. Maps every capability to Task 01 identifiers, epics, stories, stakeholders and value stream stages.
+# problems are derived from the objectives through BIZ-004, so they cannot drift from it.
+# Coverage sections give the reverse direction for two-way checking.
+artifact_id: ARC-003
+title: Traceability matrix
+status: DRAFT
+task: TASK-02
+sources:
+  - ARC-001
+  - ARC-002
+  - ARC-004
+  - BIZ-001
+  - BIZ-003
+  - BIZ-004
+  - BIZ-006
+  - product-backlog.md
+capability_trace:
+  - capability: CAP-001
+    level: 1
+    bottlenecks: [BN-01, BN-03, BN-05]
+    problems: [BP-001, BP-005]
+    objectives: [BO-001, BO-008]
+    constraints: []
+    kpis: [KPI-004, KPI-005]
+    epics: [EPIC-01]
+    stories: [PA-01, PA-02]
+    stakeholders: [STK-001, STK-002, STK-003, STK-004, STK-007]
+    value_stream_stages: [VS-01]
+    journey_stages: [JS-01, JS-02]
+    external_dependencies: []
+  - capability: CAP-002
+    level: 1
+    bottlenecks: [BN-02]
+    problems: [BP-002, BP-003]
+    objectives: [BO-002, BO-003]
+    constraints: []
+    kpis: [KPI-006, KPI-007]
+    epics: [EPIC-02]
+    stories: [PA-03, PA-04, PA-06]
+    stakeholders: [STK-001, STK-002, STK-003, STK-004]
+    value_stream_stages: [VS-02]
+    journey_stages: [JS-03, JS-04]
+    external_dependencies: []
+  - capability: CAP-003
+    level: 1
+    bottlenecks: [BN-03]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-006]
+    constraints: []
+    kpis: [KPI-008]
+    epics: [EPIC-02]
+    stories: [PA-05]
+    stakeholders: [STK-001, STK-002, STK-003, STK-004]
+    value_stream_stages: [VS-02]
+    journey_stages: [JS-05]
+    external_dependencies: []
+  - capability: CAP-004
+    level: 1
+    bottlenecks: [BN-01, BN-04]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-004, BO-006]
+    constraints: []
+    kpis: [KPI-009, KPI-010, KPI-011, KPI-021]
+    epics: [EPIC-03]
+    stories: [PA-07, PA-08]
+    stakeholders: [STK-001, STK-003, STK-004, STK-009, STK-011]
+    value_stream_stages: [VS-03]
+    journey_stages: [JS-06, JS-07]
+    external_dependencies: []
+  - capability: CAP-005
+    level: 1
+    bottlenecks: [BN-01]
+    problems: [BP-001, BP-002, BP-004]
+    objectives: [BO-001, BO-005, BO-006]
+    constraints: []
+    kpis: [KPI-001, KPI-012, KPI-013, KPI-014, KPI-021]
+    epics: [EPIC-04]
+    stories: [PA-09, PA-10, PA-11]
+    stakeholders: [STK-001, STK-003, STK-004, STK-005]
+    value_stream_stages: [VS-04]
+    journey_stages: [JS-08, JS-09]
+    external_dependencies: []
+  - capability: CAP-006
+    level: 1
+    bottlenecks: [BN-01, BN-02, BN-05]
+    problems: [BP-001, BP-002, BP-005]
+    objectives: [BO-002, BO-005, BO-007]
+    constraints: []
+    kpis: [KPI-015, KPI-016, KPI-017]
+    epics: [EPIC-05]
+    stories: [PA-12, PA-13, PA-14]
+    stakeholders: [STK-001, STK-002, STK-003, STK-004]
+    value_stream_stages: [VS-05]
+    journey_stages: [JS-10, JS-11]
+    external_dependencies: []
+  - capability: CAP-007
+    level: 1
+    bottlenecks: [BN-05]
+    problems: [BP-001, BP-002, BP-005]
+    objectives: [BO-007, BO-008]
+    constraints: []
+    kpis: [KPI-001, KPI-002, KPI-003, KPI-018, KPI-019, KPI-020, KPI-022]
+    epics: [EPIC-06]
+    stories: [PA-15, PA-16]
+    stakeholders: [STK-001, STK-002, STK-003, STK-004, STK-006, STK-008, STK-010, STK-011]
+    value_stream_stages: [VS-06]
+    journey_stages: [JS-12]
+    external_dependencies: []
+  - capability: CAP-008
+    level: 1
+    bottlenecks: []
+    problems: [BP-004]
+    objectives: [BO-006]
+    constraints: []
+    kpis: [KPI-021]
+    epics: [EPIC-04, EPIC-05]
+    stories: [PA-14]
+    stakeholders: [STK-001, STK-003, STK-004, STK-011, STK-012]
+    value_stream_stages: [VS-04, VS-05]
+    journey_stages: [JS-09, JS-11]
+    external_dependencies: []
+  - capability: CAP-009
+    level: 1
+    bottlenecks: []
+    problems: []
+    objectives: []
+    constraints: [CON-004]
+    kpis: []
+    epics: [EPIC-06]
+    stories: [PA-16]
+    stakeholders: [STK-004, STK-011, STK-012]
+    value_stream_stages: [VS-06]
+    journey_stages: [JS-12]
+    external_dependencies: []
+  - capability: CAP-010
+    level: 2
+    bottlenecks: [BN-01]
+    problems: [BP-001]
+    objectives: [BO-001]
+    constraints: []
+    kpis: [KPI-004]
+    epics: [EPIC-01]
+    stories: [PA-01]
+    stakeholders: [STK-001, STK-002, STK-004]
+    value_stream_stages: [VS-01]
+    journey_stages: [JS-01]
+    external_dependencies: []
+  - capability: CAP-011
+    level: 2
+    bottlenecks: [BN-05]
+    problems: [BP-001, BP-005]
+    objectives: [BO-001, BO-008]
+    constraints: []
+    kpis: [KPI-004, KPI-005]
+    epics: [EPIC-01]
+    stories: [PA-02]
+    stakeholders: [STK-001, STK-002, STK-004, STK-007]
+    value_stream_stages: [VS-01]
+    journey_stages: [JS-02]
+    external_dependencies: []
+  - capability: CAP-012
+    level: 2
+    bottlenecks: [BN-03]
+    problems: [BP-001]
+    objectives: [BO-001]
+    constraints: []
+    kpis: [KPI-004]
+    epics: [EPIC-01]
+    stories: []
+    stakeholders: [STK-001, STK-002, STK-003, STK-004]
+    value_stream_stages: [VS-01]
+    journey_stages: [JS-01]
+    external_dependencies: []
+  - capability: CAP-013
+    level: 2
+    bottlenecks: [BN-02]
+    problems: [BP-002, BP-003]
+    objectives: [BO-002, BO-003]
+    constraints: []
+    kpis: [KPI-006, KPI-007]
+    epics: [EPIC-02]
+    stories: [PA-03, PA-06]
+    stakeholders: [STK-001, STK-002, STK-003, STK-004]
+    value_stream_stages: [VS-02]
+    journey_stages: [JS-03]
+    external_dependencies: []
+  - capability: CAP-014
+    level: 2
+    bottlenecks: [BN-02]
+    problems: [BP-002, BP-003]
+    objectives: [BO-002, BO-003]
+    constraints: []
+    kpis: [KPI-006, KPI-007]
+    epics: [EPIC-02]
+    stories: [PA-04, PA-06]
+    stakeholders: [STK-001, STK-002, STK-003, STK-004]
+    value_stream_stages: [VS-02]
+    journey_stages: [JS-04]
+    external_dependencies: [DEP-002]
+  - capability: CAP-015
+    level: 2
+    bottlenecks: [BN-02]
+    problems: [BP-003]
+    objectives: [BO-003]
+    constraints: []
+    kpis: [KPI-007]
+    epics: [EPIC-02]
+    stories: [PA-03, PA-04, PA-06]
+    stakeholders: [STK-001, STK-003, STK-004]
+    value_stream_stages: [VS-02]
+    journey_stages: [JS-03, JS-04]
+    external_dependencies: []
+  - capability: CAP-016
+    level: 2
+    bottlenecks: [BN-03]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-006]
+    constraints: []
+    kpis: [KPI-008]
+    epics: [EPIC-02]
+    stories: [PA-05]
+    stakeholders: [STK-001, STK-003, STK-004]
+    value_stream_stages: [VS-02]
+    journey_stages: [JS-05]
+    external_dependencies: [DEP-003]
+  - capability: CAP-017
+    level: 2
+    bottlenecks: [BN-03]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-006]
+    constraints: []
+    kpis: [KPI-008]
+    epics: [EPIC-02]
+    stories: [PA-05]
+    stakeholders: [STK-001, STK-003, STK-004]
+    value_stream_stages: [VS-02]
+    journey_stages: [JS-05]
+    external_dependencies: []
+  - capability: CAP-018
+    level: 2
+    bottlenecks: [BN-03]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-006]
+    constraints: []
+    kpis: [KPI-008]
+    epics: [EPIC-02]
+    stories: [PA-05]
+    stakeholders: [STK-001, STK-002, STK-003]
+    value_stream_stages: [VS-02]
+    journey_stages: [JS-05]
+    external_dependencies: []
+  - capability: CAP-019
+    level: 2
+    bottlenecks: [BN-01, BN-04]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-006]
+    constraints: []
+    kpis: [KPI-009, KPI-011]
+    epics: [EPIC-03]
+    stories: [PA-07]
+    stakeholders: [STK-001, STK-003, STK-004, STK-009]
+    value_stream_stages: [VS-03]
+    journey_stages: [JS-06]
+    external_dependencies: [DEP-001]
+  - capability: CAP-020
+    level: 2
+    bottlenecks: [BN-01]
+    problems: [BP-004]
+    objectives: [BO-006]
+    constraints: []
+    kpis: [KPI-009, KPI-021]
+    epics: [EPIC-03]
+    stories: [PA-07]
+    stakeholders: [STK-003, STK-004]
+    value_stream_stages: [VS-03]
+    journey_stages: [JS-06]
+    external_dependencies: []
+  - capability: CAP-021
+    level: 2
+    bottlenecks: [BN-04]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-004]
+    constraints: []
+    kpis: [KPI-009, KPI-010, KPI-011]
+    epics: [EPIC-03]
+    stories: [PA-08]
+    stakeholders: [STK-001, STK-003, STK-004]
+    value_stream_stages: [VS-03]
+    journey_stages: [JS-07]
+    external_dependencies: [DEP-004]
+  - capability: CAP-022
+    level: 2
+    bottlenecks: [BN-01]
+    problems: [BP-001]
+    objectives: [BO-001]
+    constraints: []
+    kpis: [KPI-001, KPI-012]
+    epics: [EPIC-04]
+    stories: [PA-09]
+    stakeholders: [STK-001, STK-004, STK-005]
+    value_stream_stages: [VS-04]
+    journey_stages: [JS-08]
+    external_dependencies: []
+  - capability: CAP-023
+    level: 2
+    bottlenecks: [BN-01]
+    problems: [BP-001, BP-002, BP-004]
+    objectives: [BO-001, BO-005, BO-006]
+    constraints: []
+    kpis: [KPI-012, KPI-013, KPI-021]
+    epics: [EPIC-04]
+    stories: [PA-10]
+    stakeholders: [STK-001, STK-003, STK-004, STK-005]
+    value_stream_stages: [VS-04]
+    journey_stages: [JS-09]
+    external_dependencies: []
+  - capability: CAP-024
+    level: 2
+    bottlenecks: [BN-01]
+    problems: [BP-004]
+    objectives: [BO-006]
+    constraints: []
+    kpis: [KPI-014]
+    epics: [EPIC-04]
+    stories: [PA-11]
+    stakeholders: [STK-003, STK-004, STK-005]
+    value_stream_stages: [VS-04]
+    journey_stages: [JS-08]
+    external_dependencies: []
+  - capability: CAP-025
+    level: 2
+    bottlenecks: [BN-05]
+    problems: [BP-002, BP-005]
+    objectives: [BO-002, BO-007]
+    constraints: []
+    kpis: [KPI-015, KPI-017]
+    epics: [EPIC-05]
+    stories: [PA-12]
+    stakeholders: [STK-001, STK-002, STK-004]
+    value_stream_stages: [VS-05]
+    journey_stages: [JS-10]
+    external_dependencies: []
+  - capability: CAP-026
+    level: 2
+    bottlenecks: [BN-01, BN-05]
+    problems: [BP-001, BP-002]
+    objectives: [BO-005]
+    constraints: []
+    kpis: [KPI-015, KPI-016]
+    epics: [EPIC-05]
+    stories: [PA-13]
+    stakeholders: [STK-001, STK-002, STK-004]
+    value_stream_stages: [VS-05]
+    journey_stages: [JS-11]
+    external_dependencies: []
+  - capability: CAP-027
+    level: 2
+    bottlenecks: [BN-02, BN-05]
+    problems: [BP-001, BP-002]
+    objectives: [BO-002, BO-005]
+    constraints: []
+    kpis: [KPI-015, KPI-016, KPI-017]
+    epics: [EPIC-05]
+    stories: [PA-14]
+    stakeholders: [STK-001, STK-002, STK-003, STK-004]
+    value_stream_stages: [VS-05]
+    journey_stages: [JS-11]
+    external_dependencies: []
+  - capability: CAP-028
+    level: 2
+    bottlenecks: [BN-05]
+    problems: [BP-001, BP-002, BP-005]
+    objectives: [BO-007, BO-008]
+    constraints: []
+    kpis: [KPI-018, KPI-019]
+    epics: [EPIC-06]
+    stories: [PA-15]
+    stakeholders: [STK-001, STK-002, STK-004]
+    value_stream_stages: [VS-06]
+    journey_stages: [JS-12]
+    external_dependencies: []
+  - capability: CAP-029
+    level: 2
+    bottlenecks: [BN-05]
+    problems: [BP-002, BP-005]
+    objectives: [BO-007]
+    constraints: []
+    kpis: [KPI-020]
+    epics: [EPIC-06]
+    stories: [PA-16]
+    stakeholders: [STK-003, STK-004, STK-006, STK-011]
+    value_stream_stages: [VS-06]
+    journey_stages: [JS-12]
+    external_dependencies: []
+  - capability: CAP-030
+    level: 2
+    bottlenecks: []
+    problems: [BP-002, BP-005]
+    objectives: [BO-007]
+    constraints: []
+    kpis: [KPI-001, KPI-002, KPI-003, KPI-022]
+    epics: [EPIC-06]
+    stories: []
+    stakeholders: [STK-002, STK-004, STK-008, STK-010]
+    value_stream_stages: [VS-06]
+    journey_stages: [JS-12]
+    external_dependencies: []
+  - capability: CAP-031
+    level: 2
+    bottlenecks: []
+    problems: [BP-004]
+    objectives: [BO-006]
+    constraints: []
+    kpis: [KPI-021]
+    epics: [EPIC-04]
+    stories: []
+    stakeholders: [STK-001, STK-003, STK-004]
+    value_stream_stages: [VS-04]
+    journey_stages: [JS-09]
+    external_dependencies: []
+  - capability: CAP-032
+    level: 2
+    bottlenecks: []
+    problems: [BP-004]
+    objectives: [BO-006]
+    constraints: []
+    kpis: [KPI-021]
+    epics: [EPIC-05]
+    stories: [PA-14]
+    stakeholders: [STK-001, STK-003, STK-011]
+    value_stream_stages: [VS-05]
+    journey_stages: [JS-11]
+    external_dependencies: []
+  - capability: CAP-033
+    level: 2
+    bottlenecks: []
+    problems: []
+    objectives: []
+    constraints: [CON-004]
+    kpis: []
+    epics: [EPIC-06]
+    stories: [PA-16]
+    stakeholders: [STK-004, STK-011, STK-012]
+    value_stream_stages: [VS-06]
+    journey_stages: [JS-12]
+    external_dependencies: []
+  - capability: CAP-034
+    level: 2
+    bottlenecks: []
+    problems: []
+    objectives: []
+    constraints: [CON-004]
+    kpis: []
+    epics: [EPIC-06]
+    stories: [PA-16]
+    stakeholders: [STK-004, STK-011]
+    value_stream_stages: [VS-06]
+    journey_stages: [JS-12]
+    external_dependencies: []
+  - capability: CAP-035
+    level: 3
+    bottlenecks: [BN-04]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-006]
+    constraints: []
+    kpis: [KPI-009]
+    epics: [EPIC-03]
+    stories: [PA-07]
+    stakeholders: [STK-003, STK-004]
+    value_stream_stages: [VS-03]
+    journey_stages: [JS-06]
+    external_dependencies: []
+  - capability: CAP-036
+    level: 3
+    bottlenecks: [BN-04]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-006]
+    constraints: []
+    kpis: [KPI-009]
+    epics: [EPIC-03]
+    stories: [PA-07]
+    stakeholders: [STK-003, STK-004]
+    value_stream_stages: [VS-03]
+    journey_stages: [JS-06]
+    external_dependencies: []
+  - capability: CAP-037
+    level: 3
+    bottlenecks: [BN-04]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-006]
+    constraints: []
+    kpis: [KPI-009]
+    epics: [EPIC-03]
+    stories: [PA-07]
+    stakeholders: [STK-003, STK-004]
+    value_stream_stages: [VS-03]
+    journey_stages: [JS-06]
+    external_dependencies: []
+  - capability: CAP-038
+    level: 3
+    bottlenecks: [BN-04]
+    problems: [BP-003, BP-004]
+    objectives: [BO-003, BO-006]
+    constraints: []
+    kpis: [KPI-009]
+    epics: [EPIC-03]
+    stories: [PA-07]
+    stakeholders: [STK-003, STK-004, STK-011]
+    value_stream_stages: [VS-03]
+    journey_stages: [JS-06]
+    external_dependencies: []
+objective_coverage:
+  - ref: BO-001
+    capabilities: [CAP-001, CAP-005, CAP-010, CAP-011, CAP-012, CAP-022, CAP-023]
+  - ref: BO-002
+    capabilities: [CAP-002, CAP-006, CAP-013, CAP-014, CAP-025, CAP-027]
+  - ref: BO-003
+    capabilities: [CAP-002, CAP-003, CAP-004, CAP-013, CAP-014, CAP-015, CAP-016, CAP-017, CAP-018, CAP-019, CAP-021, CAP-035, CAP-036, CAP-037, CAP-038]
+  - ref: BO-004
+    capabilities: [CAP-004, CAP-021]
+  - ref: BO-005
+    capabilities: [CAP-005, CAP-006, CAP-023, CAP-026, CAP-027]
+  - ref: BO-006
+    capabilities: [CAP-003, CAP-004, CAP-005, CAP-008, CAP-016, CAP-017, CAP-018, CAP-019, CAP-020, CAP-023, CAP-024, CAP-031, CAP-032, CAP-035, CAP-036, CAP-037, CAP-038]
+  - ref: BO-007
+    capabilities: [CAP-006, CAP-007, CAP-025, CAP-028, CAP-029, CAP-030]
+  - ref: BO-008
+    capabilities: [CAP-001, CAP-007, CAP-011, CAP-028]
+bottleneck_coverage:
+  - ref: BN-01
+    capabilities: [CAP-001, CAP-004, CAP-005, CAP-006, CAP-010, CAP-019, CAP-020, CAP-022, CAP-023, CAP-024, CAP-026]
+  - ref: BN-02
+    capabilities: [CAP-002, CAP-006, CAP-013, CAP-014, CAP-015, CAP-027]
+  - ref: BN-03
+    capabilities: [CAP-001, CAP-003, CAP-012, CAP-016, CAP-017, CAP-018]
+  - ref: BN-04
+    capabilities: [CAP-004, CAP-019, CAP-021, CAP-035, CAP-036, CAP-037, CAP-038]
+  - ref: BN-05
+    capabilities: [CAP-001, CAP-006, CAP-007, CAP-011, CAP-025, CAP-026, CAP-027, CAP-028, CAP-029]
+kpi_coverage:
+  - ref: KPI-001
+    capabilities: [CAP-005, CAP-007, CAP-022, CAP-030]
+  - ref: KPI-002
+    capabilities: [CAP-007, CAP-030]
+  - ref: KPI-003
+    capabilities: [CAP-007, CAP-030]
+  - ref: KPI-004
+    capabilities: [CAP-001, CAP-010, CAP-011, CAP-012]
+  - ref: KPI-005
+    capabilities: [CAP-001, CAP-011]
+  - ref: KPI-006
+    capabilities: [CAP-002, CAP-013, CAP-014]
+  - ref: KPI-007
+    capabilities: [CAP-002, CAP-013, CAP-014, CAP-015]
+  - ref: KPI-008
+    capabilities: [CAP-003, CAP-016, CAP-017, CAP-018]
+  - ref: KPI-009
+    capabilities: [CAP-004, CAP-019, CAP-020, CAP-021, CAP-035, CAP-036, CAP-037, CAP-038]
+  - ref: KPI-010
+    capabilities: [CAP-004, CAP-021]
+  - ref: KPI-011
+    capabilities: [CAP-004, CAP-019, CAP-021]
+  - ref: KPI-012
+    capabilities: [CAP-005, CAP-022, CAP-023]
+  - ref: KPI-013
+    capabilities: [CAP-005, CAP-023]
+  - ref: KPI-014
+    capabilities: [CAP-005, CAP-024]
+  - ref: KPI-015
+    capabilities: [CAP-006, CAP-025, CAP-026, CAP-027]
+  - ref: KPI-016
+    capabilities: [CAP-006, CAP-026, CAP-027]
+  - ref: KPI-017
+    capabilities: [CAP-006, CAP-025, CAP-027]
+  - ref: KPI-018
+    capabilities: [CAP-007, CAP-028]
+  - ref: KPI-019
+    capabilities: [CAP-007, CAP-028]
+  - ref: KPI-020
+    capabilities: [CAP-007, CAP-029]
+  - ref: KPI-021
+    capabilities: [CAP-004, CAP-005, CAP-008, CAP-020, CAP-023, CAP-031, CAP-032]
+  - ref: KPI-022
+    capabilities: [CAP-007, CAP-030]
+epic_coverage:
+  - ref: EPIC-01
+    capabilities: [CAP-001, CAP-010, CAP-011, CAP-012]
+  - ref: EPIC-02
+    capabilities: [CAP-002, CAP-003, CAP-013, CAP-014, CAP-015, CAP-016, CAP-017, CAP-018]
+  - ref: EPIC-03
+    capabilities: [CAP-004, CAP-019, CAP-020, CAP-021, CAP-035, CAP-036, CAP-037, CAP-038]
+  - ref: EPIC-04
+    capabilities: [CAP-005, CAP-008, CAP-022, CAP-023, CAP-024, CAP-031]
+  - ref: EPIC-05
+    capabilities: [CAP-006, CAP-008, CAP-025, CAP-026, CAP-027, CAP-032]
+  - ref: EPIC-06
+    capabilities: [CAP-007, CAP-009, CAP-028, CAP-029, CAP-030, CAP-033, CAP-034]
+story_coverage:
+  - ref: PA-01
+    capabilities: [CAP-001, CAP-010]
+  - ref: PA-02
+    capabilities: [CAP-001, CAP-011]
+  - ref: PA-03
+    capabilities: [CAP-002, CAP-013, CAP-015]
+  - ref: PA-04
+    capabilities: [CAP-002, CAP-014, CAP-015]
+  - ref: PA-05
+    capabilities: [CAP-003, CAP-016, CAP-017, CAP-018]
+  - ref: PA-06
+    capabilities: [CAP-002, CAP-013, CAP-014, CAP-015]
+  - ref: PA-07
+    capabilities: [CAP-004, CAP-019, CAP-020, CAP-035, CAP-036, CAP-037, CAP-038]
+  - ref: PA-08
+    capabilities: [CAP-004, CAP-021]
+  - ref: PA-09
+    capabilities: [CAP-005, CAP-022]
+  - ref: PA-10
+    capabilities: [CAP-005, CAP-023]
+  - ref: PA-11
+    capabilities: [CAP-005, CAP-024]
+  - ref: PA-12
+    capabilities: [CAP-006, CAP-025]
+  - ref: PA-13
+    capabilities: [CAP-006, CAP-026]
+  - ref: PA-14
+    capabilities: [CAP-006, CAP-008, CAP-027, CAP-032]
+  - ref: PA-15
+    capabilities: [CAP-007, CAP-028]
+  - ref: PA-16
+    capabilities: [CAP-007, CAP-009, CAP-029, CAP-033, CAP-034]
+value_stream_coverage:
+  - ref: VS-01
+    capabilities: [CAP-001, CAP-010, CAP-011, CAP-012]
+  - ref: VS-02
+    capabilities: [CAP-002, CAP-003, CAP-013, CAP-014, CAP-015, CAP-016, CAP-017, CAP-018]
+  - ref: VS-03
+    capabilities: [CAP-004, CAP-019, CAP-020, CAP-021, CAP-035, CAP-036, CAP-037, CAP-038]
+  - ref: VS-04
+    capabilities: [CAP-005, CAP-008, CAP-022, CAP-023, CAP-024, CAP-031]
+  - ref: VS-05
+    capabilities: [CAP-006, CAP-008, CAP-025, CAP-026, CAP-027, CAP-032]
+  - ref: VS-06
+    capabilities: [CAP-007, CAP-009, CAP-028, CAP-029, CAP-030, CAP-033, CAP-034]
