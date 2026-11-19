@@ -1,0 +1,495 @@
+# BIZ-005 Assumptions, constraints, risks, dependencies, decisions and questions
+# Status DRAFT. No assumption has been validated. No decision has been made.
+# Risk ratings are provisional and were made without operational data.
+artifact_id: BIZ-005
+title: Assumptions, constraints, risks, dependencies, decisions and questions
+status: DRAFT
+task: TASK-01
+sources:
+  - Business Model Canvas to Business Architecture Blueprint.md, every item marked Assumption to validate or Decision required
+  - epic-01 to epic-06, open decisions sections
+  - product-backlog.md, refinement decisions before implementation
+  - Problem statement.md
+assumptions:
+  - id: ASM-001
+    statement: The initial target may be limited to new customers or may also include existing customers restructuring their organizations
+    source: Blueprint section 2, customer segments
+    validation_status: UNVALIDATED
+    validation_method: Product decision by the business sponsor
+    confirm_by: STK-010
+    related: [DEC-002]
+  - id: ASM-002
+    statement: Value is realised through the existing payroll offering rather than a new activation-specific revenue stream
+    source: Blueprint section 2, revenue streams
+    validation_status: UNVALIDATED
+    validation_method: Confirmation by the business sponsor
+    confirm_by: STK-010
+    related: [BEN-008]
+  - id: ASM-003
+    statement: The reduction in implementation effort and operating cost can be quantified
+    source: Blueprint section 2, cost structure
+    validation_status: UNVALIDATED
+    validation_method: Baseline effort and cost measurement
+    confirm_by: STK-004
+    related: [OQ-005, OQ-006]
+  - id: ASM-004
+    statement: Source employee data arrives as external payroll exports whose schemas differ from the internal data fields
+    source: Problem statement.md sections 3 and 5
+    validation_status: UNVALIDATED
+    validation_method: Review of a sample of real client input files
+    confirm_by: STK-002
+    related: [DEC-009]
+  - id: ASM-005
+    statement: An authoritative source exists for each client entity hierarchy
+    source: product-backlog.md PA-05 dependencies
+    validation_status: UNVALIDATED
+    validation_method: Identify the source system and owner of entity hierarchy data
+    confirm_by: STK-003
+    related: [DEC-013, DEP-003]
+  - id: ASM-006
+    statement: The statutory engines can execute a non-committing simulation using production-equivalent rules
+    source: Problem statement.md section 3; product-backlog.md PA-08 dependencies
+    validation_status: UNVALIDATED
+    validation_method: Technical confirmation with the statutory engine owner
+    confirm_by: STK-004
+    related: [DEC-016, DEP-004]
+  - id: ASM-007
+    statement: Validation issues can be classified as blocking, requiring review, or informational
+    source: epic-03 scope
+    validation_status: UNVALIDATED
+    validation_method: Classification defined by the payroll or compliance owner
+    confirm_by: STK-003
+    related: [DEC-006]
+  - id: ASM-008
+    statement: Record-level failures can be isolated without weakening any required validation or compliance control
+    source: Blueprint section 3, business rules
+    validation_status: UNVALIDATED
+    validation_method: Control review by the payroll or compliance owner
+    confirm_by: STK-003
+    related: [DEC-006, RSK-001]
+  - id: ASM-009
+    statement: Corrected records can be revalidated individually without reprocessing the batch
+    source: Blueprint section 3; README.md epics section
+    validation_status: UNVALIDATED
+    validation_method: Confirmation during workflow design
+    confirm_by: STK-004
+    related: [PA-13]
+  - id: ASM-010
+    statement: An authoritative pay-code catalogue exists against which custom pay codes can be mapped
+    source: product-backlog.md PA-04 dependencies
+    validation_status: UNVALIDATED
+    validation_method: Identify the catalogue and its owner
+    confirm_by: STK-003
+    related: [DEC-012, DEP-002]
+  - id: ASM-011
+    statement: Cycle time, support touchpoints and first-payroll corrections can be measured from existing records
+    source: Inferred from the three program targets
+    validation_status: UNVALIDATED
+    validation_method: Data source discovery for each KPI
+    confirm_by: STK-004
+    related: [DEC-005, DEP-007]
+  - id: ASM-012
+    statement: The industry context is payroll management and human capital management software and services
+    source: Task 01 prompt; not stated in any baseline document
+    validation_status: UNVALIDATED
+    validation_method: Confirmation by the business sponsor
+    confirm_by: STK-010
+    related: [DEC-001]
+  - id: ASM-013
+    statement: The initial customer segment is enterprise clients activating hundreds or thousands of employee profiles at once
+    source: Problem statement.md section 1; Task 01 prompt
+    validation_status: UNVALIDATED
+    validation_method: Confirmation by the business sponsor, together with ASM-001
+    confirm_by: STK-010
+    related: [DEC-002]
+  - id: ASM-014
+    statement: Root-cause hypotheses HYP-001 to HYP-007 reflect actual behaviour of the current activation workflow
+    source: BIZ-001 section 7
+    validation_status: UNVALIDATED
+    validation_method: Product walkthrough and analysis of support cases
+    confirm_by: STK-004
+    related: [OQ-003]
+constraints:
+  - id: CON-001
+    statement: Activation setup must preserve payroll data integrity and statutory compliance
+    source: Blueprint section 1, constraints
+    control_tier: Proposed business rule pending confirmation of the applicable legal requirements
+  - id: CON-002
+    statement: Validation and simulation must occur before profiles are hard-committed to live payroll
+    source: Blueprint section 1, constraints
+    control_tier: Proposed business rule
+  - id: CON-003
+    statement: Invalid records must be isolated without losing the status of valid records
+    source: Blueprint section 1, constraints
+    control_tier: Proposed business rule
+  - id: CON-004
+    statement: Employee identity, compensation, tax, benefits and banking information requires appropriate protection, with access and retention limited to what activation needs
+    source: Blueprint sections 1 and 3, information handled
+    control_tier: Employer and provider policy pending confirmation; legal requirements unknown until DEC-001
+  - id: CON-005
+    statement: No statutory jurisdiction, regulation or obligation may be assumed until recorded from an authoritative source
+    source: Task 01 prompt section 2
+    control_tier: Project governance rule
+  - id: CON-006
+    statement: AI assistance is optional and must not block core guided activation
+    source: product-backlog.md refinement decision 8; requirements-document-map.md
+    control_tier: Proposed business rule
+  - id: CON-007
+    statement: Historical payroll migration, including prior pay runs and year-to-date balances, is excluded
+    source: README.md scope; requirements-document-map.md
+    control_tier: Scope decision
+  - id: CON-008
+    statement: No fixed batch error-rate suspension threshold may be introduced without an approved policy
+    source: Blueprint section 5; epic-04 out of scope
+    control_tier: Proposed business rule
+risks:
+  - id: RSK-001
+    statement: Partial commit activates a record that should have been blocked, because the blocking policy is undefined
+    cause: DEC-006 unresolved
+    impact: Incorrect statutory profile in live payroll
+    provisional_rating: High
+    mitigation: Allow no activation until the blocking classification is approved; reconcile outcomes with validation results through KPI-021
+    owner_stakeholder: STK-003
+    related: [BP-004, CON-003]
+  - id: RSK-002
+    statement: The dry run diverges from production rules and gives false confidence
+    cause: ASM-006 unvalidated
+    impact: Errors that the dry run reported as absent appear in the first live payroll
+    provisional_rating: High
+    mitigation: Show simulation limitations to users as epic-03 requires; track KPI-010 against KPI-009
+    owner_stakeholder: STK-003
+    related: [BP-003, DEC-016]
+  - id: RSK-003
+    statement: An incorrect AI mapping suggestion is accepted and causes misconfiguration
+    cause: Reviewer over-reliance on suggestions
+    impact: Wrong field or pay-code mapping passes into validation
+    provisional_rating: Medium
+    mitigation: Apply AIB-002, AIB-003 and AIB-009; validate every mapping deterministically after review; track KPI-007
+    owner_stakeholder: STK-004
+    related: [AI-001, AI-002]
+  - id: RSK-004
+    statement: Sensitive employee data is exposed to a model or to unauthorized users
+    cause: Unmasked model inputs or insufficient role-based visibility
+    impact: Privacy breach and loss of trust
+    provisional_rating: High
+    mitigation: Apply AIB-005 and AIB-006; role-based visibility of history as epic-06 requires
+    owner_stakeholder: STK-011
+    related: [CON-004, DEC-008]
+  - id: RSK-005
+    statement: A retried or interrupted operation creates duplicate activation effects
+    cause: Retry semantics not yet designed
+    impact: Duplicate profiles or duplicate payroll effects
+    provisional_rating: Medium
+    mitigation: Treat duplicate-free recovery as a requirement from PA-11; track KPI-014
+    owner_stakeholder: STK-004
+    related: [DEC-017]
+  - id: RSK-006
+    statement: A bulk fix alters unrelated or sensitive employee data
+    cause: Fix scope not previewed or not authorized
+    impact: Silent data corruption across many records
+    provisional_rating: High
+    mitigation: Preview affected records and fields before applying, as epic-05 requires; require authorization for sensitive fields
+    owner_stakeholder: STK-003
+    related: [DEC-007, DEC-019]
+  - id: RSK-007
+    statement: The three program targets are treated as commitments before baselines exist
+    cause: DEC-005 unresolved
+    impact: Delivery judged against figures that cannot be measured
+    provisional_rating: Medium
+    mitigation: Keep baseline and target status PENDING until DEC-005 is approved
+    owner_stakeholder: STK-010
+    related: [KPI-001, KPI-002, KPI-003]
+  - id: RSK-008
+    statement: A jurisdiction is assumed implicitly in rules, examples or wording
+    cause: DEC-001 unresolved
+    impact: Specifications that are wrong for the actual jurisdiction
+    provisional_rating: Medium
+    mitigation: Scan artifacts for jurisdiction and regulation names at every validation run
+    owner_stakeholder: STK-003
+    related: [CON-005]
+  - id: RSK-009
+    statement: Entity inheritance silently assigns the wrong jurisdiction to a sub-entity
+    cause: Inheritance rules undefined
+    impact: Incorrect withholding for affected employees
+    provisional_rating: High
+    mitigation: Surface ambiguous or conflicting assignments for resolution as epic-02 requires; track KPI-008
+    owner_stakeholder: STK-003
+    related: [DEC-013, BN-03]
+  - id: RSK-010
+    statement: The root-cause hypotheses are wrong and the solution addresses the wrong problem
+    cause: ASM-014 unvalidated
+    impact: Investment without improvement in the program targets
+    provisional_rating: Medium
+    mitigation: Validate HYP-001 to HYP-007 with product walkthroughs and support-case analysis before Task 03
+    owner_stakeholder: STK-004
+    related: [OQ-003]
+  - id: RSK-011
+    statement: An architecture is locked in before business and technical discovery are complete
+    cause: Conflicting status of tech-stack.md, recorded as DEC-022
+    impact: Requirements shaped by technology rather than business need
+    provisional_rating: Medium
+    mitigation: Resolve DEC-022 before solution architecture work; keep Task 01 artifacts technology-neutral
+    owner_stakeholder: STK-004
+    related: [DEC-022]
+  - id: RSK-012
+    statement: Partial activation leaves a cohort incomplete at go-live
+    cause: Unresolved records not finished before the first live payroll
+    impact: Some employees not paid in the first run
+    provisional_rating: Medium
+    mitigation: Make unresolved records visible in outcome review; define the hand-off to first live payroll in DEC-021
+    owner_stakeholder: STK-001
+    related: [DEC-021, JS-13]
+  - id: RSK-013
+    statement: Activation history is insufficient for troubleshooting or review
+    cause: Required events and retention undefined
+    impact: Outcomes that cannot be explained to the client or a reviewer
+    provisional_rating: Medium
+    mitigation: Agree the required events in DEC-008; track KPI-020
+    owner_stakeholder: STK-006
+    related: [DEC-008]
+dependencies:
+  - id: DEP-001
+    statement: Authoritative validation rules and statutory engine identified
+    source: epic-03 open decisions
+    needed_for: [JS-06, JS-07]
+    status: OPEN
+  - id: DEP-002
+    statement: Authoritative pay-code catalogue and mapping rules identified
+    source: product-backlog.md PA-04 dependencies
+    needed_for: [JS-04]
+    status: OPEN
+  - id: DEP-003
+    statement: Authoritative entity hierarchy source identified
+    source: product-backlog.md PA-05 dependencies
+    needed_for: [JS-05]
+    status: OPEN
+  - id: DEP-004
+    statement: Statutory engine supports non-committing execution
+    source: product-backlog.md PA-08 dependencies
+    needed_for: [JS-07]
+    status: OPEN
+  - id: DEP-005
+    statement: Access to the existing payroll activation workflow and payroll data model
+    source: Blueprint section 2, key resources
+    needed_for: [JS-01, JS-08]
+    status: OPEN
+  - id: DEP-006
+    statement: Source-system, statutory-data or verification providers the workflow must integrate with are identified
+    source: Blueprint section 2, key partners
+    needed_for: [JS-02, JS-06]
+    status: OPEN
+  - id: DEP-007
+    statement: Support and implementation case data available for the KPI-002 baseline
+    source: Inferred from KPI-002
+    needed_for: [JS-12]
+    status: OPEN
+  - id: DEP-008
+    statement: Payroll or compliance owner available to define blocking policy and validation rules
+    source: epic-03 out of scope
+    needed_for: [JS-06, JS-09]
+    status: OPEN
+  - id: DEP-009
+    statement: Approved privacy and security controls for activation data
+    source: Blueprint section 3, information handled
+    needed_for: [JS-10, JS-12]
+    status: OPEN
+decisions:
+  - id: DEC-001
+    question: Which statutory jurisdiction or jurisdictions apply to the first release
+    source: Task 01 prompt section 2; no baseline records a jurisdiction
+    decide_by: STK-010
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: DEC-002
+    question: Is the initial segment new customers only, or also existing customers restructuring
+    source: Blueprint section 2, customer segments
+    decide_by: STK-010
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: DEC-003
+    question: Is the initial delivery surface an administrative UI, an API, an implementation workspace, or a combination
+    source: Blueprint section 2, channels
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-004
+    question: Which source-system, statutory-data or verification providers must the workflow integrate with
+    source: Blueprint section 2, key partners
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-005
+    question: What are the baselines, cohort boundaries, observation windows and calculation rules for the KPIs
+    source: Blueprint section 1; product-backlog.md refinement decision 7
+    decide_by: STK-010
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: DEC-006
+    question: Which issues block a record, which require review, which are informational, and which conditions pause or stop a batch
+    source: Blueprint section 3; epic-03 and epic-04 open decisions; product-backlog.md refinement decision 3
+    decide_by: STK-003
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: DEC-007
+    question: What role permissions and approvals apply to corrections, bulk fixes, sensitive changes and activation
+    source: Blueprint section 3; epic-05 open decisions; product-backlog.md refinement decision 5
+    decide_by: STK-003
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: DEC-008
+    question: Which actions and outcomes must be recorded, who can view each level of detail, and what retention and export requirements apply
+    source: Blueprint section 3; epic-06 open decisions; product-backlog.md refinement decision 6
+    decide_by: STK-011
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-009
+    question: Which input methods, formats and required employee fields are supported in the first release
+    source: epic-01 open decisions; product-backlog.md refinement decision 1
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-010
+    question: What activation context must the user provide before mapping can begin
+    source: epic-01 open decisions
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-011
+    question: How should an in-progress batch be resumed or abandoned
+    source: epic-01 open decisions
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-012
+    question: Which source fields and pay-code mappings are required
+    source: epic-02 open decisions
+    decide_by: STK-003
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-013
+    question: Which organizational settings may inherit from a parent entity, and what is the authoritative hierarchy source
+    source: epic-02 open decisions; product-backlog.md refinement decision 2
+    decide_by: STK-003
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-014
+    question: Should mapping suggestions be deterministic, AI-assisted or combined, and what data and evaluation thresholds apply if AI is tested
+    source: epic-02 open decisions; Blueprint section 4; product-backlog.md refinement decision 8
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-015
+    question: Which validation rules and statutory engine are authoritative
+    source: epic-03 open decisions; product-backlog.md refinement decision 2
+    decide_by: STK-003
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-016
+    question: What data and conditions must the dry run reproduce, and how are its limitations shown
+    source: epic-03 open decisions; product-backlog.md refinement decision 4
+    decide_by: STK-003
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-017
+    question: What retry and recovery behaviour is appropriate
+    source: epic-04 open decisions
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-018
+    question: What user controls are needed while asynchronous processing is underway
+    source: epic-04 open decisions
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-019
+    question: Which fields and error classes support bulk remediation
+    source: epic-05 open decisions
+    decide_by: STK-003
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-020
+    question: How should the workflow present errors that have no safe automatic recommendation
+    source: epic-05 open decisions
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-021
+    question: What is the hand-off from activation to the first live payroll run, and is it in scope
+    source: Task 01 journey stage JS-13; no epic or story covers the hand-off
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-022
+    question: Is the technology stack proposed or selected
+    source: README.md and tech-stack.md describe it as proposed; CLAUDE.md describes it as selected; Blueprint section 5 excludes architecture selection before technical discovery
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: DEC-023
+    question: Is operational reporting against the target metrics in scope, given that epic-06 excludes a general-purpose analytics or reporting product
+    source: Task 01 prompt section 4 stage 7; epic-06 out of scope
+    decide_by: STK-004
+    blocks_business_case_approval: false
+    status: OPEN
+open_questions:
+  - id: OQ-001
+    question: Who is the business sponsor with authority to approve the business case and the program targets
+    answer_by: Product leadership
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: OQ-002
+    question: Which statutory and regulatory obligations apply once the jurisdiction is decided
+    answer_by: STK-003
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: OQ-003
+    question: What operational evidence confirms BN-01 to BN-05 and HYP-001 to HYP-007
+    answer_by: STK-004
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: OQ-004
+    question: What are current activation volumes, batch sizes and batch frequency
+    answer_by: STK-004
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: OQ-005
+    question: What are the current cycle time, support touchpoints, effort per batch and first-time-right rate
+    answer_by: STK-004
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: OQ-006
+    question: What financial parameters apply, including loaded role costs, first-payroll correction costs, revenue recognition terms and contract values
+    answer_by: STK-010
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: OQ-007
+    question: Who owns data protection and information security for activation data and any AI component
+    answer_by: Product leadership
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: OQ-008
+    question: What counts as a professional implementation support touchpoint
+    answer_by: STK-002
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: OQ-009
+    question: What are the start and end points of end-to-end activation cycle time
+    answer_by: STK-004
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: OQ-010
+    question: Which corrections disqualify a first payroll run from being first-time-right, and how is a newly activated cohort bounded
+    answer_by: STK-003
+    blocks_business_case_approval: true
+    status: OPEN
+  - id: OQ-011
+    question: Does an AI governance framework already apply to the payroll product, and who owns it
+    answer_by: STK-012
+    blocks_business_case_approval: false
+    status: OPEN
+  - id: OQ-012
+    question: How should early churn and brand trust be measured, and can changes be attributed to activation
+    answer_by: STK-013
+    blocks_business_case_approval: false
+    status: OPEN

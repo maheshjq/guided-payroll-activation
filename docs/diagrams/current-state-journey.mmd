@@ -1,0 +1,18 @@
+flowchart TD
+    %% Current-state activation journey. PROVISIONAL and ILLUSTRATIVE.
+    %% Describes the pattern reported in Problem statement.md, not an observed client workflow.
+    C1["Step 1: Administrator starts a wizard-based activation"] --> C2["Step 2: Employee data assembled from source exports"]
+    C2 --> C3["Step 3: Fields and custom pay codes reconciled by hand"]
+    C3 --> C4["Step 4: Entity and jurisdiction rules assigned per sub-entity"]
+    C4 --> C5["Step 5: Confirmation screens stepped through in sequence"]
+    C5 --> C6{"Step 6: Validation at final submission"}
+    C6 -->|"All records pass"| C7["Step 7: Batch hard-committed with no dry run"]
+    C6 -->|"Any record fails"| C8["Step 8: Generic failure notice, batch aborted or locked"]
+    C8 --> C9["Step 9: Specialist investigates and the wizard restarts"]
+    C9 --> C1
+    C7 --> C10["Step 10: Latent errors surface in the first live payroll"]
+    BN01["BN-01 Cascading validation failures"] -.- C6
+    BN02["BN-02 Heavy reliance on manual intervention"] -.- C3
+    BN03["BN-03 Complex cross-entity dependency mapping"] -.- C4
+    BN04["BN-04 Lack of pre-ingestion sandboxing"] -.- C7
+    BN05["BN-05 Opaque error reporting"] -.- C8

@@ -1,0 +1,399 @@
+# BIZ-004 Business objectives and KPI catalogue
+# Status DRAFT. Every baseline is PENDING. Every target is PENDING.
+# Only KPI-001 to KPI-003 carry a target value, stated in Problem statement.md section 5 and not approved.
+# KPI-004 to KPI-020 are the epic-level measures named in the epic files; no epic sets a target.
+# KPI-021 and KPI-022 are candidate measures derived from baseline statements and are marked as such.
+artifact_id: BIZ-004
+title: Business objectives and KPI catalogue
+status: DRAFT
+task: TASK-01
+sources:
+  - Problem statement.md sections 4 and 5
+  - Business Model Canvas to Business Architecture Blueprint.md section 1, success measures
+  - epic-01 to epic-06, measures sections
+objectives:
+  - id: BO-001
+    name: Reduce end-to-end activation cycle time
+    statement: Shorten the elapsed time from batch initiation to activated, payroll-ready employee profiles for large cohorts
+    objective_area: Activation cycle time
+    problems: [BP-001]
+    bottlenecks: [BN-01, BN-02, BN-03]
+    kpis: [KPI-001, KPI-004, KPI-011, KPI-012]
+    capabilities: [CAP-001, CAP-005]
+    status: DRAFT
+  - id: BO-002
+    name: Reduce implementation and support effort per activation
+    statement: Lower the professional implementation and support effort needed to activate each employee cohort
+    objective_area: Implementation and support effort
+    problems: [BP-002]
+    bottlenecks: [BN-02, BN-05]
+    kpis: [KPI-002, KPI-005, KPI-006, KPI-017, KPI-019]
+    capabilities: [CAP-002, CAP-006]
+    status: DRAFT
+  - id: BO-003
+    name: Improve activation data accuracy and completeness before commit
+    statement: Detect missing, incompatible, ambiguous or invalid data and context before any profile is committed
+    objective_area: Data accuracy and completeness
+    problems: [BP-003]
+    bottlenecks: [BN-02, BN-03, BN-04]
+    kpis: [KPI-007, KPI-008, KPI-009]
+    capabilities: [CAP-002, CAP-003, CAP-004]
+    status: DRAFT
+  - id: BO-004
+    name: Achieve first-time-right payroll for newly activated cohorts
+    statement: Newly activated employees are paid correctly in their first live payroll run without activation-related correction
+    objective_area: First-time-right payroll processing
+    problems: [BP-003, BP-004]
+    bottlenecks: [BN-04]
+    kpis: [KPI-003, KPI-010]
+    capabilities: [CAP-004]
+    status: DRAFT
+  - id: BO-005
+    name: Improve exception management and remediation efficiency
+    statement: Isolate failing records, let valid records proceed, and resolve exceptions without restarting the batch
+    objective_area: Exception management and remediation efficiency
+    problems: [BP-001, BP-002]
+    bottlenecks: [BN-01, BN-05]
+    kpis: [KPI-013, KPI-015, KPI-016]
+    capabilities: [CAP-005, CAP-006]
+    status: DRAFT
+  - id: BO-006
+    name: Strengthen statutory and compliance control effectiveness during activation
+    statement: Ensure no record is activated without passing every required check, and that partial commit never weakens a control
+    objective_area: Statutory and compliance control effectiveness
+    problems: [BP-004]
+    bottlenecks: [BN-03, BN-04]
+    kpis: [KPI-014, KPI-021]
+    capabilities: [CAP-003, CAP-004, CAP-005]
+    status: DRAFT
+  - id: BO-007
+    name: Improve error transparency and management visibility
+    statement: Make every error actionable at record and field level and every batch outcome reviewable
+    objective_area: Error transparency and management visibility
+    problems: [BP-002, BP-005]
+    bottlenecks: [BN-05]
+    kpis: [KPI-018, KPI-019, KPI-020]
+    capabilities: [CAP-006, CAP-007]
+    status: DRAFT
+  - id: BO-008
+    name: Improve client experience and time to value
+    statement: Bring clients to a correct first live payroll sooner and with less friction in the first weeks
+    objective_area: Client experience and time to value
+    problems: [BP-001, BP-005]
+    bottlenecks: [BN-01, BN-05]
+    kpis: [KPI-001, KPI-022]
+    capabilities: [CAP-001, CAP-007]
+    notes: No client satisfaction or churn measure exists in the baseline; see OQ-012
+    status: DRAFT
+kpis:
+  - id: KPI-001
+    name: End-to-end activation cycle time reduction
+    definition: Reduction in the median elapsed time from batch initiation to completion of activation, against an agreed baseline
+    formula: (baseline median cycle time minus current median cycle time) divided by baseline median cycle time, multiplied by 100
+    unit: Percent reduction
+    objectives: [BO-001, BO-008]
+    data_source: Candidate batch lifecycle timestamps; baseline source not identified
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: At least 65 percent reduction, stated in Problem statement.md section 5, not approved
+    measurement_frequency: Proposed per batch, aggregated monthly; to be confirmed
+    scope: PROGRAM
+    open_items: [OQ-009, DEC-005]
+    status: DRAFT
+  - id: KPI-002
+    name: Implementation support touchpoints per 1,000 employee activations
+    definition: Count of professional implementation support touchpoints related to activation, normalized per 1,000 employee activations, against an agreed baseline
+    formula: (activation-related support touchpoints divided by employee activations) multiplied by 1,000; reduction is measured against the baseline rate
+    unit: Touchpoints per 1,000 activations, and percent reduction
+    objectives: [BO-002]
+    data_source: Candidate support or implementation case records; source not identified
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: 75 percent fewer touchpoints per 1,000 activations, stated in Problem statement.md section 5, not approved
+    measurement_frequency: Proposed monthly; to be confirmed
+    scope: PROGRAM
+    open_items: [OQ-008, DEC-005]
+    status: DRAFT
+  - id: KPI-003
+    name: First-time-right payroll run rate for newly activated cohorts
+    definition: Share of newly activated employees whose first live payroll run required no activation-related correction
+    formula: (newly activated employees with no activation-related first-payroll correction divided by newly activated employees in the cohort) multiplied by 100
+    unit: Percent
+    objectives: [BO-004]
+    data_source: Candidate first-payroll correction records linked to activation batches; source not identified
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: 99.8 percent, stated in Problem statement.md section 5, not approved
+    measurement_frequency: Proposed per cohort after its first live payroll run; to be confirmed
+    scope: PROGRAM
+    open_items: [OQ-010, DEC-005]
+    status: DRAFT
+  - id: KPI-004
+    name: Batch setup completion time
+    definition: Elapsed time from batch initiation until the batch input is structurally usable and ready for mapping
+    formula: Median of (ready-for-mapping time minus batch initiation time)
+    unit: Hours
+    objectives: [BO-001]
+    data_source: Candidate batch state history
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per batch; to be confirmed
+    scope: EPIC-01
+    open_items: [DEC-005]
+    status: DRAFT
+  - id: KPI-005
+    name: Setup-related support touchpoints
+    definition: Support touchpoints attributable to batch setup and input problems
+    formula: Count of setup-related touchpoints per period, also normalized per 1,000 activations
+    unit: Count, and touchpoints per 1,000 activations
+    objectives: [BO-002]
+    data_source: Candidate support case records with a setup category
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed monthly; to be confirmed
+    scope: EPIC-01
+    open_items: [OQ-008]
+    status: DRAFT
+  - id: KPI-006
+    name: Manual reconciliation effort
+    definition: Person-time spent reconciling source fields and pay codes per batch
+    formula: Sum of recorded reconciliation time per batch divided by number of batches
+    unit: Person-hours per batch
+    objectives: [BO-002]
+    data_source: Candidate effort records or time study; source not identified
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per batch; to be confirmed
+    scope: EPIC-02
+    open_items: [OQ-005]
+    status: DRAFT
+  - id: KPI-007
+    name: Mapping correction rate
+    definition: Share of proposed field and pay-code mappings that users had to correct
+    formula: (mappings corrected by a user divided by mappings proposed) multiplied by 100
+    unit: Percent
+    objectives: [BO-003]
+    data_source: Candidate mapping review history
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per batch; to be confirmed
+    scope: EPIC-02
+    open_items: [DEC-014]
+    status: DRAFT
+  - id: KPI-008
+    name: Unresolved entity and jurisdiction assignments
+    definition: Employee records whose entity or jurisdiction assignment remains unresolved when mapping ends
+    formula: Count of records with an unresolved assignment at the end of mapping, per batch
+    unit: Records per batch
+    objectives: [BO-003]
+    data_source: Candidate mapping and context resolution state
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per batch; to be confirmed
+    scope: EPIC-02
+    open_items: [DEC-013]
+    status: DRAFT
+  - id: KPI-009
+    name: Issues detected before activation
+    definition: Activation-relevant issues detected by validation or simulation before commit
+    formula: Count of issues raised by pre-activation validation and dry run, per batch, by severity class once severity is defined
+    unit: Issues per batch
+    objectives: [BO-003]
+    data_source: Candidate validation and simulation results
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per batch; to be confirmed
+    scope: EPIC-03
+    open_items: [DEC-006]
+    status: DRAFT
+  - id: KPI-010
+    name: Issues first found in the first live payroll
+    definition: Activation-related issues that were not detected before commit and first surfaced in the first live payroll run
+    formula: Count of activation-related first-payroll issues per cohort, also normalized per 1,000 activations
+    unit: Issues per cohort, and issues per 1,000 activations
+    objectives: [BO-004]
+    data_source: Candidate first-payroll correction records linked to activation batches
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per cohort; to be confirmed
+    scope: EPIC-03
+    open_items: [OQ-010]
+    status: DRAFT
+  - id: KPI-011
+    name: Validation and simulation completion time
+    definition: Elapsed time to complete pre-activation validation and the dry run for a batch
+    formula: Median of (simulation completion time minus validation start time)
+    unit: Hours
+    objectives: [BO-001]
+    data_source: Candidate validation and simulation run records
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per batch; to be confirmed
+    scope: EPIC-03
+    open_items: [DEC-016]
+    status: DRAFT
+  - id: KPI-012
+    name: Batch restart frequency
+    definition: Share of batches restarted in full because of record-level problems
+    formula: (batches restarted in full divided by batches started) multiplied by 100
+    unit: Percent
+    objectives: [BO-001]
+    data_source: Candidate batch state history
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed monthly; to be confirmed
+    scope: EPIC-04
+    open_items: [DEC-005]
+    status: DRAFT
+  - id: KPI-013
+    name: Records activated without a full-batch restart
+    definition: Share of activated records that reached activation without their batch being restarted in full
+    formula: (records activated in batches with no full restart divided by records activated) multiplied by 100
+    unit: Percent
+    objectives: [BO-005]
+    data_source: Candidate per-record outcome records
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed monthly; to be confirmed
+    scope: EPIC-04
+    open_items: [DEC-005]
+    status: DRAFT
+  - id: KPI-014
+    name: Duplicate activation effect incidents
+    definition: Incidents in which a failed or retried operation created a duplicate activation effect
+    formula: Count of confirmed duplicate-effect incidents per period
+    unit: Incidents
+    objectives: [BO-006]
+    data_source: Candidate incident records
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed monthly; to be confirmed
+    scope: EPIC-04
+    open_items: [DEC-017]
+    notes: epic-04 acceptance criteria require that retries do not unintentionally create duplicate effects; that is a criterion, not a numeric target
+    status: DRAFT
+  - id: KPI-015
+    name: Exception resolution time
+    definition: Elapsed time from an exception being raised to the affected record passing revalidation or being closed
+    formula: Median of (revalidation pass or closure time minus exception raised time)
+    unit: Hours
+    objectives: [BO-005]
+    data_source: Candidate remediation history
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per batch; to be confirmed
+    scope: EPIC-05
+    open_items: [DEC-019]
+    status: DRAFT
+  - id: KPI-016
+    name: Remediation completion rate
+    definition: Share of raised exceptions resolved and revalidated
+    formula: (exceptions resolved and revalidated divided by exceptions raised) multiplied by 100
+    unit: Percent
+    objectives: [BO-005]
+    data_source: Candidate remediation history
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per batch; to be confirmed
+    scope: EPIC-05
+    open_items: [DEC-019]
+    status: DRAFT
+  - id: KPI-017
+    name: Error-correction support touchpoints
+    definition: Support touchpoints attributable to correcting activation errors
+    formula: Count of error-correction touchpoints per period, also normalized per 1,000 activations
+    unit: Count, and touchpoints per 1,000 activations
+    objectives: [BO-002]
+    data_source: Candidate support case records with an error-correction category
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed monthly; to be confirmed
+    scope: EPIC-05
+    open_items: [OQ-008]
+    status: DRAFT
+  - id: KPI-018
+    name: Time to understand batch outcomes
+    definition: Time a user needs to establish which records activated and which need attention
+    formula: Median observed time from batch completion to the user confirming the outcome, by study or instrumented review
+    unit: Minutes
+    objectives: [BO-007]
+    data_source: Candidate usability study or review instrumentation; method not decided
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per study round; to be confirmed
+    scope: EPIC-06
+    open_items: [DEC-005]
+    status: DRAFT
+  - id: KPI-019
+    name: Support requests for activation status
+    definition: Support requests asking whether, or why, records were activated
+    formula: Count of status-related support requests per period, also normalized per 1,000 activations
+    unit: Count, and requests per 1,000 activations
+    objectives: [BO-002, BO-007]
+    data_source: Candidate support case records with a status category
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed monthly; to be confirmed
+    scope: EPIC-06
+    open_items: [OQ-008]
+    status: DRAFT
+  - id: KPI-020
+    name: Completeness of the agreed activation history
+    definition: Share of required history events actually recorded for activated and failed records
+    formula: (required history events recorded divided by required history events expected) multiplied by 100
+    unit: Percent
+    objectives: [BO-007]
+    data_source: Candidate activation history, once required events are agreed
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per batch; to be confirmed
+    scope: EPIC-06
+    open_items: [DEC-008]
+    status: DRAFT
+  - id: KPI-021
+    name: Activations committed without passing required checks
+    definition: Records activated although a required check had not passed
+    formula: Count of such records per period, found by reconciling activation outcomes with validation results
+    unit: Records
+    objectives: [BO-006]
+    data_source: Candidate reconciliation of activation outcomes and validation results
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per batch; to be confirmed
+    scope: CANDIDATE
+    basis: Derived from epic-03 and epic-04 acceptance criteria, which require that failed checks cannot be silently bypassed and only records satisfying required checks are activated
+    open_items: [DEC-006]
+    status: DRAFT
+  - id: KPI-022
+    name: Activation to first live payroll elapsed time
+    definition: Elapsed time from batch initiation to the first live payroll run of the activated cohort
+    formula: Median of (first live payroll run date minus batch initiation date)
+    unit: Days
+    objectives: [BO-008]
+    data_source: Candidate batch records joined to payroll run calendar
+    baseline_status: PENDING
+    target_status: PENDING
+    target_value: NONE_ESTABLISHED
+    measurement_frequency: Proposed per cohort; to be confirmed
+    scope: CANDIDATE
+    basis: Derived from Problem statement.md section 4, time to value
+    open_items: [DEC-021]
+    status: DRAFT

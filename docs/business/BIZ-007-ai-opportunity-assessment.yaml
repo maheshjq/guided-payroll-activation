@@ -1,0 +1,271 @@
+# BIZ-007 AI opportunity assessment and AI boundary rules
+# Status DRAFT. This artifact concerns runtime AI inside the future product only.
+# Engineering-time AI used to author these documents is out of its scope.
+# AI is optional. Problem statement.md section 5 permits AI-driven or rule-driven mapping and does not require AI.
+artifact_id: BIZ-007
+title: AI opportunity assessment and AI boundary rules
+status: DRAFT
+task: TASK-01
+sources:
+  - Business Model Canvas to Business Architecture Blueprint.md section 4, AI-native engineering boundaries
+  - Problem statement.md section 5
+  - epic-02, epic-03 and epic-05 scope and out of scope
+  - product-backlog.md PA-06 and refinement decision 8
+  - requirements-document-map.md, optional AI assistance
+summary:
+  bottlenecks_solved_without_ai: [BN-01, BN-03, BN-04, BN-05]
+  bottlenecks_with_candidate_ai_role: [BN-02]
+  rationale: Cascading failures are solved by asynchronous processing and record isolation, cross-entity mapping by an authoritative hierarchy and inheritance rules, lack of sandboxing by a deterministic dry run, and the core of opaque reporting by retaining record and field coordinates. AI may add value only for mapping suggestions and for explaining messages, and only after comparison with a deterministic option.
+  opportunity_count: 4
+  rejected_count: 5
+activity_classification:
+  - stage: JS-01
+    activity: Batch initiation and identification
+    approach: Deterministic business rules
+    ai_opportunities: []
+    rationale: Workflow state only
+  - stage: JS-02
+    activity: Source data upload and inspection
+    approach: Deterministic business rules
+    ai_opportunities: []
+    rationale: Structural readability checks are exact and predictable
+  - stage: JS-03
+    activity: Field mapping review
+    approach: Hybrid
+    ai_opportunities: [AI-001]
+    rationale: Deterministic matching first, optional AI suggestion second, human approval always
+  - stage: JS-04
+    activity: Pay code mapping resolution
+    approach: Hybrid
+    ai_opportunities: [AI-002]
+    rationale: Deterministic matching against the authoritative catalogue first, optional AI suggestion second, human approval always
+  - stage: JS-05
+    activity: Entity and jurisdiction assignment
+    approach: Hybrid
+    ai_opportunities: [AI-005]
+    rationale: Deterministic rules from the authoritative hierarchy plus human judgement for ambiguity; AI determination is rejected
+  - stage: JS-06
+    activity: Pre-activation validation
+    approach: Deterministic business rules
+    ai_opportunities: [AI-006]
+    rationale: Validity is an authoritative decision made by approved rules; AI determination is rejected
+  - stage: JS-07
+    activity: Dry-run simulation
+    approach: Deterministic business rules
+    ai_opportunities: [AI-007]
+    rationale: Simulation uses the statutory engines; AI calculation is rejected
+  - stage: JS-08
+    activity: Asynchronous processing and progress tracking
+    approach: Deterministic business rules
+    ai_opportunities: []
+    rationale: Processing and state tracking are exact
+  - stage: JS-09
+    activity: Partial activation of eligible records
+    approach: Hybrid
+    ai_opportunities: [AI-008]
+    rationale: Deterministic eligibility plus human approval under the authorization model; AI activation is rejected
+  - stage: JS-10
+    activity: Exception triage and diagnostics
+    approach: Hybrid
+    ai_opportunities: [AI-003]
+    rationale: Deterministic record and field coordinates, conventional analytics to group similar errors, optional generative explanation
+  - stage: JS-11
+    activity: Correction, bulk fix and revalidation
+    approach: Hybrid
+    ai_opportunities: [AI-004, AI-009]
+    rationale: Deterministic bulk fix with preview and human approval; AI drafting of suggestions is deferred; autonomous AI fixes are rejected
+  - stage: JS-12
+    activity: Outcome review and history
+    approach: Conventional analytics
+    ai_opportunities: []
+    rationale: Summaries and history are exact aggregations
+  - stage: JS-13
+    activity: Hand-off to the first live payroll run
+    approach: Human judgement
+    ai_opportunities: []
+    rationale: Go-live readiness is an accountable human decision
+ai_opportunities:
+  - id: AI-001
+    name: Source-to-payroll field mapping suggestions
+    assessment_status: CANDIDATE
+    journey_stages: [JS-03]
+    stories: [PA-06]
+    addresses_problems: [BP-001, BP-002]
+    addresses_bottlenecks: [BN-02]
+    proposed_capability: Suggest likely target payroll fields for source columns, with an indication of uncertainty
+    expected_value: Less manual reconciliation per batch, measured as the OPT-2 minus OPT-1 difference in KPI-006 and KPI-007
+    required_data: Source column names and sample values with sensitive values masked; the target field catalogue; previously approved mappings if retention is permitted
+    reliability_requirement: To be defined with evaluation data before any use (DEC-014); no threshold is assumed
+    failure_modes:
+      - Plausible but wrong mapping accepted by the reviewer
+      - Over-confident suggestion for an unusual schema
+      - Leakage of sensitive sample values
+    human_oversight: The administrator reviews and approves or corrects every suggestion; no suggestion is applied without approval
+    deterministic_control: Every approved mapping passes deterministic validation in JS-06
+    auditability: Record the suggestion, the reviewer decision and any correction (PA-16)
+    boundary_rules: [AIB-001, AIB-002, AIB-003, AIB-005, AIB-006, AIB-009, AIB-010, AIB-012]
+    status: DRAFT
+  - id: AI-002
+    name: Custom pay-code mapping suggestions
+    assessment_status: CANDIDATE
+    journey_stages: [JS-04]
+    stories: [PA-06]
+    addresses_problems: [BP-002, BP-003]
+    addresses_bottlenecks: [BN-02]
+    proposed_capability: Suggest likely matches between client pay codes and supported payroll pay codes
+    expected_value: Fewer manual pay-code reconciliations and fewer mismatches reaching validation
+    required_data: Client pay-code names and descriptions; the authoritative pay-code catalogue (DEP-002)
+    reliability_requirement: To be defined with evaluation data before any use (DEC-014); no threshold is assumed
+    failure_modes:
+      - Semantically similar but financially different pay codes matched
+      - Suggestion offered where no supported code exists
+    human_oversight: The administrator approves or corrects every suggestion; unmatched codes are surfaced, not guessed
+    deterministic_control: Approved pay-code mappings are checked against the catalogue and validated in JS-06
+    auditability: Record the suggestion, the reviewer decision and any correction (PA-16)
+    boundary_rules: [AIB-001, AIB-002, AIB-003, AIB-005, AIB-009, AIB-010, AIB-012]
+    status: DRAFT
+  - id: AI-003
+    name: Plain-language explanation of validation messages
+    assessment_status: CANDIDATE
+    journey_stages: [JS-10]
+    stories: [PA-12]
+    addresses_problems: [BP-002, BP-005]
+    addresses_bottlenecks: [BN-05]
+    proposed_capability: Explain an existing validation result in plain language, referring to the affected record and field
+    expected_value: Faster understanding of errors and fewer support requests, seen in KPI-015 and KPI-017
+    required_data: The validation result, rule identifier and affected field, with sensitive values masked
+    reliability_requirement: Explanations must not contradict the underlying validation result; acceptance criteria to be defined (DEC-014)
+    failure_modes:
+      - Explanation implies a different cause than the rule result
+      - Explanation suggests a correction that is not permitted
+    human_oversight: The administrator decides any correction; the explanation never changes the validation result
+    deterministic_control: The validation result and its record and field coordinates remain authoritative and are always shown
+    auditability: Record which explanation accompanied which validation result
+    boundary_rules: [AIB-001, AIB-002, AIB-003, AIB-004, AIB-006, AIB-010, AIB-012]
+    status: DRAFT
+  - id: AI-004
+    name: Drafting corrective suggestions for exceptions
+    assessment_status: DEFERRED
+    journey_stages: [JS-11]
+    stories: [PA-13, PA-14]
+    addresses_problems: [BP-002]
+    addresses_bottlenecks: [BN-05]
+    proposed_capability: Draft a possible correction for an exception, for human review
+    expected_value: Possibly faster remediation; unproven against deterministic recommendations
+    required_data: The exception, its rule and context, with sensitive values masked
+    reliability_requirement: Not defined; deferred until DEC-019 and DEC-020 are decided
+    failure_modes:
+      - Suggests a change to sensitive compensation, tax, identity or banking values
+      - Suggests a correction that passes validation but is factually wrong
+    human_oversight: A person must review and explicitly approve any suggestion, under the authorization defined in DEC-007; the person decides whether any change is made
+    deterministic_control: Corrected records always revalidate in JS-06
+    auditability: Record the suggestion, the approver and the resulting change
+    deferral_reason: Deterministic corrective recommendations should be defined first; epic-05 leaves errors without a safe automatic recommendation as an open decision
+    boundary_rules: [AIB-001, AIB-002, AIB-004, AIB-006, AIB-007, AIB-008, AIB-010]
+    status: DRAFT
+  - id: AI-005
+    name: AI determination of entity or jurisdiction assignment
+    assessment_status: REJECTED
+    journey_stages: [JS-05]
+    addresses_problems: [BP-004]
+    addresses_bottlenecks: [BN-03]
+    rejection_reason: epic-02 excludes automatically deciding unresolved legal-entity or jurisdiction relationships; ambiguity must be surfaced, not resolved by a model
+    boundary_rules: [AIB-002, AIB-009]
+    status: DRAFT
+  - id: AI-006
+    name: AI decision on record validity or blocking status
+    assessment_status: REJECTED
+    journey_stages: [JS-06]
+    addresses_problems: [BP-004]
+    addresses_bottlenecks: [BN-01]
+    rejection_reason: Validity is decided by approved deterministic rules and the statutory engines (Blueprint section 4)
+    boundary_rules: [AIB-002, AIB-004]
+    status: DRAFT
+  - id: AI-007
+    name: AI simulation or calculation of payroll results
+    assessment_status: REJECTED
+    journey_stages: [JS-07]
+    addresses_problems: [BP-003]
+    addresses_bottlenecks: [BN-04]
+    rejection_reason: epic-02 excludes determining statutory rules or calculating payroll results; epic-03 excludes generative AI overriding authoritative statutory rules
+    boundary_rules: [AIB-004, AIB-011]
+    status: DRAFT
+  - id: AI-008
+    name: AI approval or activation of records
+    assessment_status: REJECTED
+    journey_stages: [JS-09]
+    addresses_problems: [BP-004]
+    addresses_bottlenecks: [BN-01]
+    rejection_reason: Approval and activation remain within controlled workflows under human authority (Blueprint section 4; requirements-document-map.md)
+    boundary_rules: [AIB-002, AIB-007, AIB-008]
+    status: DRAFT
+  - id: AI-009
+    name: Autonomous AI application of bulk fixes
+    assessment_status: REJECTED
+    journey_stages: [JS-11]
+    addresses_problems: [BP-002]
+    addresses_bottlenecks: [BN-05]
+    rejection_reason: epic-05 excludes automatically changing sensitive compensation, tax, identity or banking values without authorized review
+    boundary_rules: [AIB-002, AIB-007, AIB-008]
+    status: DRAFT
+ai_boundary_rules:
+  - id: AIB-001
+    rule: Introduce AI only where a justified business benefit exists, demonstrated against the deterministic alternative
+    principle_source: Task 01 prompt principle on justified benefit; Blueprint section 4
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-002
+    rule: AI only suggests. People approve. Deterministic rules and the statutory engines decide validity.
+    principle_source: Task 01 prompt; CLAUDE.md; Blueprint section 4
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-003
+    rule: Model confidence is never treated as proof of correctness; it may only order or route items for human review
+    principle_source: Task 01 prompt principle on confidence
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-004
+    rule: AI output must not bypass statutory rules, business policies, validation, authorization or activation gates
+    principle_source: Task 01 prompt; Blueprint section 4
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-005
+    rule: AI components receive no unrestricted access to payroll systems or personal data; inputs are limited to what the specific suggestion needs
+    principle_source: Task 01 prompt principle on unrestricted access
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-006
+    rule: Mask sensitive values, such as tax identifiers and bank details, before any model call
+    principle_source: Task 01 prompt principle on masking
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-007
+    rule: Approval and activation of records stay within controlled workflows; AI cannot approve, activate or commit
+    principle_source: Task 01 prompt principle on controlled workflows; requirements-document-map.md
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-008
+    rule: High-impact decisions require appropriate human accountability and governance, and the deciding person is recorded
+    principle_source: Task 01 prompt principle on human accountability
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-009
+    rule: Ambiguous or uncertain mappings and assignments are surfaced for resolution, never silently treated as correct
+    principle_source: Blueprint sections 3 and 4; epic-02 acceptance criteria
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-010
+    rule: Every AI suggestion and the human decision on it are recorded with the affected record and field
+    principle_source: epic-06 scope; product-backlog.md PA-16
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-011
+    rule: AI must not determine statutory rules or calculate payroll results
+    principle_source: epic-02 and epic-03 out of scope; Blueprint section 4
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT
+  - id: AIB-012
+    rule: Core guided activation must work without AI; AI assistance is optional and must not block delivery
+    principle_source: product-backlog.md refinement decision 8; Blueprint section 4
+    rule_type: BINDING_ON_APPROVAL
+    status: DRAFT

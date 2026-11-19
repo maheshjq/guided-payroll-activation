@@ -1,0 +1,191 @@
+# BIZ-008 Scope and boundaries
+# Status DRAFT. Every item names its source. Items sourced only from the Task 01 prompt are marked PROMPT_ONLY.
+# CAP-001 to CAP-007 are provisional references to the blueprint section 3, in reading order. Task 02 owns the capability model.
+artifact_id: BIZ-008
+title: Scope and boundaries
+status: DRAFT
+task: TASK-01
+sources:
+  - Problem statement.md section 5
+  - Business Model Canvas to Business Architecture Blueprint.md sections 3 and 5
+  - README.md scope
+  - epic-01 to epic-06, scope and out of scope sections
+capabilities:
+  - id: CAP-001
+    name: Guided batch intake and setup
+    source: Blueprint section 3, capability 1
+    epic: EPIC-01
+    supports_objectives: [BO-001, BO-008]
+    reference_only: true
+  - id: CAP-002
+    name: Data mapping and normalization
+    source: Blueprint section 3, capability 2
+    epic: EPIC-02
+    supports_objectives: [BO-002, BO-003]
+    reference_only: true
+  - id: CAP-003
+    name: Entity and jurisdiction resolution
+    source: Blueprint section 3, capability 3
+    epic: EPIC-02
+    supports_objectives: [BO-003, BO-006]
+    reference_only: true
+  - id: CAP-004
+    name: Pre-activation validation and simulation
+    source: Blueprint section 3, capability 4
+    epic: EPIC-03
+    supports_objectives: [BO-003, BO-004, BO-006]
+    reference_only: true
+  - id: CAP-005
+    name: Asynchronous batch activation and partial commit
+    source: Blueprint section 3, capability 5
+    epic: EPIC-04
+    supports_objectives: [BO-001, BO-005, BO-006]
+    reference_only: true
+  - id: CAP-006
+    name: Remediation and bulk fixes
+    source: Blueprint section 3, capability 6
+    epic: EPIC-05
+    supports_objectives: [BO-002, BO-005, BO-007]
+    reference_only: true
+  - id: CAP-007
+    name: Activation diagnostics and audit
+    source: Blueprint section 3, capability 7
+    epic: EPIC-06
+    supports_objectives: [BO-007, BO-008]
+    reference_only: true
+in_scope:
+  - id: IS-001
+    item: Batch setup and identification
+    source: epic-01 scope; PA-01
+    capabilities: [CAP-001]
+    epic: EPIC-01
+  - id: IS-002
+    item: Bulk employee data intake and inspection
+    source: epic-01 scope; PA-02
+    capabilities: [CAP-001]
+    epic: EPIC-01
+  - id: IS-003
+    item: Source-to-payroll field mapping
+    source: epic-02 scope; PA-03
+    capabilities: [CAP-002]
+    epic: EPIC-02
+  - id: IS-004
+    item: Custom pay code mapping
+    source: Problem statement.md section 3; PA-04
+    capabilities: [CAP-002]
+    epic: EPIC-02
+  - id: IS-005
+    item: Entity and jurisdiction context resolution
+    source: epic-02 scope; PA-05
+    capabilities: [CAP-003]
+    epic: EPIC-02
+  - id: IS-006
+    item: Pre-activation validation and dry-run simulation
+    source: epic-03 scope; PA-07 and PA-08
+    capabilities: [CAP-004]
+    epic: EPIC-03
+  - id: IS-007
+    item: Asynchronous batch processing and progress tracking
+    source: epic-04 scope; PA-09 and PA-11
+    capabilities: [CAP-005]
+    epic: EPIC-04
+  - id: IS-008
+    item: Partial activation with record-level error isolation
+    source: epic-04 scope; PA-10
+    capabilities: [CAP-005]
+    epic: EPIC-04
+  - id: IS-009
+    item: Exception remediation and bulk fixes
+    source: epic-05 scope; PA-12, PA-13 and PA-14
+    capabilities: [CAP-006]
+    epic: EPIC-05
+  - id: IS-010
+    item: Outcome review, history and audit
+    source: epic-06 scope; PA-15 and PA-16
+    capabilities: [CAP-007]
+    epic: EPIC-06
+  - id: IS-011
+    item: Operational reporting against the target metrics
+    source: PROMPT_ONLY; Task 01 prompt section 4 stage 7
+    capabilities: [CAP-007]
+    epic: EPIC-06
+    notes: Possible conflict with epic-06, which excludes a general-purpose analytics or reporting product; recorded as DEC-023
+out_of_scope:
+  - id: OOS-001
+    item: Migration of historical payroll records, such as prior pay runs and year-to-date balances
+    source: README.md scope; requirements-document-map.md; product-backlog.md purpose and scope
+    classification: EXCLUDED
+  - id: OOS-002
+    item: Replacement or redesign of the payroll calculation or statutory engines
+    source: Blueprint section 5; Task 01 prompt
+    classification: EXCLUDED
+  - id: OOS-003
+    item: Replacement of the client HR information system
+    source: PROMPT_ONLY; Task 01 prompt section 4 stage 7
+    classification: EXCLUDED
+  - id: OOS-004
+    item: Autonomous statutory or regulatory decisions
+    source: Blueprint section 4; epic-02 and epic-03 out of scope; Task 01 prompt
+    classification: EXCLUDED
+  - id: OOS-005
+    item: Unrestricted AI access to payroll data or systems
+    source: Task 01 prompt; Blueprint section 4
+    classification: EXCLUDED
+  - id: OOS-006
+    item: A full enterprise-wide compliance platform
+    source: PROMPT_ONLY; Task 01 prompt section 4 stage 7
+    classification: EXCLUDED
+  - id: OOS-007
+    item: Redesigning payment, tax filing, benefits administration or the broader employee lifecycle
+    source: Blueprint section 5
+    classification: EXCLUDED
+  - id: OOS-008
+    item: A new pricing, PEPM or revenue model
+    source: Blueprint section 5
+    classification: EXCLUDED
+  - id: OOS-009
+    item: Promising guaranteed statutory accuracy or zero payroll errors
+    source: Blueprint section 5; epic-03 out of scope
+    classification: EXCLUDED
+  - id: OOS-010
+    item: Selecting an event broker, cloud architecture, service boundaries or external provider before technical discovery
+    source: Blueprint section 5; epic-04 out of scope
+    classification: EXCLUDED
+    notes: CLAUDE.md describes a selected stack; recorded as DEC-022
+  - id: OOS-011
+    item: A fixed batch error-rate suspension threshold without an approved policy
+    source: Blueprint section 5; epic-04 out of scope
+    classification: EXCLUDED
+  - id: OOS-012
+    item: General employee data management outside guided bulk activation
+    source: epic-01 out of scope
+    classification: EXCLUDED
+  - id: OOS-013
+    item: Defining supported file formats or external integrations before product discovery
+    source: epic-01 out of scope
+    classification: DEFERRED
+    notes: Deferred to DEC-009, not permanently excluded
+  - id: OOS-014
+    item: A general-purpose data integration platform
+    source: epic-02 out of scope
+    classification: EXCLUDED
+  - id: OOS-015
+    item: Automatically changing sensitive compensation, tax, identity or banking values without authorized review
+    source: epic-05 out of scope
+    classification: EXCLUDED
+  - id: OOS-016
+    item: Claiming audit records are immutable or tamper-proof without an agreed design and requirement
+    source: epic-06 out of scope
+    classification: EXCLUDED
+  - id: OOS-017
+    item: Defining regulatory retention periods or certification requirements not established by the problem statement
+    source: epic-06 out of scope
+    classification: EXCLUDED
+  - id: OOS-018
+    item: A general-purpose analytics or payroll reporting product
+    source: epic-06 out of scope
+    classification: EXCLUDED
+boundary_notes:
+  - The scope boundary is a business capability boundary, not a technology architecture
+  - AI boundaries are defined in BIZ-007 as AIB-001 to AIB-012
+  - The hand-off to the first live payroll run is an open boundary, recorded as DEC-021
