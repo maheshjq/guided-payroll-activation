@@ -1,0 +1,185 @@
+# ARC-005 Capability relationships and dependencies
+# Status DRAFT. from_capability depends on to_capability.
+# REQUIRES_OUTPUT needs an output of the other capability; GOVERNED_BY is constrained by it; FEEDBACK_LOOP is an intentional return path.
+artifact_id: ARC-005
+title: Capability relationships and dependencies
+status: DRAFT
+task: TASK-02
+sources:
+  - product-backlog.md dependencies
+  - requirements-document-map.md
+  - epic-01 to epic-06
+  - BIZ-005 dependencies
+dependencies:
+  - id: CD-001
+    from_capability: CAP-002
+    to_capability: CAP-001
+    type: REQUIRES_OUTPUT
+    description: Mapping needs structurally usable input
+    source: PA-03 depends on PA-02; epic-01 acceptance criteria
+    status: DRAFT
+  - id: CD-002
+    from_capability: CAP-003
+    to_capability: CAP-001
+    type: REQUIRES_OUTPUT
+    description: Resolution needs the captured activation context
+    source: epic-01 scope; DEC-010
+    status: DRAFT
+  - id: CD-003
+    from_capability: CAP-003
+    to_capability: CAP-002
+    type: REQUIRES_OUTPUT
+    description: Entity and jurisdiction review follows field mapping
+    source: PA-05 depends on PA-03
+    status: DRAFT
+  - id: CD-004
+    from_capability: CAP-004
+    to_capability: CAP-002
+    type: REQUIRES_OUTPUT
+    description: Validation runs on mapped records
+    source: PA-07 depends on PA-03 and PA-04
+    status: DRAFT
+  - id: CD-005
+    from_capability: CAP-004
+    to_capability: CAP-003
+    type: REQUIRES_OUTPUT
+    description: Validation needs resolved entity and jurisdiction context
+    source: PA-07 depends on PA-05
+    status: DRAFT
+  - id: CD-006
+    from_capability: CAP-005
+    to_capability: CAP-004
+    type: REQUIRES_OUTPUT
+    description: Only records that passed required checks are activated
+    source: PA-09 depends on PA-07 and PA-08; epic-04 acceptance criteria
+    status: DRAFT
+  - id: CD-007
+    from_capability: CAP-005
+    to_capability: CAP-008
+    type: GOVERNED_BY
+    description: Activation is subject to the authorization model
+    source: Blueprint section 3, roles and governance; DEC-007
+    status: DRAFT
+  - id: CD-008
+    from_capability: CAP-006
+    to_capability: CAP-004
+    type: REQUIRES_OUTPUT
+    description: Diagnostics come from validation and simulation results
+    source: PA-12 depends on PA-07 and PA-08
+    status: DRAFT
+  - id: CD-009
+    from_capability: CAP-006
+    to_capability: CAP-005
+    type: REQUIRES_OUTPUT
+    description: Remediation receives records isolated during processing
+    source: PA-13 depends on PA-10
+    status: DRAFT
+  - id: CD-010
+    from_capability: CAP-004
+    to_capability: CAP-006
+    type: FEEDBACK_LOOP
+    description: Corrected records return for revalidation
+    source: requirements-document-map.md; epic-05 scope
+    status: DRAFT
+  - id: CD-011
+    from_capability: CAP-006
+    to_capability: CAP-008
+    type: GOVERNED_BY
+    description: Sensitive corrections and bulk fixes need authorization
+    source: PA-14 dependencies; epic-05 open decisions
+    status: DRAFT
+  - id: CD-012
+    from_capability: CAP-007
+    to_capability: CAP-005
+    type: REQUIRES_OUTPUT
+    description: Outcome review needs per-record processing results
+    source: PA-15 depends on PA-09 and PA-10
+    status: DRAFT
+  - id: CD-013
+    from_capability: CAP-007
+    to_capability: CAP-002
+    type: REQUIRES_OUTPUT
+    description: History records mapping changes
+    source: PA-16 depends on PA-03
+    status: DRAFT
+  - id: CD-014
+    from_capability: CAP-007
+    to_capability: CAP-004
+    type: REQUIRES_OUTPUT
+    description: History records validation and simulation results
+    source: PA-16 depends on PA-07 and PA-08
+    status: DRAFT
+  - id: CD-015
+    from_capability: CAP-007
+    to_capability: CAP-006
+    type: REQUIRES_OUTPUT
+    description: History records corrections
+    source: PA-16 depends on PA-13
+    status: DRAFT
+  - id: CD-016
+    from_capability: CAP-007
+    to_capability: CAP-009
+    type: GOVERNED_BY
+    description: History visibility and retention follow data protection requirements
+    source: epic-06 acceptance criteria
+    status: DRAFT
+  - id: CD-017
+    from_capability: CAP-023
+    to_capability: CAP-020
+    type: REQUIRES_OUTPUT
+    description: Isolation needs the severity of each issue
+    source: PA-10 dependencies; DEC-006
+    status: DRAFT
+  - id: CD-018
+    from_capability: CAP-021
+    to_capability: CAP-019
+    type: REQUIRES_OUTPUT
+    description: The dry run follows validation
+    source: PA-08 depends on PA-07
+    status: DRAFT
+  - id: CD-019
+    from_capability: CAP-026
+    to_capability: CAP-019
+    type: REQUIRES_OUTPUT
+    description: Corrected records are revalidated
+    source: PA-13 acceptance criteria
+    status: DRAFT
+  - id: CD-020
+    from_capability: CAP-027
+    to_capability: CAP-032
+    type: GOVERNED_BY
+    description: Bulk fixes need defined approval
+    source: PA-14 dependencies
+    status: DRAFT
+  - id: CD-021
+    from_capability: CAP-024
+    to_capability: CAP-022
+    type: REQUIRES_OUTPUT
+    description: Recovery applies to asynchronous processing
+    source: PA-11 depends on PA-09
+    status: DRAFT
+shared_capabilities:
+  - capability: CAP-008
+    shared_by_epics: [EPIC-04, EPIC-05]
+    description: Approves activation in EPIC-04 and sensitive corrections in EPIC-05
+  - capability: CAP-009
+    shared_by_epics: [EPIC-02, EPIC-03, EPIC-05, EPIC-06]
+    description: Every epic that handles sensitive employee data depends on it
+  - capability: CAP-019
+    shared_by_epics: [EPIC-03, EPIC-05]
+    description: Used for first validation in EPIC-03 and revalidation in EPIC-05
+  - capability: CAP-020
+    shared_by_epics: [EPIC-03, EPIC-04]
+    description: Classifies issues in EPIC-03; drives isolation in EPIC-04
+  - capability: CAP-029
+    shared_by_epics: [EPIC-02, EPIC-03, EPIC-05, EPIC-06]
+    description: Records mapping changes, validation results and corrections from several epics
+external_dependencies:
+  - capability: CAP-014
+    task01_dependencies: [DEP-002]
+  - capability: CAP-016
+    task01_dependencies: [DEP-003]
+  - capability: CAP-019
+    task01_dependencies: [DEP-001]
+  - capability: CAP-021
+    task01_dependencies: [DEP-004]
