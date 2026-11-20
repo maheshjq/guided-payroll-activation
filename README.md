@@ -37,7 +37,7 @@ Read in this order for the full picture.
 | [Tech stack and architecture](./tech-stack.md) | Proposed Google Cloud stack, security posture, and architecture diagrams |
 | [Solution architecture diagram](./docs/solution-architecture.svg) | Layered one-page diagram (SVG) |
 | [Project recap](./docs/project-recap.md) | Plain-language summary of what was done so far and why, with diagrams |
-| [Claude Code task prompts](./docs/prompts/) | Ready-to-run prompts for Task 01, Task 02, and the operational blueprint, in that order |
+| [Claude Code task prompts](./docs/prompts/) | Ready-to-run prompts in order: Task 01, Task 02, Task 03 Part 1 (process foundation), Task 03 Part 2 (rules, requirements and operational blueprint) |
 
 ## Epics
 
