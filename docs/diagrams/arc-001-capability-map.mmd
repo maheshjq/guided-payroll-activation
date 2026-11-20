@@ -1,0 +1,54 @@
+flowchart TB
+    %% ARC-001 capability map. DRAFT. Level 1 as groups, Level 2 inside, Level 3 linked to its parent.
+    %% CAP-008 and CAP-009 are proposed cross-cutting additions (PCR-010).
+    subgraph G001["CAP-001 Guided batch intake and setup"]
+        CAP010["CAP-010 Batch identification and lifecycle tracking"]
+        CAP011["CAP-011 Batch input acceptance and structural inspection"]
+        CAP012["CAP-012 Activation context capture"]
+    end
+    subgraph G002["CAP-002 Data mapping and normalization"]
+        CAP013["CAP-013 Source-to-payroll field mapping"]
+        CAP014["CAP-014 Custom pay-code mapping"]
+        CAP015["CAP-015 Mapping review and approval"]
+    end
+    subgraph G003["CAP-003 Entity and jurisdiction resolution"]
+        CAP016["CAP-016 Entity hierarchy resolution and inheritance"]
+        CAP017["CAP-017 Jurisdiction context assignment"]
+        CAP018["CAP-018 Ambiguity surfacing and resolution"]
+    end
+    subgraph G004["CAP-004 Pre-activation validation and simulation"]
+        CAP019["CAP-019 Pre-activation data and configuration validation"]
+        CAP035["CAP-035 Compensation framework validation"]
+        CAP036["CAP-036 Tax jurisdiction and withholding validation"]
+        CAP037["CAP-037 Benefit plan assignment validation"]
+        CAP038["CAP-038 Direct-deposit banking detail validation"]
+        CAP020["CAP-020 Issue severity classification"]
+        CAP021["CAP-021 Activation dry-run simulation"]
+    end
+    subgraph G005["CAP-005 Asynchronous batch activation and partial commit"]
+        CAP022["CAP-022 Asynchronous batch processing and progress visibility"]
+        CAP023["CAP-023 Eligible-record activation and record isolation"]
+        CAP024["CAP-024 Processing recovery without duplicate effects"]
+    end
+    subgraph G006["CAP-006 Remediation and bulk fixes"]
+        CAP025["CAP-025 Record- and field-level error diagnosis"]
+        CAP026["CAP-026 Record correction and revalidation"]
+        CAP027["CAP-027 Reviewed bulk correction"]
+    end
+    subgraph G007["CAP-007 Activation diagnostics and audit"]
+        CAP028["CAP-028 Batch and record outcome reporting"]
+        CAP029["CAP-029 Activation history recording"]
+        CAP030["CAP-030 Activation outcome measurement"]
+    end
+    subgraph G008["CAP-008 Activation authorization and approval"]
+        CAP031["CAP-031 Activation approval"]
+        CAP032["CAP-032 Sensitive change authorization"]
+    end
+    subgraph G009["CAP-009 Activation data protection"]
+        CAP033["CAP-033 Role-based access to activation detail"]
+        CAP034["CAP-034 Activation data retention control"]
+    end
+    CAP019 --> CAP035
+    CAP019 --> CAP036
+    CAP019 --> CAP037
+    CAP019 --> CAP038

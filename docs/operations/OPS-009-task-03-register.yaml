@@ -1,0 +1,239 @@
+# DRAFT. Task 03 register. Tracks work; does not prove completion or approval.
+artifact_id: OPS-009
+title: Task 03 Register
+status: DRAFT
+version: '0.1'
+task: Task 03 Part 1, Operational Modelling and Process Foundation
+note: This register tracks the Task 03 work. It is not proof that the work is complete or approved. Local identifiers Q-, A- are scoped to this register; PCR continues the ARC-007 sequence.
+source_inventory:
+- artifact: BIZ-003 stakeholder register
+  informs: Roles in every process and exception
+  path: docs/business/BIZ-003-stakeholder-register.yaml
+- artifact: BIZ-004 objectives and KPI catalogue
+  informs: Objective and KPI links per process
+  path: docs/business/BIZ-004-business-objectives-and-kpi-catalogue.yaml
+- artifact: BIZ-005 assumptions, constraints, risks, decisions and questions
+  informs: Constraints, open decisions and escalation gaps
+  path: docs/business/BIZ-005-assumptions-constraints-and-risks.yaml
+- artifact: BIZ-006 activation journey
+  informs: Journey stages each process elaborates
+  path: docs/business/BIZ-006-activation-journey.md
+- artifact: BIZ-007 AI opportunity assessment
+  informs: AI-supported steps and boundary rules
+  path: docs/business/BIZ-007-ai-opportunity-assessment.yaml
+- artifact: ARC-001 capability map
+  informs: Capabilities each process delivers
+  path: docs/architecture/ARC-001-capability-map.yaml
+- artifact: ARC-002 value stream
+  informs: One process per stage; exception path and boundary
+  path: docs/architecture/ARC-002-value-stream.md
+- artifact: ARC-003 traceability matrix
+  informs: Capability to objective, KPI, story and stage links
+  path: docs/architecture/ARC-003-traceability-matrix.yaml
+- artifact: ARC-004 capability ownership
+  informs: Proposed responsible and accountable roles
+  path: docs/architecture/ARC-004-capability-ownership.yaml
+- artifact: ARC-006 business architecture blueprint
+  informs: Business rules BR-001 to BR-009 and decision points
+  path: docs/architecture/ARC-006-business-architecture-blueprint.md
+- artifact: product-backlog.md and epic files
+  informs: Acceptance criteria that ground steps and exceptions
+  path: product-backlog.md
+missing_or_incomplete_inputs:
+- No activation approval story (PCR-012) and no context capture story (PCR-011); steps are modelled from CAP-031 and CAP-012 only
+- No authoritative validation rules or statutory engine identified (DEC-015)
+- No escalation destinations or approval authority defined (DEC-007)
+- No batch-stop conditions defined (DEC-006)
+deliverables:
+- id: OPS-009
+  name: Task 03 Register
+  path: docs/operations/OPS-009-task-03-register.yaml
+  status: DRAFT
+  version: '0.1'
+  part: Part 1
+  depends_on: []
+- id: OPS-002
+  name: Operational Process Model
+  path: docs/operations/OPS-002-operational-process-model.yaml
+  status: DRAFT
+  version: '0.1'
+  part: Part 1
+  depends_on:
+  - ARC-001
+  - ARC-002
+  - ARC-003
+  - ARC-004
+  - ARC-006
+  - BIZ-003
+  - BIZ-006
+  - BIZ-007
+  content: 6 processes PRC-01 to PRC-06, one per value stream stage
+- id: OPS-003
+  name: Exception and Human-Review Pathways
+  path: docs/operations/OPS-003-exception-and-human-review-pathways.yaml
+  status: DRAFT
+  version: '0.1'
+  part: Part 1
+  depends_on:
+  - OPS-002
+  - BIZ-005
+  - BIZ-007
+  content: 21 exceptions EXC-01 to EXC-21; 17 sourced, 4 proposed
+- id: Diagram
+  name: Process overview
+  path: docs/diagrams/ops-002-process-overview.mmd
+  status: DRAFT
+  version: '0.1'
+  part: Part 1
+  depends_on:
+  - OPS-002
+- id: OPS-001, OPS-004 to OPS-008
+  name: Part 2 deliverables (blueprint, requirements, rules and decisions, state model, controls, traceability)
+  path: docs/operations/
+  status: NOT_STARTED
+  version: null
+  part: Part 2
+  depends_on:
+  - OPS-002
+  - OPS-003
+  note: Numbering is a proposal until confirmed.
+outstanding_questions:
+- id: Q-01
+  question: Who authorizes activation, sensitive changes and bulk fixes, and must the approver differ from the person who prepared the work?
+  related:
+  - DEC-007
+  - PRC-02 D3
+  - PRC-04 D1
+  - PRC-05 D3
+  - EXC-18
+  - EXC-19
+  answer_by: STK-003
+  status: OPEN
+- id: Q-02
+  question: Who may resume, abandon or restart a stopped or incomplete batch?
+  related:
+  - DEC-011
+  - DEC-006
+  - EXC-13
+  - EXC-20
+  answer_by: STK-004
+  status: OPEN
+- id: Q-03
+  question: Where does an unresolved tax or withholding finding escalate once the jurisdiction is known?
+  related:
+  - DEC-001
+  - OQ-002
+  - EXC-07
+  answer_by: STK-003
+  status: OPEN
+- id: Q-04
+  question: May a cohort with unresolved records proceed to the first live payroll?
+  related:
+  - DEC-021
+  - RSK-012
+  - EXC-21
+  answer_by: STK-004
+  status: OPEN
+- id: Q-05
+  question: Is interrupted processing handled by the payroll operations user (PA-11) or by the product or engineering owner?
+  related:
+  - PA-11
+  - EXC-14
+  - DEC-017
+  answer_by: STK-004
+  status: OPEN
+- id: Q-06
+  question: Is the dry run a required gate before activation, and for which batches?
+  related:
+  - DEC-016
+  - DEC-006
+  - PRC-03 D2
+  - EXC-10
+  answer_by: STK-003
+  status: OPEN
+- id: Q-07
+  question: Does a corrected record repeat the dry run, or only validation?
+  related:
+  - BR-005
+  - EXC-11
+  - PCR-014
+  answer_by: STK-003
+  status: OPEN
+- id: Q-08
+  question: May a required payroll field be confirmed as not applicable for a record, and who decides?
+  related:
+  - DEC-012
+  - EXC-02
+  answer_by: STK-003
+  status: OPEN
+assumptions:
+- id: A-01
+  assumption: One process per value stream stage is enough for the first release scope
+  validation: Walk through with STK-001 and STK-002
+  status: UNVALIDATED
+- id: A-02
+  assumption: Roles in each process follow ARC-004, which is itself an assumption
+  validation: Confirm with STK-003 and STK-004
+  status: UNVALIDATED
+- id: A-03
+  assumption: Activities marked System are deterministic business activities; no technology is implied
+  validation: Review in Part 2 requirements
+  status: UNVALIDATED
+- id: A-04
+  assumption: The payroll operations user (STK-005) performs recovery of interrupted processing, as PA-11 states
+  validation: Q-05
+  status: UNVALIDATED
+- id: A-05
+  assumption: Activation approval, if required, happens before processing starts
+  validation: Q-01 and DEC-007
+  status: UNVALIDATED
+- id: A-06
+  assumption: History is recorded throughout the batch, although it is modelled in PRC-06
+  validation: DEC-008
+  status: UNVALIDATED
+decisions_requiring_human_review:
+- decision: DEC-006
+  why: Severity classes, batch-stop conditions and the dry-run gate; options are in PRC-03 D1, PRC-03 D2 and PRC-04 D2
+- decision: DEC-007
+  why: Approval authority for mappings, activation, sensitive changes and bulk fixes; options are in PRC-02 D3, PRC-04 D1 and PRC-05 D3
+- decision: DEC-011
+  why: Resuming or abandoning a batch (EXC-20)
+- decision: DEC-016
+  why: What the dry run reproduces (PRC-03)
+- decision: DEC-017
+  why: Retry and recovery behaviour (PRC-04 S7)
+- decision: DEC-019
+  why: Fields eligible for bulk correction (PRC-05 D2)
+- decision: DEC-020
+  why: Errors with no safe recommendation (EXC-15)
+- decision: DEC-021
+  why: Whether the hand-off to the first live payroll is in scope (VSB-01, EXC-21)
+- decision: PCR-010
+  why: Whether CAP-008 and CAP-009 are accepted capabilities; the processes treat them as provisional
+proposed_changes:
+- id: PCR-014
+  target: ARC-002 VS-03
+  observation: VS-03 accepts corrected records from VS-05 but does not say whether they repeat the dry run
+  proposed_change: Clarify once Q-07 is answered
+  status: PROPOSED
+- id: PCR-015
+  target: product-backlog.md, PA-01
+  observation: PA-01 covers returning to an incomplete batch but not abandoning one; DEC-011 is open
+  proposed_change: Add an acceptance criterion or story for abandoning a batch once DEC-011 is decided
+  status: PROPOSED
+- id: PCR-016
+  target: ARC-006 section 7
+  observation: The decision-point table omits DEC-011, DEC-017 and DEC-020, which the processes depend on
+  proposed_change: Add them to the decision-point table
+  status: PROPOSED
+carried_forward: PCR-001 to PCR-013 from ARC-007 remain as recorded there; none was applied by Task 03.
+validation:
+  status: DRAFT, internal checks passed; business review pending
+  internal_checks: 27 checks, 27 passed, 0 failed
+  validator_self_test: Three seeded defects (invalid process reference, invented role, technology term) were all detected; an initial crash on the invalid reference was fixed first
+  js_yaml: npx js-yaml 4.1.0 parsed OPS-002, OPS-003, OPS-009 and every Task 01 and Task 02 YAML file without error
+  mermaid: npx @mermaid-js/mermaid-cli 11.4.2 rendered all six diagrams in docs/diagrams without error, including the five from Tasks 01 and 02
+  limitations:
+  - Checks confirm structure and references, not that the processes match real client operations
+  - The technology and regulation scans are keyword-based
+  - The validator and generator are in the session scratchpad, not the repository

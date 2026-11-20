@@ -1,0 +1,110 @@
+# ARC-007 Proposed changes to the baseline and to Task 01 artifacts
+# Status DRAFT. Nothing in this file has been applied by Task 02.
+# PCR-001 to PCR-005 are carried forward from validation/task-01-completion-record.md section 7.
+# PCR-006 onward were identified by Task 02.
+artifact_id: ARC-007
+title: Proposed changes to the baseline and to Task 01 artifacts
+status: DRAFT
+task: TASK-02
+sources:
+  - validation/task-01-completion-record.md section 7
+  - Task 02 prompt, Part A, decisions recorded in this review
+  - ARC-001 to ARC-006
+proposed_changes:
+  - id: PCR-001
+    origin: TASK-01
+    target: CLAUDE.md, README.md, tech-stack.md and the blueprint
+    observation: Task 01 found that CLAUDE.md called the stack selected while README.md and tech-stack.md called it proposed
+    proposed_change: Align the stack wording once DEC-022 is decided
+    change_status: APPLIED_OUTSIDE_TASK_02
+    evidence: Commit 523844d changed CLAUDE.md and tech-stack.md so that the stack is described as a proposal, not a constraint, citing DEC-022
+    reviewer_note: The Task 02 prompt lists PCR-001 to PCR-005 as unapplied; the repository shows PCR-001 already applied. Confirm and close.
+    related: [DEC-022, PCR-006]
+  - id: PCR-002
+    origin: TASK-01
+    target: epic-01 measures section
+    observation: epic-01 says the program-level targets are in the blueprint; their verified source is the problem statement
+    proposed_change: Point the epic-01 measures section to the problem statement
+    change_status: PENDING
+    related: [KPI-001, KPI-002, KPI-003]
+  - id: PCR-003
+    origin: TASK-01
+    target: product-backlog.md
+    observation: Benefit plan assignment and direct-deposit banking validation are named in the problem statement section 1 but no story covers them explicitly
+    proposed_change: Confirm they fall under PA-07, or add stories
+    change_status: PENDING
+    task02_finding: Task 02 models them as CAP-037 and CAP-038 under CAP-019, both traced only to PA-07
+    related: [CAP-037, CAP-038]
+  - id: PCR-004
+    origin: TASK-01
+    target: product-backlog.md and epic-06
+    observation: No epic or story covers the hand-off from activation to the first live payroll
+    proposed_change: Decide DEC-021, then add or exclude the hand-off explicitly
+    change_status: PENDING
+    task02_finding: Task 02 models the hand-off as boundary VSB-01, with no capability assigned
+    related: [DEC-021, VSB-01]
+  - id: PCR-005
+    origin: TASK-01
+    target: Business Model Canvas to Business Architecture Blueprint.md section 5
+    observation: IS-011, OOS-003 and OOS-006 come only from the Task 01 prompt
+    proposed_change: Add them to the blueprint, or remove them from BIZ-008 on review
+    change_status: PENDING
+    task02_finding: IS-011 is modelled as the provisional capability CAP-030
+    related: [IS-011, OOS-003, OOS-006, CAP-030, DEC-023]
+  - id: PCR-006
+    origin: TASK-02
+    target: BIZ-005, decision DEC-022
+    observation: The Task 02 authorisation decided that the stack in tech-stack.md is a proposal, not a constraint; BIZ-005 still records DEC-022 as OPEN
+    proposed_change: Set DEC-022 to DECIDED, record the decision and its date, and keep the question text
+    change_status: PENDING
+    decided_by: The reviewer, in the Task 02 authorisation
+    related: [DEC-022, PCR-001]
+  - id: PCR-007
+    origin: TASK-02
+    target: BIZ-008, capabilities section
+    observation: CAP-001 to CAP-007 are defined in BIZ-008 and again in ARC-001, the canonical capability map; this temporarily breaks the single-definition rule
+    proposed_change: Replace the CAP entries in BIZ-008 with references to ARC-001, keeping the in-scope links to CAP IDs
+    change_status: PENDING
+    related: [CAP-001, CAP-002, CAP-003, CAP-004, CAP-005, CAP-006, CAP-007]
+  - id: PCR-008
+    origin: TASK-02
+    target: BIZ-003 and BIZ-004, capability links
+    observation: BIZ-004 links objectives only to CAP-001 to CAP-007, so BO-006 does not list CAP-008; BIZ-003 stakeholder capability links are a subset of ARC-003
+    proposed_change: Refresh the capability links in BIZ-003 and BIZ-004 from ARC-003
+    change_status: PENDING
+    related: [BO-006, CAP-008]
+  - id: PCR-009
+    origin: TASK-02
+    target: BIZ-004, objectives
+    observation: No Task 01 objective covers protection of activation data; CAP-009, CAP-033 and CAP-034 rest on constraint CON-004 only
+    proposed_change: Add a data protection objective, or confirm that these capabilities are constraint-driven and need no objective
+    change_status: PENDING
+    related: [CAP-009, CAP-033, CAP-034, CON-004]
+  - id: PCR-010
+    origin: TASK-02
+    target: Business Model Canvas to Business Architecture Blueprint.md section 3, capabilities in scope
+    observation: The blueprint treats authorization and data protection as governance and information-handling concerns, not capabilities
+    proposed_change: Add activation authorization and approval (CAP-008) and activation data protection (CAP-009) as cross-cutting capabilities
+    change_status: PENDING
+    related: [CAP-008, CAP-009]
+  - id: PCR-011
+    origin: TASK-02
+    target: product-backlog.md, EPIC-01
+    observation: epic-01 scope includes capturing the activation context, but no story covers it
+    proposed_change: Add a story for activation context capture once DEC-010 is decided
+    change_status: PENDING
+    related: [CAP-012, DEC-010]
+  - id: PCR-012
+    origin: TASK-02
+    target: product-backlog.md, EPIC-04
+    observation: The blueprint says the administrator initiates or approves activation under an authorization model, but no story covers activation approval
+    proposed_change: Add a story for activation approval once DEC-007 is decided
+    change_status: PENDING
+    related: [CAP-031, DEC-007]
+  - id: PCR-013
+    origin: TASK-02
+    target: BIZ-007, AIB-005 and AIB-006
+    observation: The Task 02 authorisation states that AIB-005 and AIB-006 remain pending security confirmation; BIZ-007 shows them as DRAFT
+    proposed_change: Set AIB-005 and AIB-006 to PENDING_EXTERNAL_CONFIRMATION until the security owner confirms them
+    change_status: PENDING
+    related: [AIB-005, AIB-006, OQ-007]

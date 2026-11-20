@@ -1,0 +1,635 @@
+# ARC-001 Capability map
+# Status DRAFT. This is the canonical definition of every capability ID.
+# CAP-001 to CAP-007 keep the meaning they have in BIZ-008; BIZ-008 also defines them until PCR-007 is accepted.
+# Business capabilities only. No process, solution capability or technical component is defined here.
+# basis BLUEPRINT is named in the blueprint; DERIVED is derived from a cited baseline statement; PROPOSED_ADDITION and PROVISIONAL need confirmation.
+artifact_id: ARC-001
+title: Capability map
+status: DRAFT
+task: TASK-02
+sources:
+  - Business Model Canvas to Business Architecture Blueprint.md section 3
+  - epic-01 to epic-06 scope and acceptance criteria
+  - product-backlog.md
+  - Problem statement.md sections 1, 3 and 5
+  - BIZ-008
+capabilities:
+  - id: CAP-001
+    name: Guided batch intake and setup
+    level: 1
+    parent: null
+    type: CORE
+    definition: The ability to accept a bulk activation batch and establish the context required to process it
+    purpose: Give every activation a known, inspectable starting point
+    source: Blueprint section 3, capability 1
+    basis: BLUEPRINT
+    children: [CAP-010, CAP-011, CAP-012]
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-002
+    name: Data mapping and normalization
+    level: 1
+    parent: null
+    type: CORE
+    definition: The ability to align source fields and custom pay codes with the data the payroll system expects
+    purpose: Remove manual reconciliation of disparate schemas and pay codes
+    source: Blueprint section 3, capability 2
+    basis: BLUEPRINT
+    children: [CAP-013, CAP-014, CAP-015]
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: [AI-001, AI-002]
+    rejected_ai_uses: []
+    boundary_rules: [AIB-001, AIB-002, AIB-003, AIB-005, AIB-006, AIB-009, AIB-010, AIB-012]
+    status: DRAFT
+  - id: CAP-003
+    name: Entity and jurisdiction resolution
+    level: 1
+    parent: null
+    type: CORE
+    definition: The ability to resolve the applicable parent-child entity and jurisdiction context and surface ambiguity for review
+    purpose: Remove repetitive manual assignment per sub-entity without guessing
+    source: Blueprint section 3, capability 3
+    basis: BLUEPRINT
+    children: [CAP-016, CAP-017, CAP-018]
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: [AI-005]
+    boundary_rules: [AIB-002, AIB-009]
+    status: DRAFT
+  - id: CAP-004
+    name: Pre-activation validation and simulation
+    level: 1
+    parent: null
+    type: CORE
+    definition: The ability to identify syntax, configuration and statutory conflicts before activation, including by a dry run
+    purpose: Find issues before commit rather than in the first live payroll
+    source: Blueprint section 3, capability 4
+    basis: BLUEPRINT
+    children: [CAP-019, CAP-020, CAP-021]
+    criticality_note: Problem statement.md section 1 describes activation as the critical gatekeeper for statutory compliance and data integrity
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: [AI-006, AI-007]
+    boundary_rules: [AIB-002, AIB-004, AIB-011]
+    status: DRAFT
+  - id: CAP-005
+    name: Asynchronous batch activation and partial commit
+    level: 1
+    parent: null
+    type: CORE
+    definition: The ability to process large batches without a single all-or-nothing submission, activating eligible records while isolating invalid ones
+    purpose: Stop one bad record from blocking or restarting a whole batch
+    source: Blueprint section 3, capability 5
+    basis: BLUEPRINT
+    children: [CAP-022, CAP-023, CAP-024]
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: [AI-008]
+    boundary_rules: [AIB-002, AIB-007, AIB-008]
+    status: DRAFT
+  - id: CAP-006
+    name: Remediation and bulk fixes
+    level: 1
+    parent: null
+    type: CORE
+    definition: The ability to give users actionable record- and field-level errors and to correct eligible issues without restarting the batch
+    purpose: Turn opaque failures into targeted corrections
+    source: Blueprint section 3, capability 6
+    basis: BLUEPRINT
+    children: [CAP-025, CAP-026, CAP-027]
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: [AI-003, AI-004]
+    rejected_ai_uses: [AI-009]
+    boundary_rules: [AIB-001, AIB-002, AIB-003, AIB-004, AIB-006, AIB-007, AIB-008, AIB-010, AIB-012]
+    status: DRAFT
+  - id: CAP-007
+    name: Activation diagnostics and audit
+    level: 1
+    parent: null
+    type: CORE
+    definition: The ability to retain the status and change context of each activation for review and troubleshooting
+    purpose: Make every outcome explainable to users and reviewers
+    source: Blueprint section 3, capability 7
+    basis: BLUEPRINT
+    children: [CAP-028, CAP-029, CAP-030]
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-008
+    name: Activation authorization and approval
+    level: 1
+    parent: null
+    type: CROSS_CUTTING
+    definition: The ability to ensure that activation, sensitive corrections and bulk fixes are approved by an authorized person
+    purpose: Keep approval decisions with accountable people under a defined authorization model
+    source: Blueprint section 3, roles and governance; product-backlog.md refinement decision 5
+    basis: PROPOSED_ADDITION
+    children: [CAP-031, CAP-032]
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: [AI-008]
+    boundary_rules: [AIB-002, AIB-007, AIB-008]
+    notes: Proposed addition to the blueprint capability list (PCR-010); the blueprint treats authorization as governance
+    status: DRAFT
+  - id: CAP-009
+    name: Activation data protection
+    level: 1
+    parent: null
+    type: CROSS_CUTTING
+    definition: The ability to limit access to, and retention of, sensitive activation data to what activation needs
+    purpose: Protect employee identity, compensation, tax, benefits and banking data throughout activation
+    source: Blueprint sections 1 and 3, constraints and information handled; epic-06 acceptance criteria
+    basis: PROPOSED_ADDITION
+    children: [CAP-033, CAP-034]
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    notes: Proposed addition to the blueprint (PCR-010). Supports no Task 01 objective; driven by constraint CON-004 (PCR-009)
+    status: DRAFT
+  - id: CAP-010
+    name: Batch identification and lifecycle tracking
+    level: 2
+    parent: CAP-001
+    type: CORE
+    definition: The ability to create, identify and track the state of an activation batch
+    purpose: Let users continue the right batch and see whether it needs attention
+    source: epic-01 scope; PA-01
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-011
+    name: Batch input acceptance and structural inspection
+    level: 2
+    parent: CAP-001
+    type: CORE
+    definition: The ability to accept bulk employee data and report specifically whether it can be read
+    purpose: Separate input problems from record-level problems
+    source: epic-01 scope and acceptance criteria; PA-02
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-012
+    name: Activation context capture
+    level: 2
+    parent: CAP-001
+    type: CORE
+    definition: The ability to capture or select the customer, organization and activation context a batch needs
+    purpose: Give mapping and resolution the context they depend on
+    source: epic-01 scope
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    notes: No backlog story covers this capability (PCR-011)
+    status: DRAFT
+  - id: CAP-013
+    name: Source-to-payroll field mapping
+    level: 2
+    parent: CAP-002
+    type: CORE
+    definition: The ability to map source columns to payroll fields and identify missing, incompatible or ambiguous mappings
+    purpose: Catch field mismatches before validation
+    source: epic-02 scope; PA-03
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: [AI-001]
+    rejected_ai_uses: []
+    boundary_rules: [AIB-001, AIB-002, AIB-003, AIB-005, AIB-006, AIB-009, AIB-010, AIB-012]
+    status: DRAFT
+  - id: CAP-014
+    name: Custom pay-code mapping
+    level: 2
+    parent: CAP-002
+    type: CORE
+    definition: The ability to match client pay codes to supported payroll pay codes and surface codes with no match
+    purpose: Catch pay-code mismatches during setup
+    source: Problem statement.md section 3; PA-04
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: [AI-002]
+    rejected_ai_uses: []
+    boundary_rules: [AIB-001, AIB-002, AIB-003, AIB-005, AIB-009, AIB-010, AIB-012]
+    status: DRAFT
+  - id: CAP-015
+    name: Mapping review and approval
+    level: 2
+    parent: CAP-002
+    type: CORE
+    definition: The ability for users to review, correct and approve mappings so that approved corrections reach validation
+    purpose: Keep people in control of every mapping
+    source: epic-02 scope and acceptance criteria; PA-03, PA-04, PA-06
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: [AIB-002, AIB-009]
+    status: DRAFT
+  - id: CAP-016
+    name: Entity hierarchy resolution and inheritance
+    level: 2
+    parent: CAP-003
+    type: CORE
+    definition: The ability to resolve parent-child entity structures and apply settings that may be inherited
+    purpose: Remove repetitive per-sub-entity assignment
+    source: Problem statement.md section 3; epic-02 scope; PA-05
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-017
+    name: Jurisdiction context assignment
+    level: 2
+    parent: CAP-003
+    type: CORE
+    definition: The ability to associate each applicable employee profile with its jurisdiction context
+    purpose: Use the right activation context for statutory setup
+    source: epic-02 scope; PA-05
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: [AI-005]
+    boundary_rules: [AIB-002, AIB-009]
+    status: DRAFT
+  - id: CAP-018
+    name: Ambiguity surfacing and resolution
+    level: 2
+    parent: CAP-003
+    type: CORE
+    definition: The ability to surface ambiguous or conflicting mappings and assignments for a person to resolve
+    purpose: Prevent silent guessing
+    source: Blueprint section 3 business rules; epic-02 acceptance criteria
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: [AIB-009]
+    status: DRAFT
+  - id: CAP-019
+    name: Pre-activation data and configuration validation
+    level: 2
+    parent: CAP-004
+    type: CORE
+    definition: The ability to check mapped records against the relevant payroll configuration and statutory constraints before activation
+    purpose: Detect activation-blocking issues before commit
+    source: epic-03 scope; PA-07
+    basis: DERIVED
+    children: [CAP-035, CAP-036, CAP-037, CAP-038]
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: [AI-006]
+    boundary_rules: [AIB-002, AIB-004]
+    status: DRAFT
+  - id: CAP-020
+    name: Issue severity classification
+    level: 2
+    parent: CAP-004
+    type: CORE
+    definition: The ability to distinguish issues that prevent activation from issues that need review or are informational, according to approved rules
+    purpose: Make the activation decision depend on approved rules, not on judgement at commit time
+    source: epic-03 scope; Blueprint section 3 decision points
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-021
+    name: Activation dry-run simulation
+    level: 2
+    parent: CAP-004
+    type: CORE
+    definition: The ability to simulate activation before live commit without activating profiles or creating live payroll effects
+    purpose: Detect calculation or configuration conflicts before commit
+    source: Problem statement.md section 3; epic-03 scope; PA-08
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: [AI-007]
+    boundary_rules: [AIB-004, AIB-011]
+    status: DRAFT
+  - id: CAP-022
+    name: Asynchronous batch processing and progress visibility
+    level: 2
+    parent: CAP-005
+    type: CORE
+    definition: The ability to process a large batch asynchronously and show whether it is queued, processing, completed or needs attention
+    purpose: Let users start large activations and follow their progress
+    source: epic-04 scope; PA-09
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-023
+    name: Eligible-record activation and record isolation
+    level: 2
+    parent: CAP-005
+    type: CORE
+    definition: The ability to activate records that passed required checks and isolate records that cannot proceed without discarding other results
+    purpose: Let valid records activate despite unrelated failures
+    source: epic-04 scope and acceptance criteria; PA-10
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: [AI-008]
+    boundary_rules: [AIB-002, AIB-007, AIB-008]
+    status: DRAFT
+  - id: CAP-024
+    name: Processing recovery without duplicate effects
+    level: 2
+    parent: CAP-005
+    type: CORE
+    definition: The ability to recover interrupted processing so that a retry creates no duplicate activation effect
+    purpose: Make large-batch processing safe to resume
+    source: epic-04 acceptance criteria; PA-11
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-025
+    name: Record- and field-level error diagnosis
+    level: 2
+    parent: CAP-006
+    type: CORE
+    definition: The ability to identify the affected record and field of an error and explain why it matters
+    purpose: Let users correct the right data without guessing
+    source: Problem statement.md section 3; epic-05 scope; PA-12
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: [AI-003]
+    rejected_ai_uses: []
+    boundary_rules: [AIB-001, AIB-002, AIB-003, AIB-004, AIB-006, AIB-010, AIB-012]
+    status: DRAFT
+  - id: CAP-026
+    name: Record correction and revalidation
+    level: 2
+    parent: CAP-006
+    type: CORE
+    definition: The ability to correct an invalid record and revalidate it without restarting the batch
+    purpose: Continue activation efficiently after an error
+    source: epic-05 scope; PA-13
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: [AI-004]
+    rejected_ai_uses: []
+    boundary_rules: [AIB-001, AIB-002, AIB-004, AIB-006, AIB-007, AIB-008, AIB-010]
+    notes: AI-004 is deferred, not approved
+    status: DRAFT
+  - id: CAP-027
+    name: Reviewed bulk correction
+    level: 2
+    parent: CAP-006
+    type: CORE
+    definition: The ability to apply one reviewed correction to several eligible records, with the affected records and fields shown first
+    purpose: Resolve repeated errors efficiently and safely
+    source: Problem statement.md section 5; epic-05 scope and acceptance criteria; PA-14
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: [AI-009]
+    boundary_rules: [AIB-002, AIB-007, AIB-008]
+    status: DRAFT
+  - id: CAP-028
+    name: Batch and record outcome reporting
+    level: 2
+    parent: CAP-007
+    type: CORE
+    definition: The ability to summarize a batch outcome and show each record as activated, failed or still needing attention
+    purpose: Make clear what was activated and what was not
+    source: epic-06 scope; PA-15
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-029
+    name: Activation history recording
+    level: 2
+    parent: CAP-007
+    type: CORE
+    definition: The ability to record mapping changes, corrections, validation results and outcomes in context
+    purpose: Let authorized reviewers trace how a profile reached its final state
+    source: epic-06 scope; PA-16
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    notes: Does not claim that history is immutable (OOS-016)
+    status: DRAFT
+  - id: CAP-030
+    name: Activation outcome measurement
+    level: 2
+    parent: CAP-007
+    type: CORE
+    definition: The ability to measure activation outcomes against the program targets and epic measures
+    purpose: Show whether the targets are being met once baselines exist
+    source: Problem statement.md section 5; Task 01 IS-011
+    basis: PROVISIONAL
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    notes: Provisional until DEC-023; epic-06 excludes a general-purpose reporting product; no backlog story
+    status: DRAFT
+  - id: CAP-031
+    name: Activation approval
+    level: 2
+    parent: CAP-008
+    type: CROSS_CUTTING
+    definition: The ability for an authorized person to approve the activation of eligible records
+    purpose: Keep the activation decision with an accountable person
+    source: Blueprint section 3, payroll administrator role; epic-01 out of scope
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: [AI-008]
+    boundary_rules: [AIB-002, AIB-007, AIB-008]
+    notes: No backlog story covers activation approval (PCR-012)
+    status: DRAFT
+  - id: CAP-032
+    name: Sensitive change authorization
+    level: 2
+    parent: CAP-008
+    type: CROSS_CUTTING
+    definition: The ability to require additional authorization for corrections and bulk fixes that touch sensitive values
+    purpose: Prevent unauthorized changes to compensation, tax, identity or banking data
+    source: epic-05 open decisions and out of scope; PA-14
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-033
+    name: Role-based access to activation detail
+    level: 2
+    parent: CAP-009
+    type: CROSS_CUTTING
+    definition: The ability to show each level of activation detail only to roles authorized to see it
+    purpose: Avoid exposing sensitive employee data
+    source: epic-06 acceptance criteria; PA-16
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-034
+    name: Activation data retention control
+    level: 2
+    parent: CAP-009
+    type: CROSS_CUTTING
+    definition: The ability to retain and dispose of activation data and history according to confirmed retention requirements
+    purpose: Keep sensitive data no longer than activation needs
+    source: Blueprint section 3, information handled; epic-06 acceptance criteria
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    status: DRAFT
+  - id: CAP-035
+    name: Compensation framework validation
+    level: 3
+    parent: CAP-019
+    type: CORE
+    definition: The ability to check baseline compensation configuration for each record
+    purpose: Catch compensation setup errors before commit
+    source: Problem statement.md section 1; epic-03 scope
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    notes: Covered only implicitly by PA-07 (PCR-003)
+    status: DRAFT
+  - id: CAP-036
+    name: Tax jurisdiction and withholding validation
+    level: 3
+    parent: CAP-019
+    type: CORE
+    definition: The ability to check tax jurisdiction mapping and withholding setup for each record against approved rules
+    purpose: Catch statutory setup errors before commit
+    source: Problem statement.md section 1; epic-03 scope
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    notes: No jurisdiction or rule set is assumed
+    status: DRAFT
+  - id: CAP-037
+    name: Benefit plan assignment validation
+    level: 3
+    parent: CAP-019
+    type: CORE
+    definition: The ability to check benefit plan assignments for each record
+    purpose: Catch benefit setup errors before commit
+    source: Problem statement.md section 1
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    notes: No story covers benefit plan assignment explicitly (PCR-003)
+    status: DRAFT
+  - id: CAP-038
+    name: Direct-deposit banking detail validation
+    level: 3
+    parent: CAP-019
+    type: CORE
+    definition: The ability to check direct-deposit banking credentials for each record
+    purpose: Catch payment setup errors before commit
+    source: Problem statement.md section 1
+    basis: DERIVED
+    children: []
+    criticality_note: NOT_ASSESSED
+    maturity: NOT_ASSESSED
+    ai_opportunities: []
+    rejected_ai_uses: []
+    boundary_rules: []
+    notes: No story covers banking validation explicitly (PCR-003)
+    status: DRAFT
