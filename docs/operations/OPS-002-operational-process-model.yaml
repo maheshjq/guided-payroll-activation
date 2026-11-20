@@ -1,0 +1,1195 @@
+# DRAFT. Task 03 Part 1. Proposed content for human review; nothing here is approved.
+artifact_id: OPS-002
+title: Operational Process Model
+status: DRAFT
+version: '0.1'
+task: Task 03 Part 1, Operational Modelling and Process Foundation
+sources:
+- ARC-001
+- ARC-002
+- ARC-003
+- ARC-004
+- ARC-006
+- BIZ-003
+- BIZ-004
+- BIZ-006
+- BIZ-007
+- product-backlog.md
+- epic-01 to epic-06
+notes:
+- Every process is a proposal, not confirmed practice. The current-state journey remains illustrative until validated with a real client.
+- One process per value stream stage VS-01 to VS-06. CAP-008 and CAP-009 are cross-cutting and appear as steps in PRC-04, PRC-05 and PRC-06 rather than as separate processes.
+- Step identifiers S1 and onward and decision identifiers D1 and onward are local to each process.
+- 'Step classifications: DETERMINISTIC, AI_SUPPORTED, HUMAN_REVIEW, RESERVED_HUMAN_DECISION. "System" means a deterministic business activity performed without a person; no technology is implied.'
+- Roles come from BIZ-003. Role assignments follow ARC-004 and are assumptions. Authority shown as UNRESOLVED is not decided.
+- The hand-off to the first live payroll is the boundary VSB-01 (DEC-021). No process is modelled beyond it.
+classification_legend:
+  DETERMINISTIC: Carried out by explicit rules or fixed conditions
+  AI_SUPPORTED: AI may suggest or explain within AIB-001 to AIB-012; a person decides
+  HUMAN_REVIEW: A person examines information or exercises judgement
+  RESERVED_HUMAN_DECISION: A decision that must remain with an authorized person
+revalidation_loop:
+  from: PRC-05 S8
+  to: PRC-03 S1
+  rule: BR-005
+  note: Only corrected records return; the batch is not restarted and completed records are not reprocessed.
+processes:
+- id: PRC-01
+  name: Prepare and inspect an activation batch
+  business_purpose: Give every activation a known, inspectable starting point, and separate file-level input problems from record-level problems before any mapping starts.
+  justification: BN-05 opaque error reporting and BP-001 time to value; the blueprint value-stream step Prepare batch.
+  value_stream_stage: VS-01
+  journey_stages:
+  - JS-01
+  - JS-02
+  capabilities:
+  - CAP-001
+  - CAP-010
+  - CAP-011
+  - CAP-012
+  objectives:
+  - BO-001
+  - BO-008
+  kpis:
+  - KPI-004
+  - KPI-005
+  epics:
+  - EPIC-01
+  stories:
+  - PA-01
+  - PA-02
+  trigger: A client payroll administrator decides to activate a group of employee profiles, for example during onboarding, tenant provisioning or restructuring.
+  preconditions:
+  - The administrator holds employee data for the group to be activated.
+  - The activation context needed to start a batch is known to the administrator (which context is required is open, DEC-010).
+  roles:
+  - role: STK-001
+    part: Starts the batch, provides input, reads inspection results
+  - role: STK-002
+    part: Consulted when input problems need specialist help
+  - role: STK-004
+    part: Owns the capability and the supported input formats (DEC-009)
+  steps:
+  - id: S1
+    activity: Start a new batch and give it an identity
+    performed_by: STK-001
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-010
+  - id: S2
+    activity: Capture the activation context for the batch, such as the client organization and entity scope
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-012
+    note: The required context is not decided (DEC-010); no story covers this step (PCR-011).
+  - id: S3
+    activity: Provide the employee data input to the batch
+    performed_by: STK-001
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-011
+  - id: S4
+    activity: Inspect the input structure and report whether it can be read
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-011
+    exceptions:
+    - EXC-01
+  - id: S5
+    activity: Review inspection results; resolve file-level problems or continue to mapping
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-011
+    exceptions:
+    - EXC-01
+  - id: S6
+    activity: Record the batch state so the batch can be found and continued later
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-010
+    exceptions:
+    - EXC-20
+  inputs:
+  - Employee data input for the group
+  - Activation context
+  outputs:
+  - An identified batch with a visible state
+  - 'An inspection result: structurally usable, or a specific file-level reason'
+  information_used:
+  - Employee identity data at file level
+  - Organizational entity context
+  decision_points:
+  - id: D1
+    name: Is the input structurally usable?
+    at_step: S4
+    classification: DETERMINISTIC
+    authority: Deterministic inspection rules owned by STK-004
+    authority_basis: ARC-004 assumption
+    outcomes:
+    - 'Usable: continue to PRC-02'
+    - 'Not usable: report a specific reason and stay in PRC-01 (EXC-01)'
+    related_rules: []
+    related_decisions:
+    - DEC-009
+  - id: D2
+    name: Continue the batch to mapping
+    at_step: S5
+    classification: HUMAN_REVIEW
+    authority: STK-001
+    authority_basis: ARC-004 performer assumption
+    outcomes:
+    - Continue to PRC-02
+    - Provide corrected input and repeat S3
+    related_rules: []
+    related_decisions:
+    - DEC-010
+  handoffs:
+  - from: PRC-01
+    to: PRC-02
+    what: Structurally usable batch input and activation context
+  human_intervention_points:
+  - S2
+  - S5
+  automation:
+    opportunities:
+    - Structural inspection and specific, actionable file-level messages (S4)
+    - Batch state tracking (S6)
+    limitations:
+    - Which formats and fields are supported is not decided (DEC-009)
+    - Which activation context is mandatory is not decided (DEC-010)
+    ai_involvement: None. No AI opportunity applies to this stage in BIZ-007.
+  controls:
+  - CON-001
+  open_items:
+  - DEC-009
+  - DEC-010
+  - DEC-011
+  - PCR-011
+  basis: PROPOSED
+  exceptions:
+  - EXC-01
+  - EXC-20
+- id: PRC-02
+  name: Map data and resolve activation context
+  business_purpose: Reconcile source data to payroll fields, pay codes, entities and jurisdictions, with every ambiguity made visible rather than guessed.
+  justification: BN-02 manual intervention and BN-03 cross-entity dependency mapping; BP-002 cost of delivery.
+  value_stream_stage: VS-02
+  journey_stages:
+  - JS-03
+  - JS-04
+  - JS-05
+  capabilities:
+  - CAP-002
+  - CAP-003
+  - CAP-013
+  - CAP-014
+  - CAP-015
+  - CAP-016
+  - CAP-017
+  - CAP-018
+  objectives:
+  - BO-002
+  - BO-003
+  - BO-006
+  kpis:
+  - KPI-006
+  - KPI-007
+  - KPI-008
+  epics:
+  - EPIC-02
+  stories:
+  - PA-03
+  - PA-04
+  - PA-05
+  - PA-06
+  trigger: PRC-01 hands over structurally usable batch input.
+  preconditions:
+  - The batch input is structurally usable (PRC-01 D1).
+  - The required payroll target fields and the authoritative pay-code catalogue are identified (DEC-012).
+  roles:
+  - role: STK-001
+    part: Reviews and corrects mappings and assignments
+  - role: STK-002
+    part: Consulted on unusual source schemas and pay codes
+  - role: STK-003
+    part: Accountable for mapping and entity or jurisdiction outcomes; owns inheritance rules
+  - role: STK-004
+    part: Owns the mapping capabilities
+  steps:
+  - id: S1
+    activity: Present each source field as mapped, unmapped or requiring review
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-013
+    exceptions:
+    - EXC-02
+  - id: S2
+    activity: Offer optional field-mapping suggestions, clearly marked as suggestions
+    performed_by: System
+    classification: AI_SUPPORTED
+    capabilities:
+    - CAP-013
+    ai_support:
+      opportunity: AI-001
+      rules:
+      - AIB-002
+      - AIB-003
+      - AIB-006
+      - AIB-009
+      - AIB-010
+      - AIB-012
+      note: Optional, P1 (PA-06). Suggestions never count as approved mappings.
+    exceptions:
+    - EXC-05
+  - id: S3
+    activity: Review, accept, edit or reject field mappings
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-015
+    exceptions:
+    - EXC-02
+    - EXC-05
+  - id: S4
+    activity: Present source pay codes with proposed payroll pay codes; mark unknown, conflicting or ambiguous codes for review
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-014
+    exceptions:
+    - EXC-03
+  - id: S5
+    activity: Offer optional pay-code match suggestions
+    performed_by: System
+    classification: AI_SUPPORTED
+    capabilities:
+    - CAP-014
+    ai_support:
+      opportunity: AI-002
+      rules:
+      - AIB-002
+      - AIB-003
+      - AIB-009
+      - AIB-010
+      - AIB-012
+      note: Optional, P1 (PA-06).
+    exceptions:
+    - EXC-05
+  - id: S6
+    activity: Review and resolve pay-code mappings
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-015
+    exceptions:
+    - EXC-03
+  - id: S7
+    activity: Resolve entity hierarchy and inherited settings, and assign jurisdiction context from the authoritative source
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-016
+    - CAP-017
+    exceptions:
+    - EXC-04
+    note: AI determination of entity or jurisdiction is rejected (AI-005). Inheritance rules are open (DEC-013).
+  - id: S8
+    activity: Review assignments, including each effective value and its source; resolve flagged records
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-018
+    exceptions:
+    - EXC-04
+  - id: S9
+    activity: Confirm the reviewed mappings and assignments for use by validation
+    performed_by: STK-001
+    classification: RESERVED_HUMAN_DECISION
+    capabilities:
+    - CAP-015
+    note: Accountability for the confirmed mapping is proposed for STK-003 (ARC-004); whether this confirmation needs a separate approver is part of DEC-007.
+  inputs:
+  - Structurally usable batch input
+  - Activation context
+  - Pay-code catalogue and mapping rules (DEC-012)
+  - Entity hierarchy source (DEC-013)
+  outputs:
+  - Reviewed field mappings
+  - Reviewed pay-code mappings
+  - Reviewed entity and jurisdiction assignments, each with its effective value and source
+  - Records flagged for resolution
+  information_used:
+  - Pay-code data
+  - Organizational entity data
+  - Jurisdiction context
+  - Employee compensation and tax-related fields at mapping level
+  decision_points:
+  - id: D1
+    name: Accept, edit or reject a mapping or a suggestion
+    at_step: S3
+    classification: HUMAN_REVIEW
+    authority: STK-001
+    authority_basis: ARC-004 assumption; CAP-015 accountable role STK-001
+    outcomes:
+    - Accepted mapping used by validation
+    - Edited mapping used by validation
+    - Rejected; field stays unmapped and flagged
+    related_rules:
+    - BR-004
+    related_decisions:
+    - DEC-014
+  - id: D2
+    name: Resolve an ambiguous or conflicting entity or jurisdiction assignment
+    at_step: S8
+    classification: HUMAN_REVIEW
+    authority: STK-001 performs; STK-003 accountable
+    authority_basis: ARC-004 assumption
+    outcomes:
+    - Resolved assignment
+    - Record stays flagged and cannot proceed to validation
+    related_rules:
+    - BR-004
+    related_decisions:
+    - DEC-013
+  - id: D3
+    name: Release reviewed mappings and assignments to validation
+    at_step: S9
+    classification: RESERVED_HUMAN_DECISION
+    authority: UNRESOLVED
+    authority_basis: DEC-007
+    options:
+    - The administrator who reviewed the mappings releases them
+    - A separate authorized reviewer (STK-006) confirms them
+    - Confirmation is required only for mappings flagged as ambiguous
+    outcomes:
+    - Released to PRC-03
+    - Held for further review
+    related_rules:
+    - BR-004
+    related_decisions:
+    - DEC-007
+  handoffs:
+  - from: PRC-02
+    to: PRC-03
+    what: Reviewed mappings and assignments, with flagged records identified
+  human_intervention_points:
+  - S3
+  - S6
+  - S8
+  - S9
+  automation:
+    opportunities:
+    - Deterministic mapping of recognized fields and pay codes
+    - Deterministic inheritance of entity settings once DEC-013 is decided
+    - Optional AI suggestions for fields and pay codes (AI-001, AI-002)
+    limitations:
+    - Suggestions only order work for review; confidence is not proof (AIB-003)
+    - Sensitive values are masked before any model call (AIB-006, pending security confirmation)
+    - Core mapping must work without AI (AIB-012)
+    ai_involvement: Optional suggestions at S2 and S5 only.
+  controls:
+  - BR-004
+  - AIB-002
+  - AIB-009
+  - AIB-010
+  - CON-005
+  open_items:
+  - DEC-012
+  - DEC-013
+  - DEC-014
+  - DEC-007
+  basis: PROPOSED
+  exceptions:
+  - EXC-02
+  - EXC-03
+  - EXC-04
+  - EXC-05
+- id: PRC-03
+  name: Validate and simulate before activation
+  business_purpose: Find data, configuration and statutory issues for each record before anything is committed, and show what activation would do without creating live payroll effects.
+  justification: BN-01 cascading validation failures and BN-04 lack of pre-ingestion sandboxing; BP-003 first-payroll failure rate and BP-004 regulatory exposure.
+  value_stream_stage: VS-03
+  journey_stages:
+  - JS-06
+  - JS-07
+  capabilities:
+  - CAP-004
+  - CAP-019
+  - CAP-020
+  - CAP-021
+  - CAP-035
+  - CAP-036
+  - CAP-037
+  - CAP-038
+  objectives:
+  - BO-003
+  - BO-004
+  - BO-006
+  kpis:
+  - KPI-009
+  - KPI-010
+  - KPI-011
+  - KPI-021
+  epics:
+  - EPIC-03
+  stories:
+  - PA-07
+  - PA-08
+  trigger: PRC-02 releases reviewed mappings and assignments, or PRC-05 returns corrected records for revalidation.
+  preconditions:
+  - Mappings and activation context are available for the records to be checked.
+  - The authoritative validation rules and statutory engine are identified (DEC-015).
+  roles:
+  - role: STK-001
+    part: Runs validation and the dry run, reviews results
+  - role: STK-003
+    part: Owns and is accountable for validation rules, severity classes and dry-run scope
+  - role: STK-004
+    part: Consulted on how checks are run
+  steps:
+  - id: S1
+    activity: Run pre-activation validation for the batch, or for the corrected records only
+    performed_by: STK-001
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-019
+    note: Corrected records are revalidated on their own (BR-005).
+  - id: S2
+    activity: Check data and configuration, including compensation framework, tax jurisdiction and withholding, benefit plan assignment and direct-deposit banking details, against the approved applicable rules
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-019
+    - CAP-035
+    - CAP-036
+    - CAP-037
+    - CAP-038
+    exceptions:
+    - EXC-06
+    - EXC-07
+    - EXC-08
+    - EXC-09
+    note: AI decision on validity is rejected (AI-006). No jurisdiction or rule set is assumed (DEC-001).
+  - id: S3
+    activity: Classify each finding by severity and determine record eligibility
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-020
+    exceptions:
+    - EXC-06
+    - EXC-07
+    - EXC-08
+    note: The severity classes and their effect are not decided (DEC-006).
+  - id: S4
+    activity: Show results with the affected record and field; report any rule that could not be evaluated as a limitation, not a pass
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-019
+    exceptions:
+    - EXC-09
+  - id: S5
+    activity: Run the dry run against the statutory engines without activating profiles or creating live payroll effects
+    performed_by: STK-001
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-021
+    exceptions:
+    - EXC-10
+    note: AI simulation or calculation is rejected (AI-007, AIB-011). What the dry run reproduces is open (DEC-016).
+  - id: S6
+    activity: Review validation and dry-run results, including visible simulation limitations
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-021
+    exceptions:
+    - EXC-10
+  - id: S7
+    activity: Route eligible records toward activation and records with issues to remediation
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-020
+    note: Failed checks cannot be silently bypassed (PA-07).
+  inputs:
+  - Reviewed mappings and assignments
+  - Corrected records from PRC-05
+  - Approved applicable rules (DEC-015)
+  outputs:
+  - A validation outcome per record, with record and field identified
+  - A dry-run outcome and its stated limitations
+  - Eligible records for PRC-04
+  - Records with issues for PRC-05
+  information_used:
+  - Employee compensation, tax withholding, benefit and banking data
+  - Jurisdiction context
+  - Validation rules and statutory engine results
+  decision_points:
+  - id: D1
+    name: Severity class of a finding
+    at_step: S3
+    classification: DETERMINISTIC
+    authority: Rules defined by STK-003; the classification policy itself is UNRESOLVED
+    authority_basis: DEC-006; CAP-020 owner STK-003 (ARC-004 assumption)
+    options:
+    - Every failed required check blocks the record; other findings need review or are informational
+    - Severity is set rule by rule by the payroll or compliance owner
+    - A finding blocks only for checks designated as statutory or banking; others need review
+    outcomes:
+    - 'Blocking: record cannot be activated (BR-001)'
+    - 'Review: record needs a human review before activation'
+    - 'Informational: no effect on eligibility'
+    related_rules:
+    - BR-001
+    - BR-003
+    related_decisions:
+    - DEC-006
+  - id: D2
+    name: Is the dry run a required gate before activation?
+    at_step: S7
+    classification: RESERVED_HUMAN_DECISION
+    authority: UNRESOLVED
+    authority_basis: PA-09 depends on approved activation gates; DEC-006 and DEC-016
+    options:
+    - A dry run is required for every batch before activation
+    - A dry run is required only for the first batch of a client or after configuration changes
+    - A dry run is optional and its findings feed remediation only
+    outcomes:
+    - 'Gate passed: eligible records proceed to PRC-04'
+    - 'Gate not passed: records wait or go to PRC-05'
+    related_rules:
+    - BR-006
+    related_decisions:
+    - DEC-006
+    - DEC-016
+  handoffs:
+  - from: PRC-03
+    to: PRC-04
+    what: Eligible records with validation and dry-run outcomes
+  - from: PRC-03
+    to: PRC-05
+    what: Records with findings, each with the affected record, field and reason
+  human_intervention_points:
+  - S1
+  - S5
+  - S6
+  automation:
+    opportunities:
+    - Deterministic validation and severity classification once DEC-006 and DEC-015 are decided
+    - Non-committing simulation against the statutory engines
+    limitations:
+    - No jurisdiction may be assumed (CON-005)
+    - Dry-run scope and fidelity are open (DEC-016, RSK-002)
+    ai_involvement: None in validation or simulation. AI uses AI-006 and AI-007 are rejected.
+  controls:
+  - BR-001
+  - BR-003
+  - BR-005
+  - BR-006
+  - CON-002
+  - AIB-004
+  - AIB-011
+  open_items:
+  - DEC-001
+  - DEC-006
+  - DEC-015
+  - DEC-016
+  - OQ-002
+  basis: PROPOSED
+  exceptions:
+  - EXC-06
+  - EXC-07
+  - EXC-08
+  - EXC-09
+  - EXC-10
+  - EXC-11
+- id: PRC-04
+  name: Approve and process activation with partial commit
+  business_purpose: Activate eligible records without waiting for, or being blocked by, unrelated record failures, and keep every record outcome tied to its batch.
+  justification: BN-01 cascading validation failures; BP-001 time to value; the target of at least 65 percent faster activation (a target, baseline pending).
+  value_stream_stage: VS-04
+  journey_stages:
+  - JS-08
+  - JS-09
+  capabilities:
+  - CAP-005
+  - CAP-008
+  - CAP-022
+  - CAP-023
+  - CAP-024
+  - CAP-031
+  objectives:
+  - BO-001
+  - BO-005
+  - BO-006
+  kpis:
+  - KPI-001
+  - KPI-012
+  - KPI-013
+  - KPI-014
+  - KPI-021
+  epics:
+  - EPIC-04
+  stories:
+  - PA-09
+  - PA-10
+  - PA-11
+  trigger: PRC-03 releases eligible records and the activation gate is passed.
+  preconditions:
+  - Records have passed the required checks (BR-001, BR-003).
+  - Activation is approved under the authorization model (DEC-007).
+  roles:
+  - role: STK-001
+    part: Requests activation and tracks progress
+  - role: STK-003
+    part: Accountable for activation outcomes and for activation approval (CAP-031, proposed)
+  - role: STK-004
+    part: Owns processing and recovery
+  - role: STK-005
+    part: Recovers interrupted processing (PA-11)
+  steps:
+  - id: S1
+    activity: Request activation of the eligible records in the batch
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-022
+  - id: S2
+    activity: Approve activation of the batch or of the eligible records
+    performed_by: UNRESOLVED (DEC-007)
+    classification: RESERVED_HUMAN_DECISION
+    capabilities:
+    - CAP-031
+    exceptions:
+    - EXC-19
+    note: AI approval or activation is rejected (AI-008, AIB-007). No story covers activation approval (PCR-012).
+  - id: S3
+    activity: Process activation asynchronously, so the batch continues without the user staying in the workflow
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-022
+    exceptions:
+    - EXC-14
+  - id: S4
+    activity: Activate each eligible record; isolate any record that fails, without erasing or hiding other outcomes
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-023
+    exceptions:
+    - EXC-12
+    note: BR-001 and BR-002 apply.
+  - id: S5
+    activity: Stop the whole batch only for a condition that requires it, reporting the reason and affected scope
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-023
+    exceptions:
+    - EXC-13
+    note: Which conditions stop a batch is open (DEC-006); no fixed error-rate threshold may be used (CON-008).
+  - id: S6
+    activity: Show progress and the final or attention-required state
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-022
+  - id: S7
+    activity: Recover interrupted processing without duplicating completed activation effects
+    performed_by: STK-005
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-024
+    exceptions:
+    - EXC-14
+    note: Retry semantics need technical design (PA-11); behaviour is open (DEC-017).
+  inputs:
+  - Eligible records with validation and dry-run outcomes
+  - Activation approval (DEC-007)
+  outputs:
+  - 'An outcome for every record in the batch: activated, failed or attention required'
+  - Isolated failures for PRC-05
+  - Batch progress and final state
+  information_used:
+  - All activation data for eligible records
+  - Batch and record state
+  decision_points:
+  - id: D1
+    name: Approve activation
+    at_step: S2
+    classification: RESERVED_HUMAN_DECISION
+    authority: UNRESOLVED
+    authority_basis: DEC-007; CAP-031 owner STK-003 is an ARC-004 assumption
+    options:
+    - The requesting administrator approves after reviewing results
+    - An authorized payroll or compliance reviewer (STK-006) approves, separate from the requester
+    - Approval is required only above a scope that the payroll or compliance owner defines
+    outcomes:
+    - 'Approved: processing starts'
+    - 'Not approved: records stay eligible but unactivated (EXC-19)'
+    related_rules:
+    - BR-001
+    - BR-003
+    related_decisions:
+    - DEC-007
+  - id: D2
+    name: Isolate a record or stop the batch
+    at_step: S5
+    classification: DETERMINISTIC
+    authority: Rule defined by STK-003; the stop conditions are UNRESOLVED
+    authority_basis: DEC-006; PA-10
+    options:
+    - Only conditions that affect every record stop the batch; all others isolate the record
+    - The payroll or compliance owner lists specific batch-stop conditions
+    outcomes:
+    - Isolate the record and continue (EXC-12)
+    - Stop the batch and report scope (EXC-13)
+    related_rules:
+    - BR-002
+    related_decisions:
+    - DEC-006
+  - id: D3
+    name: Can a retry proceed safely?
+    at_step: S7
+    classification: HUMAN_REVIEW
+    authority: STK-005 performs; STK-004 accountable
+    authority_basis: ARC-004 assumption; PA-11
+    outcomes:
+    - 'Retry: completed effects are not duplicated'
+    - 'Do not retry: report the issue and do not claim completion (EXC-14)'
+    related_rules:
+    - BR-008
+    related_decisions:
+    - DEC-017
+  handoffs:
+  - from: PRC-04
+    to: PRC-05
+    what: Records whose activation failed, isolated from the rest
+  - from: PRC-04
+    to: PRC-06
+    what: Batch and record outcomes
+  human_intervention_points:
+  - S1
+  - S2
+  - S7
+  automation:
+    opportunities:
+    - Asynchronous processing with progress visibility
+    - Per-record isolation of failures
+    - Recovery that does not duplicate effects
+    limitations:
+    - Approval authority is not decided (DEC-007)
+    - Batch-stop conditions are not decided (DEC-006)
+    - Retry behaviour is not decided (DEC-017)
+    ai_involvement: None. AI approval or activation is rejected (AI-008).
+  controls:
+  - BR-001
+  - BR-002
+  - BR-003
+  - BR-008
+  - CON-003
+  - CON-008
+  - AIB-007
+  - AIB-008
+  open_items:
+  - DEC-006
+  - DEC-007
+  - DEC-017
+  - DEC-018
+  - PCR-012
+  basis: PROPOSED
+  exceptions:
+  - EXC-12
+  - EXC-13
+  - EXC-14
+  - EXC-19
+- id: PRC-05
+  name: Remediate exceptions and revalidate corrected records
+  business_purpose: Let administrators find, understand and correct failing records, alone or in a reviewed bulk fix, and send only the corrected records back for validation.
+  justification: BN-05 opaque error reporting and BN-02 manual intervention; BP-002 cost of delivery; the target of 75 percent fewer support touchpoints (a target, baseline pending).
+  value_stream_stage: VS-05
+  journey_stages:
+  - JS-10
+  - JS-11
+  capabilities:
+  - CAP-006
+  - CAP-008
+  - CAP-025
+  - CAP-026
+  - CAP-027
+  - CAP-032
+  objectives:
+  - BO-002
+  - BO-005
+  - BO-007
+  kpis:
+  - KPI-015
+  - KPI-016
+  - KPI-017
+  epics:
+  - EPIC-05
+  stories:
+  - PA-12
+  - PA-13
+  - PA-14
+  trigger: PRC-03 routes records with findings, or PRC-04 isolates records whose activation failed.
+  preconditions:
+  - Each record to remediate has a reported reason, with the affected field when available.
+  roles:
+  - role: STK-001
+    part: Diagnoses and corrects records; prepares bulk fixes
+  - role: STK-002
+    part: Consulted on errors that need manual investigation
+  - role: STK-003
+    part: Accountable for bulk corrections and sensitive changes (proposed)
+  - role: STK-011
+    part: Consulted on sensitive changes (inferred role)
+  steps:
+  - id: S1
+    activity: Open a failing record and read the record- and field-level reason
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-025
+    exceptions:
+    - EXC-15
+  - id: S2
+    activity: Offer an optional plain-language explanation of the message
+    performed_by: System
+    classification: AI_SUPPORTED
+    capabilities:
+    - CAP-025
+    ai_support:
+      opportunity: AI-003
+      rules:
+      - AIB-002
+      - AIB-004
+      - AIB-006
+      - AIB-010
+      - AIB-012
+      note: Explains only; does not change data or validity.
+  - id: S3
+    activity: Offer an optional corrective suggestion tied to the reported issue
+    performed_by: System
+    classification: AI_SUPPORTED
+    capabilities:
+    - CAP-026
+    ai_support:
+      opportunity: AI-004
+      rules:
+      - AIB-002
+      - AIB-004
+      - AIB-006
+      - AIB-007
+      - AIB-008
+      - AIB-010
+      note: Never silently changes employee data (PA-12).
+    exceptions:
+    - EXC-15
+  - id: S4
+    activity: Correct the record using supported data
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-026
+  - id: S5
+    activity: Prepare a bulk fix for records with the same eligible issue, showing affected records and fields before application
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-027
+    exceptions:
+    - EXC-17
+    note: Autonomous AI bulk fixes are rejected (AI-009). P1 story PA-14.
+  - id: S6
+    activity: Authorize a sensitive change or a bulk fix that needs approval
+    performed_by: UNRESOLVED (DEC-007)
+    classification: RESERVED_HUMAN_DECISION
+    capabilities:
+    - CAP-032
+    exceptions:
+    - EXC-18
+  - id: S7
+    activity: Apply the correction or the approved bulk fix to the selected records and fields only
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-027
+  - id: S8
+    activity: Submit only the corrected records for revalidation in PRC-03; other completed records are not reprocessed
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-026
+    exceptions:
+    - EXC-16
+    note: BR-005 applies.
+  inputs:
+  - Records with findings from PRC-03
+  - Isolated failures from PRC-04
+  outputs:
+  - Corrected records returned to PRC-03
+  - Records still unresolved, kept distinct from activated records
+  - A record of each correction and bulk fix
+  information_used:
+  - The failing record data and fields
+  - Validation and dry-run findings
+  - Bulk-fix scope
+  decision_points:
+  - id: D1
+    name: Accept, edit or reject a corrective suggestion
+    at_step: S4
+    classification: HUMAN_REVIEW
+    authority: STK-001
+    authority_basis: ARC-004 assumption; CAP-026 accountable role STK-001
+    outcomes:
+    - Correction applied by the administrator
+    - Suggestion rejected; manual investigation (EXC-15)
+    related_rules:
+    - BR-005
+    related_decisions:
+    - DEC-020
+  - id: D2
+    name: Is a field eligible for bulk correction?
+    at_step: S5
+    classification: DETERMINISTIC
+    authority: Rule defined by STK-003; eligible fields are UNRESOLVED
+    authority_basis: DEC-019
+    outcomes:
+    - 'Eligible: proceed to S6 or S7'
+    - 'Not eligible: block or route for approval (EXC-17)'
+    related_rules:
+    - BR-007
+    related_decisions:
+    - DEC-019
+  - id: D3
+    name: Authorize a sensitive change or bulk fix
+    at_step: S6
+    classification: RESERVED_HUMAN_DECISION
+    authority: UNRESOLVED
+    authority_basis: DEC-007; CAP-032 owner STK-003 is an ARC-004 assumption
+    options:
+    - The payroll or compliance owner authorizes
+    - An authorized reviewer (STK-006) other than the person who prepared the change authorizes
+    - No separate authorization for fields the payroll or compliance owner designates as low risk
+    outcomes:
+    - 'Authorized: apply (S7)'
+    - 'Rejected: no change; the record stays in remediation'
+    related_rules:
+    - BR-007
+    - BR-009
+    related_decisions:
+    - DEC-007
+    - DEC-008
+  handoffs:
+  - from: PRC-05
+    to: PRC-03
+    what: Corrected records only, for revalidation
+  - from: PRC-05
+    to: PRC-06
+    what: Records that remain unresolved, with their current reason
+  human_intervention_points:
+  - S1
+  - S4
+  - S5
+  - S6
+  automation:
+    opportunities:
+    - Record- and field-level diagnosis
+    - Optional explanations and corrective suggestions (AI-003, AI-004)
+    - Targeted revalidation of corrected records
+    limitations:
+    - Errors with no safe recommendation need manual investigation (DEC-020)
+    - Bulk-fix eligibility and approvals are open (DEC-019, DEC-007)
+    ai_involvement: Optional explanation at S2 and suggestion at S3 only.
+  controls:
+  - BR-005
+  - BR-007
+  - BR-009
+  - AIB-002
+  - AIB-004
+  - AIB-007
+  - AIB-010
+  open_items:
+  - DEC-007
+  - DEC-019
+  - DEC-020
+  basis: PROPOSED
+  exceptions:
+  - EXC-15
+  - EXC-16
+  - EXC-17
+  - EXC-18
+- id: PRC-06
+  name: Review outcomes and activation history
+  business_purpose: Let users and reviewers distinguish activated, failed and pending records, understand why, and trace how each profile reached its state.
+  justification: BN-05 opaque error reporting; BP-005 early churn and brand trust; KPI-018 time to understand outcomes.
+  value_stream_stage: VS-06
+  journey_stages:
+  - JS-12
+  capabilities:
+  - CAP-007
+  - CAP-009
+  - CAP-028
+  - CAP-029
+  - CAP-030
+  - CAP-033
+  - CAP-034
+  objectives:
+  - BO-007
+  - BO-008
+  kpis:
+  - KPI-018
+  - KPI-019
+  - KPI-020
+  - KPI-002
+  - KPI-003
+  - KPI-022
+  kpi_note: KPI-002, KPI-003 and KPI-022 are the program-level measures linked through CAP-030, which is provisional (DEC-023); baselines are pending (DEC-005). KPI-022 also depends on the boundary VSB-01 (DEC-021).
+  epics:
+  - EPIC-06
+  stories:
+  - PA-15
+  - PA-16
+  trigger: Batch processing has started, finished, or records still need attention.
+  preconditions:
+  - Record outcomes exist from PRC-04 or PRC-05.
+  roles:
+  - role: STK-001
+    part: Reviews the batch summary and per-record outcomes
+  - role: STK-006
+    part: Reviews changes and decisions (PA-16)
+  - role: STK-002
+    part: Consulted when outcomes need explanation to the client
+  - role: STK-011
+    part: Owns access and retention of activation detail (inferred role)
+  steps:
+  - id: S1
+    activity: Show the batch summary, distinguishing activated, failed and attention-required records; a batch still processing is not shown as complete
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-028
+  - id: S2
+    activity: Show, for each record not activated, its current reason or next required action
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-028
+    exceptions:
+    - EXC-21
+  - id: S3
+    activity: Record mapping changes, corrections, validation results, approvals and outcomes for review
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-029
+  - id: S4
+    activity: Review activation changes and decisions
+    performed_by: STK-006
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-029
+  - id: S5
+    activity: Limit visibility of sensitive detail to authorized roles and keep data only as long as agreed
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-033
+    - CAP-034
+    note: BR-009. Visibility and retention rules are open (DEC-008). CAP-009 is a proposed capability (PCR-010).
+  - id: S6
+    activity: Report outcomes against the target metrics
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - CAP-030
+    note: 'Provisional: in scope only if DEC-023 is decided; baselines are pending (DEC-005).'
+  - id: S7
+    activity: Mark the batch reviewed; the hand-off to the first live payroll is a boundary (VSB-01)
+    performed_by: STK-001
+    classification: HUMAN_REVIEW
+    capabilities:
+    - CAP-028
+    exceptions:
+    - EXC-21
+    note: DEC-021 is open; no process is modelled beyond the boundary.
+  inputs:
+  - Record and batch outcomes
+  - Recorded changes and decisions
+  outputs:
+  - A batch summary and per-record outcomes
+  - A reviewable activation history
+  - Outcome measures, if CAP-030 is confirmed
+  information_used:
+  - Batch and record outcomes
+  - History of changes and decisions
+  - Sensitive employee details, subject to role-based access
+  decision_points:
+  - id: D1
+    name: Who may see sensitive activation detail
+    at_step: S5
+    classification: DETERMINISTIC
+    authority: Rules owned by STK-011 (inferred role); the rules themselves are UNRESOLVED
+    authority_basis: DEC-008; ARC-004 assumption
+    outcomes:
+    - Detail shown to an authorized role
+    - Detail withheld
+    related_rules:
+    - BR-009
+    related_decisions:
+    - DEC-008
+  - id: D2
+    name: Is the batch ready to leave review
+    at_step: S7
+    classification: HUMAN_REVIEW
+    authority: STK-001 for the batch; whether a cohort with unresolved records may go live is UNRESOLVED
+    authority_basis: DEC-021; RSK-012
+    outcomes:
+    - Reviewed; boundary VSB-01 reached
+    - Records still need attention; return to PRC-05
+    related_rules:
+    - BR-002
+    related_decisions:
+    - DEC-021
+  handoffs:
+  - from: PRC-06
+    to: PRC-05
+    what: Records that still need attention
+  - from: PRC-06
+    to: VSB-01
+    what: Reviewed outcome, at the boundary only
+  human_intervention_points:
+  - S4
+  - S7
+  automation:
+    opportunities:
+    - Outcome summaries and per-record reasons
+    - Automatic recording of history
+    limitations:
+    - Recorded events, visibility and retention are open (DEC-008)
+    - Outcome measurement depends on DEC-023 and DEC-005
+    ai_involvement: None.
+  controls:
+  - BR-002
+  - BR-009
+  - CON-004
+  - AIB-010
+  open_items:
+  - DEC-005
+  - DEC-008
+  - DEC-021
+  - DEC-023
+  - PCR-009
+  - PCR-010
+  basis: PROPOSED
+  exceptions:
+  - EXC-21
