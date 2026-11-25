@@ -12,6 +12,8 @@ Each run has the same shape: a review decision and authorisation block, then the
 
 Before Run 1: Part A states that you reviewed the Task 02 outputs and makes decisions in your name. Read at least ARC-001, ARC-002, ARC-006 and validation/task-02-completion-record.md first, and edit any line you do not agree with. The recommended answers built in are: CAP-008 and CAP-009 stay provisional (PCR-010); the business rules BR-001 to BR-009 and the ownership in ARC-004 stay proposals; the hand-off to the first live payroll stays a boundary (DEC-021); DEC-006 and DEC-007 stay open; PCR items stay unapplied.
 
+Revision: Run 1 now also requires the business domain for each process, a capability operations view (how each capability works in practice), one step per distinct capability, a capability link on every exception, and the dispute and fraud-indicator exception categories. These were in the source method or needed to answer its first objective, and were missing from the first version of this prompt.
+
 Numbering note: OPS-002, OPS-003 and OPS-009 belong to Part 1. The Part 2 numbers (OPS-001 and OPS-004 to OPS-008) are a proposal. Change them if your reference material says otherwise.
 
 If the permission system blocks npx, allow it in your Claude Code permission settings first, or the YAML and Mermaid checks stay limited.
@@ -192,10 +194,11 @@ Identify the operational processes required to deliver the capabilities in ARC-0
 For each process, describe:
 
 - Process identifier (PRC-01 and onward), name and business purpose.
+- Related business domain. The project has no separate domain model, so use the Level 1 capability group from ARC-001 as the domain, and record this mapping as an assumption in OPS-009.
 - Related value stream stage, business capability, objective, KPI, epic and story.
 - Trigger or initiating event, and preconditions.
 - Participating business roles (from BIZ-003).
-- Process activities and sequence, each classified as deterministic, AI-supported, human review or reserved human decision.
+- Process activities and sequence, each classified as deterministic, AI-supported, human review or reserved human decision, and each naming the capability it exercises by ID and name.
 - Inputs and outputs, and the business information used.
 - Decision points, and who holds authority (or unresolved).
 - Handoffs between roles or capabilities.
@@ -205,6 +208,8 @@ For each process, describe:
 - Related controls and unresolved matters.
 
 Use local step identifiers (S1, S2 and so on) within each process rather than inventing additional enterprise-wide identifier families.
+
+Give each Level 2 and Level 3 capability at least one step of its own. Do not merge distinct capabilities into one step, for example the separate validation checks for compensation, tax and withholding, benefits and banking details, unless they share the same trigger, owner and exceptions; if you merge them, record why.
 
 ### Process modelling expectations
 
@@ -219,6 +224,23 @@ The model should explain the actual business operation. For example:
 - How is the outcome communicated or recorded?
 
 Ensure the processes collectively cover the important capabilities and outcomes from Task 02. Show the revalidation loop from remediation back to validation. Show VSB-01 (hand-off to the first live payroll) as a boundary only.
+
+### Capability operations view
+
+The process model is organised by process. Also explain how each capability operates in practice, so a reader can start from a capability instead of a process. In OPS-002, add a capability operations section with one entry for every Level 2 and Level 3 capability in ARC-001, and a short summary for every Level 1 capability, including the cross-cutting CAP-008 and CAP-009.
+
+For each capability, describe:
+
+- Capability identifier and name, exactly as in ARC-001.
+- How it operates in practice, in plain language, in two or three sentences.
+- The processes and steps that exercise it.
+- Performing, accountable and consulted roles (from ARC-004, marked as assumptions).
+- Decision points that belong to it, and who holds authority (or unresolved).
+- Exceptions from OPS-003 that affect it.
+- Business rules (BR), constraints and controls that apply.
+- AI involvement, if any, with the boundary rules that limit it.
+- Open decisions and questions.
+- Coverage note: whether it is exercised by its own steps, shares a step with another capability, or is not yet exercised. Never hide a capability that has no step; list it as a gap.
 
 ## 6. Develop Exception and Human-Review Pathways: OPS-003
 
@@ -239,6 +261,8 @@ Consider, where the sources support them:
 - Interrupted or partly failed processing.
 - A correction or bulk fix that needs approval.
 - An error with no safe automatic recommendation (DEC-020).
+- Stakeholder disputes, for example a client or employee disputing a mapping, an entity or jurisdiction assignment, a validation finding or an activation outcome.
+- Suspected fraud or risk indicators, where relevant, for example an unexpected change to direct-deposit banking details. Mark these as proposed, and do not invent detection rules, thresholds or investigation procedures.
 - Requests requiring human judgement, escalation and referral situations.
 
 Mark each category as supported by a source or proposed.
@@ -248,6 +272,7 @@ For each exception, define:
 - Exception identifier (EXC-01 and onward) and description.
 - Triggering condition.
 - Related process and step.
+- Related capability (ID and name).
 - Initial handling activity.
 - Responsible or proposed responsible role.
 - Human-review requirement.
@@ -277,6 +302,8 @@ After creating the deliverables:
 - Check YAML syntax with the authorised tooling.
 - Check identifier consistency and that every reference to an earlier artifact exists.
 - Check capability, objective, KPI, role and story traceability, in both directions.
+- Check that every Level 2 and Level 3 capability is exercised by at least one step and has a capability operations entry, and that every capability name matches ARC-001.
+- Check that every process names its business domain and every exception names its capability.
 - Check that all major processes have a meaningful business justification and cover their value stream stage.
 - Check exception coverage and that every exception refers to a real process and step.
 - Check human accountability and that no approval authority or destination was invented.
@@ -302,14 +329,15 @@ Present:
 
 1. Task 01 and Task 02 source inventory.
 2. Operational process inventory.
-3. Capability-to-process mapping.
+3. Capability-to-process mapping and capability operations summary, including any capability with thin coverage (one step, or a step shared with another capability).
 4. KPI-to-process mapping.
 5. Exception and human-review summary.
 6. Open assumptions and decisions, and who must confirm them.
 7. Files created and their status.
 8. Validation results and limitations.
 9. Issues requiring human review.
-10. Readiness for Part 2.
+10. A self-assessment against the human review checklist: each process traces to a real need, capability or outcome; triggers, steps, inputs, outputs and handovers are understandable; roles come from existing sources; decision points link to decision rights or are marked unresolved; KPIs connect to processes for a meaningful reason, not merely because the identifiers exist; exception categories are supported or marked proposed; human-review pathways do not invent authority or destinations; AI-supported activities are distinguished from deterministic activities and human decisions; assumptions, questions and dependencies are visible in OPS-009; earlier artifacts are unchanged.
+11. Readiness for Part 2.
 
 Show the actual file changes. Stop after Part 1. Do not begin Part 2 automatically. Wait for human review and confirmation.
 
@@ -349,7 +377,7 @@ This is not formal approval of the operational blueprint. All outstanding extern
 
 Accept the following as the initial inputs to Part 2:
 
-- OPS-002: the operational process model (processes PRC-xx and their steps).
+- OPS-002: the operational process model (processes PRC-xx, their steps and the capability operations view).
 - OPS-003: the exception and human-review pathways (EXC-xx).
 - OPS-009: the Task 03 register, as the tracker to be extended.
 
@@ -476,7 +504,7 @@ Create docs/operations/OPS-007-operational-controls.yaml. Define business contro
 
 ## 8. Build the traceability matrix: OPS-008
 
-Create docs/operations/OPS-008-operational-traceability-matrix.yaml. Trace the full chain in both directions: bottleneck, problem, objective, KPI, capability, value stream stage, process, step, exception, rule or decision, requirement, control, story and role. List any item with a missing link as a gap.
+Create docs/operations/OPS-008-operational-traceability-matrix.yaml. Start from the capability operations view in OPS-002. Trace the full chain in both directions: bottleneck, problem, objective, KPI, capability, value stream stage, process, step, exception, rule or decision, requirement, control, story and role. List any item with a missing link as a gap.
 
 ## 9. Consolidate the operational blueprint: OPS-001
 
