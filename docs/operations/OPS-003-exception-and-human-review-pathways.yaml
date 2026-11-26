@@ -2,7 +2,7 @@
 artifact_id: OPS-003
 title: Exception and Human-Review Pathways
 status: DRAFT
-version: '0.1'
+version: '0.2'
 task: Task 03 Part 1, Operational Modelling and Process Foundation
 sources:
 - OPS-002
@@ -17,6 +17,7 @@ notes:
 - basis SOURCED means the exception is stated in a cited source; PROPOSED means it is inferred and needs confirmation.
 - Where DEC-006 or DEC-007 governs handling, the destination is UNRESOLVED and the options are in OPS-002 decision points.
 - No approval authority, escalation destination, threshold or regulatory obligation is invented.
+- 'Version 0.2: every exception names its capability; EXC-22 (suspected fraud or risk indicator) and EXC-23 (stakeholder dispute) added as proposed categories. No detection rules, thresholds or dispute procedures are invented.'
 human_and_ai_boundaries:
   deterministic:
   - Input inspection
@@ -57,6 +58,9 @@ exceptions:
   related_steps:
   - S4
   - S5
+  related_capabilities:
+  - id: CAP-011
+    name: Batch input acceptance and structural inspection
   initial_handling: Report a specific, actionable reason, distinguishable from record-level errors
   responsible_role: STK-001
   responsible_role_basis: PA-02
@@ -83,6 +87,11 @@ exceptions:
   related_steps:
   - S1
   - S3
+  related_capabilities:
+  - id: CAP-013
+    name: Source-to-payroll field mapping
+  - id: CAP-015
+    name: Mapping review and approval
   initial_handling: Identify the missing mapping clearly
   responsible_role: STK-001
   responsible_role_basis: PA-03
@@ -113,6 +122,11 @@ exceptions:
   related_steps:
   - S4
   - S6
+  related_capabilities:
+  - id: CAP-014
+    name: Custom pay-code mapping
+  - id: CAP-015
+    name: Mapping review and approval
   initial_handling: Mark the pay code for review; never treat it as resolved
   responsible_role: STK-001
   responsible_role_basis: PA-04; CAP-014 accountable STK-003 (ARC-004 assumption)
@@ -141,6 +155,14 @@ exceptions:
   related_steps:
   - S7
   - S8
+  - S9
+  related_capabilities:
+  - id: CAP-016
+    name: Entity hierarchy resolution and inheritance
+  - id: CAP-017
+    name: Jurisdiction context assignment
+  - id: CAP-018
+    name: Ambiguity surfacing and resolution
   initial_handling: Flag the record for resolution before it proceeds, showing the effective value and its source
   responsible_role: STK-001 performs; STK-003 accountable
   responsible_role_basis: ARC-004 assumption
@@ -172,6 +194,13 @@ exceptions:
   - S2
   - S3
   - S5
+  related_capabilities:
+  - id: CAP-013
+    name: Source-to-payroll field mapping
+  - id: CAP-014
+    name: Custom pay-code mapping
+  - id: CAP-015
+    name: Mapping review and approval
   initial_handling: Show the uncertainty; require manual review; the suggestion does not count as an approved mapping
   responsible_role: STK-001
   responsible_role_basis: PA-06
@@ -199,6 +228,17 @@ exceptions:
   related_steps:
   - S2
   - S3
+  - S5
+  - S7
+  related_capabilities:
+  - id: CAP-019
+    name: Pre-activation data and configuration validation
+  - id: CAP-035
+    name: Compensation framework validation
+  - id: CAP-037
+    name: Benefit plan assignment validation
+  - id: CAP-020
+    name: Issue severity classification
   initial_handling: Report the record and field; classify severity; the failed check cannot be silently bypassed
   responsible_role: STK-001 performs remediation; STK-003 owns the rule
   responsible_role_basis: PA-07; ARC-004 assumption
@@ -226,8 +266,13 @@ exceptions:
   triggering_condition: A tax jurisdiction or statutory withholding check fails
   related_process: PRC-03
   related_steps:
-  - S2
-  - S3
+  - S4
+  - S7
+  related_capabilities:
+  - id: CAP-036
+    name: Tax jurisdiction and withholding validation
+  - id: CAP-020
+    name: Issue severity classification
   initial_handling: Report the record and field; the record cannot be activated while the finding blocks it
   responsible_role: STK-001 performs remediation; STK-003 accountable
   responsible_role_basis: ARC-004 assumption
@@ -257,8 +302,13 @@ exceptions:
   triggering_condition: Banking credential validation fails for a record
   related_process: PRC-03
   related_steps:
-  - S2
-  - S3
+  - S6
+  - S7
+  related_capabilities:
+  - id: CAP-038
+    name: Direct-deposit banking detail validation
+  - id: CAP-020
+    name: Issue severity classification
   initial_handling: Report the record and field; sensitive banking values are not shown to unauthorized users
   responsible_role: STK-001 performs remediation; STK-003 accountable
   responsible_role_basis: ARC-004 assumption
@@ -288,7 +338,10 @@ exceptions:
   related_process: PRC-03
   related_steps:
   - S2
-  - S4
+  - S8
+  related_capabilities:
+  - id: CAP-019
+    name: Pre-activation data and configuration validation
   initial_handling: Report the limitation; never show the check as passed
   responsible_role: STK-001 informed; STK-004 owns the capability
   responsible_role_basis: PA-07; ARC-004 assumption
@@ -314,8 +367,11 @@ exceptions:
   triggering_condition: The dry run identifies a calculation or configuration conflict, or its limitations prevent a conclusion
   related_process: PRC-03
   related_steps:
-  - S5
-  - S6
+  - S9
+  - S10
+  related_capabilities:
+  - id: CAP-021
+    name: Activation dry-run simulation
   initial_handling: Show the affected record and issue for remediation, and the simulation limitations
   responsible_role: STK-001
   responsible_role_basis: PA-08
@@ -345,6 +401,11 @@ exceptions:
   related_process: PRC-03
   related_steps:
   - S1
+  related_capabilities:
+  - id: CAP-019
+    name: Pre-activation data and configuration validation
+  - id: CAP-026
+    name: Record correction and revalidation
   initial_handling: Treat affected records as needing revalidation before they proceed
   responsible_role: System
   responsible_role_basis: null
@@ -370,6 +431,9 @@ exceptions:
   related_process: PRC-04
   related_steps:
   - S4
+  related_capabilities:
+  - id: CAP-023
+    name: Eligible-record activation and record isolation
   initial_handling: Isolate the record; do not erase or hide other outcomes; route it to remediation
   responsible_role: System; STK-001 informed
   responsible_role_basis: PA-10
@@ -396,6 +460,11 @@ exceptions:
   related_process: PRC-04
   related_steps:
   - S5
+  related_capabilities:
+  - id: CAP-023
+    name: Eligible-record activation and record isolation
+  - id: CAP-022
+    name: Asynchronous batch processing and progress visibility
   initial_handling: Stop processing and report the reason and affected scope
   responsible_role: STK-001 informed; STK-004 owns processing
   responsible_role_basis: PA-10; ARC-004 assumption
@@ -425,6 +494,11 @@ exceptions:
   related_steps:
   - S3
   - S7
+  related_capabilities:
+  - id: CAP-024
+    name: Processing recovery without duplicate effects
+  - id: CAP-022
+    name: Asynchronous batch processing and progress visibility
   initial_handling: Resume without duplicating completed effects, or report the issue without claiming completion
   responsible_role: STK-005
   responsible_role_basis: PA-11
@@ -453,6 +527,11 @@ exceptions:
   related_steps:
   - S1
   - S3
+  related_capabilities:
+  - id: CAP-025
+    name: Record- and field-level error diagnosis
+  - id: CAP-026
+    name: Record correction and revalidation
   initial_handling: Show clearly that manual investigation is needed
   responsible_role: STK-001
   responsible_role_basis: PA-12
@@ -480,6 +559,9 @@ exceptions:
   related_process: PRC-05
   related_steps:
   - S8
+  related_capabilities:
+  - id: CAP-026
+    name: Record correction and revalidation
   initial_handling: Show the current issue; the record stays unactivated
   responsible_role: STK-001
   responsible_role_basis: PA-13
@@ -506,6 +588,9 @@ exceptions:
   related_process: PRC-05
   related_steps:
   - S5
+  related_capabilities:
+  - id: CAP-027
+    name: Reviewed bulk correction
   initial_handling: Block the fix, or route it for the required approval
   responsible_role: STK-001
   responsible_role_basis: PA-14
@@ -535,6 +620,9 @@ exceptions:
   related_process: PRC-05
   related_steps:
   - S6
+  related_capabilities:
+  - id: CAP-032
+    name: Sensitive change authorization
   initial_handling: Hold the change until authorized; show who must decide once that is known
   responsible_role: UNRESOLVED (DEC-007)
   responsible_role_basis: CAP-032 owner STK-003 is an ARC-004 assumption
@@ -564,6 +652,9 @@ exceptions:
   related_process: PRC-04
   related_steps:
   - S2
+  related_capabilities:
+  - id: CAP-031
+    name: Activation approval
   initial_handling: Keep records eligible but unactivated; show the approval as pending
   responsible_role: UNRESOLVED (DEC-007)
   responsible_role_basis: CAP-031 owner STK-003 is an ARC-004 assumption
@@ -592,6 +683,9 @@ exceptions:
   related_process: PRC-01
   related_steps:
   - S6
+  related_capabilities:
+  - id: CAP-010
+    name: Batch identification and lifecycle tracking
   initial_handling: Keep the batch identifiable with its current state
   responsible_role: STK-001
   responsible_role_basis: PA-01
@@ -618,7 +712,10 @@ exceptions:
   related_process: PRC-06
   related_steps:
   - S2
-  - S7
+  - S8
+  related_capabilities:
+  - id: CAP-028
+    name: Batch and record outcome reporting
   initial_handling: Keep unresolved records distinct and visible with their reason or next action
   responsible_role: STK-001; STK-002 consulted
   responsible_role_basis: ARC-004 assumption
@@ -637,3 +734,75 @@ exceptions:
   - DEC-021
   outstanding_questions:
   - Q-04
+- id: EXC-22
+  name: Suspected fraud or risk indicator in banking details
+  category: Suspected fraud or risk indicator
+  basis: PROPOSED
+  source: Prompt category; CAP-038; CON-004
+  triggering_condition: A record shows a possible risk indicator, for example an unexpected change to direct-deposit banking details. What counts as an indicator is not defined.
+  related_process: PRC-03
+  related_steps:
+  - S6
+  related_capabilities:
+  - id: CAP-038
+    name: Direct-deposit banking detail validation
+  - id: CAP-032
+    name: Sensitive change authorization
+  initial_handling: Hold the record from activation and route it for human review; do not apply or reverse any change automatically
+  responsible_role: UNRESOLVED
+  responsible_role_basis: No source names who investigates
+  human_review: 'REQUIRED: a reserved human decision'
+  escalation_path: UNRESOLVED (no investigation procedure or destination is defined; see Q-09)
+  permitted_outcomes:
+  - Cleared by an authorized person and returned to validation
+  - Held pending investigation
+  required_information:
+  - The changed fields and who changed them, without exposing full values
+  resolution_evidence:
+  - The reviewing person and decision are recorded (AIB-008)
+  related_rules:
+  - BR-009
+  related_decisions:
+  - DEC-007
+  - DEC-008
+  ai_involvement: None. No detection rules, thresholds or AI screening are proposed.
+  outstanding_questions:
+  - Q-09
+- id: EXC-23
+  name: Stakeholder dispute of a mapping, assignment, finding or outcome
+  category: Stakeholder dispute
+  basis: PROPOSED
+  source: Prompt category; STK-007 and STK-009 in BIZ-003
+  triggering_condition: A client or employee disputes a mapping, an entity or jurisdiction assignment, a validation finding or an activation outcome
+  related_process: PRC-03
+  related_steps:
+  - S10
+  related_capabilities:
+  - id: CAP-018
+    name: Ambiguity surfacing and resolution
+  - id: CAP-020
+    name: Issue severity classification
+  - id: CAP-028
+    name: Batch and record outcome reporting
+  initial_handling: Record the dispute against the record and keep the record out of activation until it is resolved
+  responsible_role: STK-001 records it; STK-003 decides payroll interpretation (proposed)
+  responsible_role_basis: ARC-004 assumption
+  human_review: REQUIRED
+  escalation_path: UNRESOLVED (no dispute owner or escalation path is defined; see Q-10)
+  permitted_outcomes:
+  - 'Upheld: record corrected in PRC-05'
+  - 'Rejected: finding stands, with the reason recorded'
+  required_information:
+  - What is disputed, by whom, and the evidence offered
+  resolution_evidence:
+  - The decision, decider and reason are recorded (AIB-008)
+  related_rules:
+  - BR-002
+  - BR-004
+  related_decisions:
+  - DEC-007
+  outstanding_questions:
+  - Q-10
+  also_applies_to:
+  - PRC-02 S9
+  - PRC-06 S8

@@ -1,11 +1,12 @@
 # Task 03 Part 1 Validation Report
 
+Version: 0.2
 Status: DRAFT. Validation shows structure and references only. It does not show that the processes match how any client actually works.
-Executed: 2026-11-20, by Claude Code, from `docs/prompts/task-03-operational-blueprint-prompt.md`, Run 1
+Executed: 2026-11-26, by Claude Code, from `docs/prompts/task-03-operational-blueprint-prompt.md` (revised), replacing the version 0.1 run of 2026-11-20
 
 ## 1. Summary
 
-All 27 internal checks pass. The validator was tested against three seeded defects and caught all three. `js-yaml` parsed every YAML file in the repository, and the Mermaid renderer drew all six diagrams. These are the first standard-parser and rendering checks for the Task 01 and Task 02 files as well.
+All 39 internal checks pass, including 13 new checks for the revised prompt: capability names, one step per capability, the capability operations view, business domains, capability links on exceptions, and the dispute and fraud-indicator categories. The validator caught every seeded defect. `js-yaml` parsed all three operations files, and the process diagram rendered.
 
 ## 2. Internal checks
 
@@ -33,36 +34,49 @@ All 27 internal checks pass. The validator was tested against three seeded defec
 | 20 | Every exception has the required fields | PASS |  |
 | 21 | Every unresolved authority names its open decision | PASS |  |
 | 22 | Every fully unresolved decision presents options | PASS |  |
-| 23 | No technology, product or vendor names | PASS |  |
-| 24 | No named regulations or legal claims | PASS |  |
-| 25 | No invented numeric thresholds (only the problem-statement targets) | PASS |  |
-| 26 | No Task 01, Task 02 or baseline file changed (git status) | PASS |  |
-| 27 | Overview diagram names all six processes | PASS | ['PRC-01', 'PRC-02', 'PRC-03', 'PRC-04', 'PRC-05', 'PRC-06'] |
+| 23 | Every capability name matches ARC-001 (steps, domains, exceptions, capability view) | PASS |  |
+| 24 | Every process names a business domain (a Level 1 capability) | PASS |  |
+| 25 | Every step names the capability it exercises | PASS |  |
+| 26 | Every ARC-001 capability has a capability operations entry | PASS |  |
+| 27 | Every Level 2 and Level 3 capability has at least one step of its own | PASS |  |
+| 28 | Capability coverage notes agree with the steps | PASS |  |
+| 29 | Every capability entry describes its operation and points to real steps | PASS |  |
+| 30 | Every exception names its capability | PASS |  |
+| 31 | Dispute and fraud-indicator exception categories are present | PASS | ['Conflicting information', 'Escalation and referral', 'Failed verification', 'Incomplete submission', 'Missing information', 'Process failure', 'Request requiring human judgement', 'Stakeholder dispute', 'Suspected fraud or risk indicator', 'Unavailable information source'] |
+| 32 | Every also_applies_to reference is a real step that links back | PASS |  |
+| 33 | Every decision point sits on a real step | PASS |  |
+| 34 | Every human intervention point is a real step | PASS |  |
+| 35 | No technology, product or vendor names | PASS |  |
+| 36 | No named regulations or legal claims | PASS |  |
+| 37 | No invented numeric thresholds (only the problem-statement targets) | PASS |  |
+| 38 | No Task 01, Task 02 or baseline file changed (git status) | PASS |  |
+| 39 | Overview diagram names all six processes | PASS | ['PRC-01', 'PRC-02', 'PRC-03', 'PRC-04', 'PRC-05', 'PRC-06'] |
 
 ## 3. Validator self-test
 
-Three defects were seeded into copies of OPS-002 and OPS-003, then the files were restored:
+Defects were seeded into copies of the files, and the files were then restored.
 
-| Seeded defect | Detected by |
-| :-- | :-- |
-| An exception pointing to a non-existent process (PRC-09) | Exception refers to a real process and step; exception linked from a step |
-| An invented role (STK-099) | Identifier exists; role is from BIZ-003 |
-| A technology term in a step (database) | No technology, product or vendor names |
+| Run | Seeded defect | Detected by |
+| :-- | :-- | :-- |
+| 0.1 | An exception pointing to a non-existent process (PRC-09) | Exception refers to a real process and step |
+| 0.1 | An invented role (STK-099) | Role is from BIZ-003; identifier exists |
+| 0.1 | A technology term in a step (database) | No technology, product or vendor names |
+| 0.2 | A wrong capability name on a step | Capability name matches ARC-001 |
+| 0.2 | The tax validation capability merged into a shared step | Every Level 2 and Level 3 capability has a step of its own |
+| 0.2 | An exception with no capability link | Every exception names its capability |
 
-The first self-test run crashed on the invalid process reference instead of reporting it. The validator was fixed to report the failure, and the self-test was rerun successfully.
-
-## 4. Package tools authorised in Part A
+## 4. Package tools
 
 | Tool | Scope | Result |
 | :-- | :-- | :-- |
-| `npx js-yaml@4.1.0` | OPS-002, OPS-003, OPS-009, and read-only every YAML file in docs/business and docs/architecture | All parsed without error |
-| `npx @mermaid-js/mermaid-cli@11.4.2` with the pre-installed Chromium | All six `.mmd` files in docs/diagrams, read-only for Tasks 01 and 02 | All rendered without error; rendered images kept in the session scratchpad |
+| `npx js-yaml@4.1.0` | OPS-002, OPS-003, OPS-009 version 0.2 | All parsed without error |
+| `npx @mermaid-js/mermaid-cli@11.4.2` | `docs/diagrams/ops-002-process-overview.mmd` | Rendered without error |
 
 No package was added to the repository.
 
 ## 5. Limitations
 
-- The checks confirm well-formed files, existing identifiers, coverage and the absence of flagged words. They cannot confirm that a step, role or exception is correct for a real client.
-- The technology, regulation and number scans are keyword-based and cannot detect an implied claim.
-- The generator and validator scripts are in the session scratchpad, not the repository, so these checks cannot be rerun from the repository alone.
-- Ownership and authority shown in the processes come from ARC-004, which is itself an assumption.
+- The checks confirm well-formed files, existing identifiers, coverage and the absence of flagged words. They cannot confirm that a step, role or capability description is correct for a real client.
+- The capability descriptions were written from the Task 01 and Task 02 artifacts and the backlog; a check confirms each is present and long enough, not that it is accurate.
+- The technology, regulation and number scans are keyword-based.
+- The generator and validator scripts are in the session scratchpad, not the repository.

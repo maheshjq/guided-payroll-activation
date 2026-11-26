@@ -2,7 +2,7 @@
 artifact_id: OPS-009
 title: Task 03 Register
 status: DRAFT
-version: '0.1'
+version: '0.2'
 task: Task 03 Part 1, Operational Modelling and Process Foundation
 note: This register tracks the Task 03 work. It is not proof that the work is complete or approved. Local identifiers Q-, A- are scoped to this register; PCR continues the ARC-007 sequence.
 source_inventory:
@@ -44,19 +44,20 @@ missing_or_incomplete_inputs:
 - No authoritative validation rules or statutory engine identified (DEC-015)
 - No escalation destinations or approval authority defined (DEC-007)
 - No batch-stop conditions defined (DEC-006)
+- No business domain model; Level 1 capabilities are used as domains (A-07)
 deliverables:
 - id: OPS-009
   name: Task 03 Register
   path: docs/operations/OPS-009-task-03-register.yaml
   status: DRAFT
-  version: '0.1'
+  version: '0.2'
   part: Part 1
   depends_on: []
 - id: OPS-002
   name: Operational Process Model
   path: docs/operations/OPS-002-operational-process-model.yaml
   status: DRAFT
-  version: '0.1'
+  version: '0.2'
   part: Part 1
   depends_on:
   - ARC-001
@@ -67,18 +68,18 @@ deliverables:
   - BIZ-003
   - BIZ-006
   - BIZ-007
-  content: 6 processes PRC-01 to PRC-06, one per value stream stage
+  content: 6 processes PRC-01 to PRC-06 with 50 steps, and a capability operations view with 38 entries (29 Level 2 and Level 3 capabilities, each with its own steps)
 - id: OPS-003
   name: Exception and Human-Review Pathways
   path: docs/operations/OPS-003-exception-and-human-review-pathways.yaml
   status: DRAFT
-  version: '0.1'
+  version: '0.2'
   part: Part 1
   depends_on:
   - OPS-002
   - BIZ-005
   - BIZ-007
-  content: 21 exceptions EXC-01 to EXC-21; 17 sourced, 4 proposed
+  content: 23 exceptions EXC-01 to EXC-23; 17 sourced, 6 proposed; each names its capability
 - id: Diagram
   name: Process overview
   path: docs/diagrams/ops-002-process-overview.mmd
@@ -87,8 +88,8 @@ deliverables:
   part: Part 1
   depends_on:
   - OPS-002
-- id: OPS-001, OPS-004 to OPS-008
-  name: Part 2 deliverables (blueprint, requirements, rules and decisions, state model, controls, traceability)
+- id: Part 2
+  name: Task 03 Part 2 deliverables
   path: docs/operations/
   status: NOT_STARTED
   version: null
@@ -96,7 +97,7 @@ deliverables:
   depends_on:
   - OPS-002
   - OPS-003
-  note: Numbering is a proposal until confirmed.
+  note: To be defined by the Task 03 Part 2 prompt once its learning guide is available.
 outstanding_questions:
 - id: Q-01
   question: Who authorizes activation, sensitive changes and bulk fixes, and must the approver differ from the person who prepared the work?
@@ -166,6 +167,21 @@ outstanding_questions:
   - EXC-02
   answer_by: STK-003
   status: OPEN
+- id: Q-09
+  question: What counts as a fraud or risk indicator during activation, for example an unexpected change to banking details, and who investigates it?
+  related:
+  - EXC-22
+  - CAP-038
+  - DEC-008
+  answer_by: STK-012
+  status: OPEN
+- id: Q-10
+  question: Who owns a dispute raised by a client or employee about a mapping, assignment, finding or outcome, and how is it escalated?
+  related:
+  - EXC-23
+  - DEC-007
+  answer_by: STK-003
+  status: OPEN
 assumptions:
 - id: A-01
   assumption: One process per value stream stage is enough for the first release scope
@@ -191,6 +207,10 @@ assumptions:
   assumption: History is recorded throughout the batch, although it is modelled in PRC-06
   validation: DEC-008
   status: UNVALIDATED
+- id: A-07
+  assumption: The Level 1 capability groups in ARC-001 serve as business domains, because the project has no separate domain model
+  validation: Confirm with STK-004
+  status: UNVALIDATED
 decisions_requiring_human_review:
 - decision: DEC-006
   why: Severity classes, batch-stop conditions and the dry-run gate; options are in PRC-03 D1, PRC-03 D2 and PRC-04 D2
@@ -210,6 +230,8 @@ decisions_requiring_human_review:
   why: Whether the hand-off to the first live payroll is in scope (VSB-01, EXC-21)
 - decision: PCR-010
   why: Whether CAP-008 and CAP-009 are accepted capabilities; the processes treat them as provisional
+- decision: Q-09 and Q-10
+  why: Fraud-indicator handling (EXC-22) and dispute handling (EXC-23) are proposed with no owner or escalation path
 proposed_changes:
 - id: PCR-014
   target: ARC-002 VS-03
@@ -229,11 +251,16 @@ proposed_changes:
 carried_forward: PCR-001 to PCR-013 from ARC-007 remain as recorded there; none was applied by Task 03.
 validation:
   status: DRAFT, internal checks passed; business review pending
-  internal_checks: 27 checks, 27 passed, 0 failed
-  validator_self_test: Three seeded defects (invalid process reference, invented role, technology term) were all detected; an initial crash on the invalid reference was fixed first
-  js_yaml: npx js-yaml 4.1.0 parsed OPS-002, OPS-003, OPS-009 and every Task 01 and Task 02 YAML file without error
-  mermaid: npx @mermaid-js/mermaid-cli 11.4.2 rendered all six diagrams in docs/diagrams without error, including the five from Tasks 01 and 02
+  internal_checks: 39 checks, 39 passed, 0 failed (version 0.2 adds 13 checks for capabilities, domains and the new exception categories)
+  validator_self_test: Six seeded defects across two runs (invalid process reference, invented role, technology term, wrong capability name, a capability merged out of its own step, an exception with no capability) were all detected
+  js_yaml: npx js-yaml 4.1.0 parsed OPS-002, OPS-003 and OPS-009 version 0.2 without error
+  mermaid: npx @mermaid-js/mermaid-cli 11.4.2 rendered the process overview diagram without error
   limitations:
   - Checks confirm structure and references, not that the processes match real client operations
   - The technology and regulation scans are keyword-based
   - The validator and generator are in the session scratchpad, not the repository
+revision_history:
+- version: '0.1'
+  change: First run of the Task 03 Part 1 prompt
+- version: '0.2'
+  change: 'Rerun with the revised prompt: capability operations view, one step per Level 2 and Level 3 capability, named capabilities on steps and exceptions, business domain per process, dispute and fraud-indicator exceptions'

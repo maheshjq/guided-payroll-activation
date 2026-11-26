@@ -59,7 +59,7 @@ flowchart LR
     subgraph T3["Task 03 Part 1: the business how"]
         O1["Register<br/>OPS-009"]
         O2["Processes<br/>OPS-002, 6 processes"]
-        O3["Exceptions and human review<br/>OPS-003, 21 pathways"]
+        O3["Exceptions and human review<br/>OPS-003, 23 pathways"]
     end
     IN --> T1 --> G1 --> T2 --> G2 --> T3
 ```
@@ -107,7 +107,8 @@ Task 03 Part 1 (documents in docs/operations and validation):
 
 - OPS-009 register, OPS-002 process model and OPS-003 exception and human-review pathways, plus a process overview diagram at docs/diagrams/ops-002-process-overview.mmd.
 - 6 processes, one per value-stream stage, with every step marked as rule-based, AI-supported, human review, or a decision reserved for an authorized person.
-- 21 exceptions (17 taken from existing documents, 4 proposed), 8 new open questions and 3 new proposed changes.
+- 23 exceptions (17 taken from existing documents, 6 proposed, including a suspected fraud indicator and a stakeholder dispute), each linked to its capability; 10 new open questions and 3 new proposed changes.
+- A capability operations view: for each of the 38 capabilities, a plain description of how it works in practice, with its steps, roles, decisions, exceptions and rules. Every Level 2 and Level 3 capability has steps of its own.
 - Approval authority (DEC-007) and the blocking policy (DEC-006) are left open; the processes show options instead of choosing.
 
 ## 6a. What the operation looks like

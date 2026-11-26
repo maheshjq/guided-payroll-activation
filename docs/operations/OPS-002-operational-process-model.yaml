@@ -2,7 +2,7 @@
 artifact_id: OPS-002
 title: Operational Process Model
 status: DRAFT
-version: '0.1'
+version: '0.2'
 task: Task 03 Part 1, Operational Modelling and Process Foundation
 sources:
 - ARC-001
@@ -23,6 +23,7 @@ notes:
 - 'Step classifications: DETERMINISTIC, AI_SUPPORTED, HUMAN_REVIEW, RESERVED_HUMAN_DECISION. "System" means a deterministic business activity performed without a person; no technology is implied.'
 - Roles come from BIZ-003. Role assignments follow ARC-004 and are assumptions. Authority shown as UNRESOLVED is not decided.
 - The hand-off to the first live payroll is the boundary VSB-01 (DEC-021). No process is modelled beyond it.
+- 'Version 0.2: every Level 2 and Level 3 capability now has at least one step of its own, every step names its capability by ID and name, and each process names its business domain. A capability operations view explains how each capability works in practice.'
 classification_legend:
   DETERMINISTIC: Carried out by explicit rules or fixed conditions
   AI_SUPPORTED: AI may suggest or explain within AIB-001 to AIB-012; a person decides
@@ -38,6 +39,10 @@ processes:
   name: Prepare and inspect an activation batch
   business_purpose: Give every activation a known, inspectable starting point, and separate file-level input problems from record-level problems before any mapping starts.
   justification: BN-05 opaque error reporting and BP-001 time to value; the blueprint value-stream step Prepare batch.
+  business_domain:
+  - id: CAP-001
+    name: Guided batch intake and setup
+  business_domain_basis: 'ASSUMPTION: the Level 1 capability group from ARC-001 is used as the business domain (OPS-009 A-07)'
   value_stream_stage: VS-01
   journey_stages:
   - JS-01
@@ -75,26 +80,30 @@ processes:
     performed_by: STK-001
     classification: DETERMINISTIC
     capabilities:
-    - CAP-010
+    - id: CAP-010
+      name: Batch identification and lifecycle tracking
   - id: S2
     activity: Capture the activation context for the batch, such as the client organization and entity scope
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-012
+    - id: CAP-012
+      name: Activation context capture
     note: The required context is not decided (DEC-010); no story covers this step (PCR-011).
   - id: S3
     activity: Provide the employee data input to the batch
     performed_by: STK-001
     classification: DETERMINISTIC
     capabilities:
-    - CAP-011
+    - id: CAP-011
+      name: Batch input acceptance and structural inspection
   - id: S4
     activity: Inspect the input structure and report whether it can be read
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-011
+    - id: CAP-011
+      name: Batch input acceptance and structural inspection
     exceptions:
     - EXC-01
   - id: S5
@@ -102,7 +111,8 @@ processes:
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-011
+    - id: CAP-011
+      name: Batch input acceptance and structural inspection
     exceptions:
     - EXC-01
   - id: S6
@@ -110,7 +120,8 @@ processes:
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-010
+    - id: CAP-010
+      name: Batch identification and lifecycle tracking
     exceptions:
     - EXC-20
   inputs:
@@ -177,6 +188,12 @@ processes:
   name: Map data and resolve activation context
   business_purpose: Reconcile source data to payroll fields, pay codes, entities and jurisdictions, with every ambiguity made visible rather than guessed.
   justification: BN-02 manual intervention and BN-03 cross-entity dependency mapping; BP-002 cost of delivery.
+  business_domain:
+  - id: CAP-002
+    name: Data mapping and normalization
+  - id: CAP-003
+    name: Entity and jurisdiction resolution
+  business_domain_basis: 'ASSUMPTION: the Level 1 capability group from ARC-001 is used as the business domain (OPS-009 A-07)'
   value_stream_stage: VS-02
   journey_stages:
   - JS-03
@@ -225,7 +242,8 @@ processes:
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-013
+    - id: CAP-013
+      name: Source-to-payroll field mapping
     exceptions:
     - EXC-02
   - id: S2
@@ -233,7 +251,8 @@ processes:
     performed_by: System
     classification: AI_SUPPORTED
     capabilities:
-    - CAP-013
+    - id: CAP-013
+      name: Source-to-payroll field mapping
     ai_support:
       opportunity: AI-001
       rules:
@@ -251,7 +270,8 @@ processes:
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-015
+    - id: CAP-015
+      name: Mapping review and approval
     exceptions:
     - EXC-02
     - EXC-05
@@ -260,7 +280,8 @@ processes:
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-014
+    - id: CAP-014
+      name: Custom pay-code mapping
     exceptions:
     - EXC-03
   - id: S5
@@ -268,7 +289,8 @@ processes:
     performed_by: System
     classification: AI_SUPPORTED
     capabilities:
-    - CAP-014
+    - id: CAP-014
+      name: Custom pay-code mapping
     ai_support:
       opportunity: AI-002
       rules:
@@ -285,33 +307,47 @@ processes:
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-015
+    - id: CAP-015
+      name: Mapping review and approval
     exceptions:
     - EXC-03
   - id: S7
-    activity: Resolve entity hierarchy and inherited settings, and assign jurisdiction context from the authoritative source
+    activity: Resolve the entity hierarchy and inherited settings from the authoritative hierarchy source, showing each effective value and its source
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-016
-    - CAP-017
+    - id: CAP-016
+      name: Entity hierarchy resolution and inheritance
     exceptions:
     - EXC-04
-    note: AI determination of entity or jurisdiction is rejected (AI-005). Inheritance rules are open (DEC-013).
+    note: Which settings inherit is open (DEC-013).
   - id: S8
+    activity: Assign each record its jurisdiction context from the authoritative source
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - id: CAP-017
+      name: Jurisdiction context assignment
+    exceptions:
+    - EXC-04
+    note: AI determination of entity or jurisdiction is rejected (AI-005). No jurisdiction is assumed (DEC-001).
+  - id: S9
     activity: Review assignments, including each effective value and its source; resolve flagged records
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-018
+    - id: CAP-018
+      name: Ambiguity surfacing and resolution
     exceptions:
     - EXC-04
-  - id: S9
+    - EXC-23
+  - id: S10
     activity: Confirm the reviewed mappings and assignments for use by validation
     performed_by: STK-001
     classification: RESERVED_HUMAN_DECISION
     capabilities:
-    - CAP-015
+    - id: CAP-015
+      name: Mapping review and approval
     note: Accountability for the confirmed mapping is proposed for STK-003 (ARC-004); whether this confirmation needs a separate approver is part of DEC-007.
   inputs:
   - Structurally usable batch input
@@ -345,7 +381,7 @@ processes:
     - DEC-014
   - id: D2
     name: Resolve an ambiguous or conflicting entity or jurisdiction assignment
-    at_step: S8
+    at_step: S9
     classification: HUMAN_REVIEW
     authority: STK-001 performs; STK-003 accountable
     authority_basis: ARC-004 assumption
@@ -358,7 +394,7 @@ processes:
     - DEC-013
   - id: D3
     name: Release reviewed mappings and assignments to validation
-    at_step: S9
+    at_step: S10
     classification: RESERVED_HUMAN_DECISION
     authority: UNRESOLVED
     authority_basis: DEC-007
@@ -380,8 +416,8 @@ processes:
   human_intervention_points:
   - S3
   - S6
-  - S8
   - S9
+  - S10
   automation:
     opportunities:
     - Deterministic mapping of recognized fields and pay codes
@@ -409,10 +445,15 @@ processes:
   - EXC-03
   - EXC-04
   - EXC-05
+  - EXC-23
 - id: PRC-03
   name: Validate and simulate before activation
   business_purpose: Find data, configuration and statutory issues for each record before anything is committed, and show what activation would do without creating live payroll effects.
   justification: BN-01 cascading validation failures and BN-04 lack of pre-ingestion sandboxing; BP-003 first-payroll failure rate and BP-004 regulatory exposure.
+  business_domain:
+  - id: CAP-004
+    name: Pre-activation validation and simulation
+  business_domain_basis: 'ASSUMPTION: the Level 1 capability group from ARC-001 is used as the business domain (OPS-009 A-07)'
   value_stream_stage: VS-03
   journey_stages:
   - JS-06
@@ -457,66 +498,105 @@ processes:
     performed_by: STK-001
     classification: DETERMINISTIC
     capabilities:
-    - CAP-019
+    - id: CAP-019
+      name: Pre-activation data and configuration validation
     note: Corrected records are revalidated on their own (BR-005).
   - id: S2
-    activity: Check data and configuration, including compensation framework, tax jurisdiction and withholding, benefit plan assignment and direct-deposit banking details, against the approved applicable rules
+    activity: Check that required data and configuration are present and consistent against the approved applicable rules
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-019
-    - CAP-035
-    - CAP-036
-    - CAP-037
-    - CAP-038
+    - id: CAP-019
+      name: Pre-activation data and configuration validation
     exceptions:
     - EXC-06
-    - EXC-07
-    - EXC-08
     - EXC-09
     note: AI decision on validity is rejected (AI-006). No jurisdiction or rule set is assumed (DEC-001).
   - id: S3
+    activity: Validate the compensation framework settings of each record
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - id: CAP-035
+      name: Compensation framework validation
+    exceptions:
+    - EXC-06
+  - id: S4
+    activity: Validate tax jurisdiction and statutory withholding settings of each record
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - id: CAP-036
+      name: Tax jurisdiction and withholding validation
+    exceptions:
+    - EXC-07
+  - id: S5
+    activity: Validate benefit plan assignments of each record
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - id: CAP-037
+      name: Benefit plan assignment validation
+    exceptions:
+    - EXC-06
+  - id: S6
+    activity: Validate direct-deposit banking details of each record, without exposing full values
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - id: CAP-038
+      name: Direct-deposit banking detail validation
+    exceptions:
+    - EXC-08
+    - EXC-22
+  - id: S7
     activity: Classify each finding by severity and determine record eligibility
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-020
+    - id: CAP-020
+      name: Issue severity classification
     exceptions:
     - EXC-06
     - EXC-07
     - EXC-08
     note: The severity classes and their effect are not decided (DEC-006).
-  - id: S4
+  - id: S8
     activity: Show results with the affected record and field; report any rule that could not be evaluated as a limitation, not a pass
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-019
+    - id: CAP-019
+      name: Pre-activation data and configuration validation
     exceptions:
     - EXC-09
-  - id: S5
+  - id: S9
     activity: Run the dry run against the statutory engines without activating profiles or creating live payroll effects
     performed_by: STK-001
     classification: DETERMINISTIC
     capabilities:
-    - CAP-021
+    - id: CAP-021
+      name: Activation dry-run simulation
     exceptions:
     - EXC-10
     note: AI simulation or calculation is rejected (AI-007, AIB-011). What the dry run reproduces is open (DEC-016).
-  - id: S6
+  - id: S10
     activity: Review validation and dry-run results, including visible simulation limitations
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-021
+    - id: CAP-021
+      name: Activation dry-run simulation
     exceptions:
     - EXC-10
-  - id: S7
+    - EXC-23
+  - id: S11
     activity: Route eligible records toward activation and records with issues to remediation
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-020
+    - id: CAP-020
+      name: Issue severity classification
     note: Failed checks cannot be silently bypassed (PA-07).
   inputs:
   - Reviewed mappings and assignments
@@ -534,7 +614,7 @@ processes:
   decision_points:
   - id: D1
     name: Severity class of a finding
-    at_step: S3
+    at_step: S7
     classification: DETERMINISTIC
     authority: Rules defined by STK-003; the classification policy itself is UNRESOLVED
     authority_basis: DEC-006; CAP-020 owner STK-003 (ARC-004 assumption)
@@ -553,7 +633,7 @@ processes:
     - DEC-006
   - id: D2
     name: Is the dry run a required gate before activation?
-    at_step: S7
+    at_step: S11
     classification: RESERVED_HUMAN_DECISION
     authority: UNRESOLVED
     authority_basis: PA-09 depends on approved activation gates; DEC-006 and DEC-016
@@ -578,8 +658,8 @@ processes:
     what: Records with findings, each with the affected record, field and reason
   human_intervention_points:
   - S1
-  - S5
-  - S6
+  - S9
+  - S10
   automation:
     opportunities:
     - Deterministic validation and severity classification once DEC-006 and DEC-015 are decided
@@ -610,10 +690,18 @@ processes:
   - EXC-09
   - EXC-10
   - EXC-11
+  - EXC-22
+  - EXC-23
 - id: PRC-04
   name: Approve and process activation with partial commit
   business_purpose: Activate eligible records without waiting for, or being blocked by, unrelated record failures, and keep every record outcome tied to its batch.
   justification: BN-01 cascading validation failures; BP-001 time to value; the target of at least 65 percent faster activation (a target, baseline pending).
+  business_domain:
+  - id: CAP-005
+    name: Asynchronous batch activation and partial commit
+  - id: CAP-008
+    name: Activation authorization and approval
+  business_domain_basis: 'ASSUMPTION: the Level 1 capability group from ARC-001 is used as the business domain (OPS-009 A-07)'
   value_stream_stage: VS-04
   journey_stages:
   - JS-08
@@ -660,13 +748,15 @@ processes:
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-022
+    - id: CAP-022
+      name: Asynchronous batch processing and progress visibility
   - id: S2
     activity: Approve activation of the batch or of the eligible records
     performed_by: UNRESOLVED (DEC-007)
     classification: RESERVED_HUMAN_DECISION
     capabilities:
-    - CAP-031
+    - id: CAP-031
+      name: Activation approval
     exceptions:
     - EXC-19
     note: AI approval or activation is rejected (AI-008, AIB-007). No story covers activation approval (PCR-012).
@@ -675,7 +765,8 @@ processes:
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-022
+    - id: CAP-022
+      name: Asynchronous batch processing and progress visibility
     exceptions:
     - EXC-14
   - id: S4
@@ -683,7 +774,8 @@ processes:
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-023
+    - id: CAP-023
+      name: Eligible-record activation and record isolation
     exceptions:
     - EXC-12
     note: BR-001 and BR-002 apply.
@@ -692,7 +784,8 @@ processes:
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-023
+    - id: CAP-023
+      name: Eligible-record activation and record isolation
     exceptions:
     - EXC-13
     note: Which conditions stop a batch is open (DEC-006); no fixed error-rate threshold may be used (CON-008).
@@ -701,13 +794,15 @@ processes:
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-022
+    - id: CAP-022
+      name: Asynchronous batch processing and progress visibility
   - id: S7
     activity: Recover interrupted processing without duplicating completed activation effects
     performed_by: STK-005
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-024
+    - id: CAP-024
+      name: Processing recovery without duplicate effects
     exceptions:
     - EXC-14
     note: Retry semantics need technical design (PA-11); behaviour is open (DEC-017).
@@ -815,6 +910,12 @@ processes:
   name: Remediate exceptions and revalidate corrected records
   business_purpose: Let administrators find, understand and correct failing records, alone or in a reviewed bulk fix, and send only the corrected records back for validation.
   justification: BN-05 opaque error reporting and BN-02 manual intervention; BP-002 cost of delivery; the target of 75 percent fewer support touchpoints (a target, baseline pending).
+  business_domain:
+  - id: CAP-006
+    name: Remediation and bulk fixes
+  - id: CAP-008
+    name: Activation authorization and approval
+  business_domain_basis: 'ASSUMPTION: the Level 1 capability group from ARC-001 is used as the business domain (OPS-009 A-07)'
   value_stream_stage: VS-05
   journey_stages:
   - JS-10
@@ -858,7 +959,8 @@ processes:
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-025
+    - id: CAP-025
+      name: Record- and field-level error diagnosis
     exceptions:
     - EXC-15
   - id: S2
@@ -866,7 +968,8 @@ processes:
     performed_by: System
     classification: AI_SUPPORTED
     capabilities:
-    - CAP-025
+    - id: CAP-025
+      name: Record- and field-level error diagnosis
     ai_support:
       opportunity: AI-003
       rules:
@@ -881,7 +984,8 @@ processes:
     performed_by: System
     classification: AI_SUPPORTED
     capabilities:
-    - CAP-026
+    - id: CAP-026
+      name: Record correction and revalidation
     ai_support:
       opportunity: AI-004
       rules:
@@ -899,13 +1003,15 @@ processes:
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-026
+    - id: CAP-026
+      name: Record correction and revalidation
   - id: S5
     activity: Prepare a bulk fix for records with the same eligible issue, showing affected records and fields before application
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-027
+    - id: CAP-027
+      name: Reviewed bulk correction
     exceptions:
     - EXC-17
     note: Autonomous AI bulk fixes are rejected (AI-009). P1 story PA-14.
@@ -914,7 +1020,8 @@ processes:
     performed_by: UNRESOLVED (DEC-007)
     classification: RESERVED_HUMAN_DECISION
     capabilities:
-    - CAP-032
+    - id: CAP-032
+      name: Sensitive change authorization
     exceptions:
     - EXC-18
   - id: S7
@@ -922,13 +1029,15 @@ processes:
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-027
+    - id: CAP-027
+      name: Reviewed bulk correction
   - id: S8
     activity: Submit only the corrected records for revalidation in PRC-03; other completed records are not reprocessed
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-026
+    - id: CAP-026
+      name: Record correction and revalidation
     exceptions:
     - EXC-16
     note: BR-005 applies.
@@ -1032,6 +1141,12 @@ processes:
   name: Review outcomes and activation history
   business_purpose: Let users and reviewers distinguish activated, failed and pending records, understand why, and trace how each profile reached its state.
   justification: BN-05 opaque error reporting; BP-005 early churn and brand trust; KPI-018 time to understand outcomes.
+  business_domain:
+  - id: CAP-007
+    name: Activation diagnostics and audit
+  - id: CAP-009
+    name: Activation data protection
+  business_domain_basis: 'ASSUMPTION: the Level 1 capability group from ARC-001 is used as the business domain (OPS-009 A-07)'
   value_stream_stage: VS-06
   journey_stages:
   - JS-12
@@ -1077,13 +1192,15 @@ processes:
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-028
+    - id: CAP-028
+      name: Batch and record outcome reporting
   - id: S2
     activity: Show, for each record not activated, its current reason or next required action
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-028
+    - id: CAP-028
+      name: Batch and record outcome reporting
     exceptions:
     - EXC-21
   - id: S3
@@ -1091,36 +1208,49 @@ processes:
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-029
+    - id: CAP-029
+      name: Activation history recording
   - id: S4
     activity: Review activation changes and decisions
     performed_by: STK-006
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-029
+    - id: CAP-029
+      name: Activation history recording
   - id: S5
-    activity: Limit visibility of sensitive detail to authorized roles and keep data only as long as agreed
+    activity: Limit visibility of sensitive activation detail to authorized roles
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-033
-    - CAP-034
-    note: BR-009. Visibility and retention rules are open (DEC-008). CAP-009 is a proposed capability (PCR-010).
+    - id: CAP-033
+      name: Role-based access to activation detail
+    note: BR-009. Visibility rules are open (DEC-008). CAP-009 is a proposed capability (PCR-010).
   - id: S6
+    activity: Keep activation data only as long as agreed, and handle it according to the retention rules
+    performed_by: System
+    classification: DETERMINISTIC
+    capabilities:
+    - id: CAP-034
+      name: Activation data retention control
+    note: Retention rules are open (DEC-008).
+  - id: S7
     activity: Report outcomes against the target metrics
     performed_by: System
     classification: DETERMINISTIC
     capabilities:
-    - CAP-030
+    - id: CAP-030
+      name: Activation outcome measurement
     note: 'Provisional: in scope only if DEC-023 is decided; baselines are pending (DEC-005).'
-  - id: S7
+  - id: S8
     activity: Mark the batch reviewed; the hand-off to the first live payroll is a boundary (VSB-01)
     performed_by: STK-001
     classification: HUMAN_REVIEW
     capabilities:
-    - CAP-028
+    - id: CAP-028
+      name: Batch and record outcome reporting
     exceptions:
     - EXC-21
+    - EXC-23
     note: DEC-021 is open; no process is modelled beyond the boundary.
   inputs:
   - Record and batch outcomes
@@ -1149,7 +1279,7 @@ processes:
     - DEC-008
   - id: D2
     name: Is the batch ready to leave review
-    at_step: S7
+    at_step: S8
     classification: HUMAN_REVIEW
     authority: STK-001 for the batch; whether a cohort with unresolved records may go live is UNRESOLVED
     authority_basis: DEC-021; RSK-012
@@ -1169,7 +1299,7 @@ processes:
     what: Reviewed outcome, at the boundary only
   human_intervention_points:
   - S4
-  - S7
+  - S8
   automation:
     opportunities:
     - Outcome summaries and per-record reasons
@@ -1193,3 +1323,1028 @@ processes:
   basis: PROPOSED
   exceptions:
   - EXC-21
+  - EXC-23
+capability_operations:
+- id: CAP-001
+  name: Guided batch intake and setup
+  level: 1
+  how_it_operates: Starts every activation with an identified batch, inspected input and recorded context.
+  operates_through:
+  - PRC-01
+  child_capabilities:
+  - id: CAP-010
+    name: Batch identification and lifecycle tracking
+  - id: CAP-011
+    name: Batch input acceptance and structural inspection
+  - id: CAP-012
+    name: Activation context capture
+  note: Level 1 group. Its operation is the sum of its child capabilities below; it has no steps of its own.
+- id: CAP-002
+  name: Data mapping and normalization
+  level: 1
+  how_it_operates: Turns source data into payroll fields and pay codes, with every mapping reviewed by a person.
+  operates_through:
+  - PRC-02
+  child_capabilities:
+  - id: CAP-013
+    name: Source-to-payroll field mapping
+  - id: CAP-014
+    name: Custom pay-code mapping
+  - id: CAP-015
+    name: Mapping review and approval
+  note: Level 1 group. Its operation is the sum of its child capabilities below; it has no steps of its own.
+- id: CAP-003
+  name: Entity and jurisdiction resolution
+  level: 1
+  how_it_operates: Gives every record its entity and jurisdiction context, with inherited values traceable and ambiguity resolved by a person.
+  operates_through:
+  - PRC-02
+  child_capabilities:
+  - id: CAP-016
+    name: Entity hierarchy resolution and inheritance
+  - id: CAP-017
+    name: Jurisdiction context assignment
+  - id: CAP-018
+    name: Ambiguity surfacing and resolution
+  note: Level 1 group. Its operation is the sum of its child capabilities below; it has no steps of its own.
+- id: CAP-004
+  name: Pre-activation validation and simulation
+  level: 1
+  how_it_operates: Finds data, configuration and statutory issues for each record before anything is committed, using validation and a non-committing dry run.
+  operates_through:
+  - PRC-03
+  child_capabilities:
+  - id: CAP-019
+    name: Pre-activation data and configuration validation
+  - id: CAP-020
+    name: Issue severity classification
+  - id: CAP-021
+    name: Activation dry-run simulation
+  note: Level 1 group. Its operation is the sum of its child capabilities below; it has no steps of its own.
+- id: CAP-005
+  name: Asynchronous batch activation and partial commit
+  level: 1
+  how_it_operates: Activates eligible records in the background, isolates failures and recovers from interruptions without duplicate effects.
+  operates_through:
+  - PRC-04
+  child_capabilities:
+  - id: CAP-022
+    name: Asynchronous batch processing and progress visibility
+  - id: CAP-023
+    name: Eligible-record activation and record isolation
+  - id: CAP-024
+    name: Processing recovery without duplicate effects
+  note: Level 1 group. Its operation is the sum of its child capabilities below; it has no steps of its own.
+- id: CAP-006
+  name: Remediation and bulk fixes
+  level: 1
+  how_it_operates: Lets administrators diagnose, correct and bulk-fix records, and sends only the changed records back for validation.
+  operates_through:
+  - PRC-05
+  child_capabilities:
+  - id: CAP-025
+    name: Record- and field-level error diagnosis
+  - id: CAP-026
+    name: Record correction and revalidation
+  - id: CAP-027
+    name: Reviewed bulk correction
+  note: Level 1 group. Its operation is the sum of its child capabilities below; it has no steps of its own.
+- id: CAP-007
+  name: Activation diagnostics and audit
+  level: 1
+  how_it_operates: Shows batch and record outcomes, records the activation history and, if confirmed, measures results against the targets.
+  operates_through:
+  - PRC-06
+  child_capabilities:
+  - id: CAP-028
+    name: Batch and record outcome reporting
+  - id: CAP-029
+    name: Activation history recording
+  - id: CAP-030
+    name: Activation outcome measurement
+  note: Level 1 group. Its operation is the sum of its child capabilities below; it has no steps of its own.
+- id: CAP-008
+  name: Activation authorization and approval
+  level: 1
+  how_it_operates: Cross-cutting and proposed (PCR-010). Holds the reserved human approvals for activation and for sensitive changes and bulk fixes. The approval authority is not decided (DEC-007).
+  operates_through:
+  - PRC-04
+  - PRC-05
+  child_capabilities:
+  - id: CAP-031
+    name: Activation approval
+  - id: CAP-032
+    name: Sensitive change authorization
+  note: Level 1 group. Its operation is the sum of its child capabilities below; it has no steps of its own.
+- id: CAP-009
+  name: Activation data protection
+  level: 1
+  how_it_operates: Cross-cutting and proposed (PCR-010). Limits who sees activation detail and how long it is kept. It supports no Task 01 objective yet (PCR-009).
+  operates_through:
+  - PRC-06
+  child_capabilities:
+  - id: CAP-033
+    name: Role-based access to activation detail
+  - id: CAP-034
+    name: Activation data retention control
+  note: Level 1 group. Its operation is the sum of its child capabilities below; it has no steps of its own.
+- id: CAP-010
+  name: Batch identification and lifecycle tracking
+  level: 2
+  parent:
+    id: CAP-001
+    name: Guided batch intake and setup
+  how_it_operates: When an administrator starts a batch, it gets an identity and a visible state. The state (awaiting input, ready for mapping, processing, needs attention) lets the administrator find and continue the right batch later.
+  exercised_by:
+  - 'PRC-01 S1: Start a new batch and give it an identity'
+  - 'PRC-01 S6: Record the batch state so the batch can be found and continued later'
+  roles:
+    performing_in_steps:
+    - STK-001
+    - System
+    owning: STK-004
+    accountable: STK-004
+    consulted:
+    - STK-002
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-20
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-011
+  coverage: OWN_STEPS
+- id: CAP-011
+  name: Batch input acceptance and structural inspection
+  level: 2
+  parent:
+    id: CAP-001
+    name: Guided batch intake and setup
+  how_it_operates: The administrator provides the employee data input, and its structure is inspected before any record is read. Problems are reported with a specific reason and kept separate from record-level errors.
+  exercised_by:
+  - 'PRC-01 S3: Provide the employee data input to the batch'
+  - 'PRC-01 S4: Inspect the input structure and report whether it can be read'
+  - 'PRC-01 S5: Review inspection results; resolve file-level problems or continue to mapping'
+  roles:
+    performing_in_steps:
+    - STK-001
+    - System
+    owning: STK-004
+    accountable: STK-004
+    consulted:
+    - STK-002
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-01 D1 Is the input structurally usable? (authority: Deterministic inspection rules owned by STK-004)'
+  - 'PRC-01 D2 Continue the batch to mapping (authority: STK-001)'
+  exceptions:
+  - EXC-01
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-009
+  - DEC-010
+  coverage: OWN_STEPS
+- id: CAP-012
+  name: Activation context capture
+  level: 2
+  parent:
+    id: CAP-001
+    name: Guided batch intake and setup
+  how_it_operates: The administrator records the context the batch needs, such as the client organization and entity scope. Which context is mandatory is not decided (DEC-010), and no story covers this yet (PCR-011).
+  exercised_by:
+  - 'PRC-01 S2: Capture the activation context for the batch, such as the client organization and entity scope'
+  roles:
+    performing_in_steps:
+    - STK-001
+    owning: STK-004
+    accountable: STK-004
+    consulted:
+    - STK-002
+    - STK-003
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions: []
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-010
+  coverage: OWN_STEPS
+- id: CAP-013
+  name: Source-to-payroll field mapping
+  level: 2
+  parent:
+    id: CAP-002
+    name: Data mapping and normalization
+  how_it_operates: Each source field is shown as mapped, unmapped or needing review, and the administrator corrects mismatches. Optional suggestions may help, but never count as approved mappings.
+  exercised_by:
+  - 'PRC-02 S1: Present each source field as mapped, unmapped or requiring review'
+  - 'PRC-02 S2: Offer optional field-mapping suggestions, clearly marked as suggestions'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-004
+    accountable: STK-003
+    consulted:
+    - STK-002
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-02
+  - EXC-05
+  business_rules: []
+  ai:
+    opportunity: AI-001
+    rejected_use: null
+    boundary_rules:
+    - AIB-001
+    - AIB-002
+    - AIB-003
+    - AIB-005
+    - AIB-006
+    - AIB-009
+    - AIB-010
+    - AIB-012
+  open_decisions:
+  - DEC-012
+  - DEC-014
+  coverage: OWN_STEPS
+- id: CAP-014
+  name: Custom pay-code mapping
+  level: 2
+  parent:
+    id: CAP-002
+    name: Data mapping and normalization
+  how_it_operates: Each source pay code is shown with its proposed payroll pay code. Unknown, conflicting or ambiguous codes are marked for review and are never treated as resolved.
+  exercised_by:
+  - 'PRC-02 S4: Present source pay codes with proposed payroll pay codes; mark unknown, conflicting or ambiguous codes for review'
+  - 'PRC-02 S5: Offer optional pay-code match suggestions'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-004
+    accountable: STK-003
+    consulted:
+    - STK-002
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-03
+  - EXC-05
+  business_rules: []
+  ai:
+    opportunity: AI-002
+    rejected_use: null
+    boundary_rules:
+    - AIB-001
+    - AIB-002
+    - AIB-003
+    - AIB-005
+    - AIB-009
+    - AIB-010
+    - AIB-012
+  open_decisions:
+  - DEC-012
+  - DEC-014
+  coverage: OWN_STEPS
+- id: CAP-015
+  name: Mapping review and approval
+  level: 2
+  parent:
+    id: CAP-002
+    name: Data mapping and normalization
+  how_it_operates: The administrator accepts, edits or rejects field and pay-code mappings and suggestions, then confirms them for validation. Whether that confirmation needs a separate approver is part of DEC-007.
+  exercised_by:
+  - 'PRC-02 S3: Review, accept, edit or reject field mappings'
+  - 'PRC-02 S6: Review and resolve pay-code mappings'
+  - 'PRC-02 S10: Confirm the reviewed mappings and assignments for use by validation'
+  roles:
+    performing_in_steps:
+    - STK-001
+    owning: STK-004
+    accountable: STK-001
+    consulted:
+    - STK-003
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-02 D1 Accept, edit or reject a mapping or a suggestion (authority: STK-001)'
+  - 'PRC-02 D3 Release reviewed mappings and assignments to validation (authority: UNRESOLVED)'
+  exceptions:
+  - EXC-02
+  - EXC-03
+  - EXC-05
+  business_rules:
+  - BR-004
+  ai: None
+  open_decisions:
+  - DEC-007
+  - DEC-012
+  - DEC-014
+  coverage: OWN_STEPS
+- id: CAP-016
+  name: Entity hierarchy resolution and inheritance
+  level: 2
+  parent:
+    id: CAP-003
+    name: Entity and jurisdiction resolution
+  how_it_operates: The entity hierarchy and inherited settings are resolved from the authoritative hierarchy source, so each record shows its effective value and where it came from. Which settings inherit is not decided (DEC-013).
+  exercised_by:
+  - 'PRC-02 S7: Resolve the entity hierarchy and inherited settings from the authoritative hierarchy source, showing each effective value and its source'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-04
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-001
+  - DEC-013
+  coverage: OWN_STEPS
+- id: CAP-017
+  name: Jurisdiction context assignment
+  level: 2
+  parent:
+    id: CAP-003
+    name: Entity and jurisdiction resolution
+  how_it_operates: Each record is assigned its jurisdiction context from the authoritative source, never by AI (AI-005). No jurisdiction is assumed (DEC-001).
+  exercised_by:
+  - 'PRC-02 S8: Assign each record its jurisdiction context from the authoritative source'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-04
+  business_rules: []
+  ai:
+    opportunity: null
+    rejected_use: AI-005
+    boundary_rules:
+    - AIB-002
+    - AIB-009
+  open_decisions:
+  - DEC-001
+  - DEC-013
+  coverage: OWN_STEPS
+- id: CAP-018
+  name: Ambiguity surfacing and resolution
+  level: 2
+  parent:
+    id: CAP-003
+    name: Entity and jurisdiction resolution
+  how_it_operates: Missing, ambiguous or conflicting assignments are flagged and the record is held until the administrator resolves them, so nothing is silently guessed (BR-004).
+  exercised_by:
+  - 'PRC-02 S9: Review assignments, including each effective value and its source; resolve flagged records'
+  roles:
+    performing_in_steps:
+    - STK-001
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-002
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-02 D2 Resolve an ambiguous or conflicting entity or jurisdiction assignment (authority: STK-001 performs; STK-003 accountable)'
+  exceptions:
+  - EXC-04
+  - EXC-23
+  business_rules:
+  - BR-004
+  ai: None
+  open_decisions:
+  - DEC-001
+  - DEC-007
+  - DEC-013
+  coverage: OWN_STEPS
+- id: CAP-019
+  name: Pre-activation data and configuration validation
+  level: 2
+  parent:
+    id: CAP-004
+    name: Pre-activation validation and simulation
+  how_it_operates: Validation runs for the whole batch, or for corrected records only, against the approved applicable rules. A rule that cannot be evaluated is reported as a limitation, never as a pass.
+  exercised_by:
+  - 'PRC-03 S1: Run pre-activation validation for the batch, or for the corrected records only'
+  - 'PRC-03 S2: Check that required data and configuration are present and consistent against the approved applicable rules'
+  - 'PRC-03 S8: Show results with the affected record and field; report any rule that could not be evaluated as a limitation, not a pass'
+  roles:
+    performing_in_steps:
+    - STK-001
+    - System
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-06
+  - EXC-09
+  - EXC-11
+  business_rules:
+  - BR-003
+  ai:
+    opportunity: null
+    rejected_use: AI-006
+    boundary_rules:
+    - AIB-002
+    - AIB-004
+  open_decisions:
+  - DEC-006
+  - DEC-015
+  coverage: OWN_STEPS
+- id: CAP-020
+  name: Issue severity classification
+  level: 2
+  parent:
+    id: CAP-004
+    name: Pre-activation validation and simulation
+  how_it_operates: Each finding is classified by severity, which decides whether the record can proceed toward activation. The classes and their effect are not decided (DEC-006), and a failed required check cannot be bypassed silently.
+  exercised_by:
+  - 'PRC-03 S7: Classify each finding by severity and determine record eligibility'
+  - 'PRC-03 S11: Route eligible records toward activation and records with issues to remediation'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-03 D1 Severity class of a finding (authority: Rules defined by STK-003; the classification policy itself is UNRESOLVED)'
+  - 'PRC-03 D2 Is the dry run a required gate before activation? (authority: UNRESOLVED)'
+  exceptions:
+  - EXC-06
+  - EXC-07
+  - EXC-08
+  - EXC-23
+  business_rules:
+  - BR-001
+  ai: None
+  open_decisions:
+  - DEC-001
+  - DEC-006
+  - DEC-007
+  - DEC-008
+  - DEC-015
+  - DEC-016
+  coverage: OWN_STEPS
+- id: CAP-021
+  name: Activation dry-run simulation
+  level: 2
+  parent:
+    id: CAP-004
+    name: Pre-activation validation and simulation
+  how_it_operates: The administrator runs a dry run against the statutory engines. It reports results and its own limitations without activating profiles or creating live payroll effects (BR-006).
+  exercised_by:
+  - 'PRC-03 S9: Run the dry run against the statutory engines without activating profiles or creating live payroll effects'
+  - 'PRC-03 S10: Review validation and dry-run results, including visible simulation limitations'
+  roles:
+    performing_in_steps:
+    - STK-001
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-10
+  business_rules:
+  - BR-006
+  ai:
+    opportunity: null
+    rejected_use: AI-007
+    boundary_rules:
+    - AIB-004
+    - AIB-011
+  open_decisions:
+  - DEC-006
+  - DEC-016
+  coverage: OWN_STEPS
+- id: CAP-022
+  name: Asynchronous batch processing and progress visibility
+  level: 2
+  parent:
+    id: CAP-005
+    name: Asynchronous batch activation and partial commit
+  how_it_operates: Activation runs in the background, so the administrator does not have to stay in the workflow. The batch shows whether it is queued, underway, completed or needs attention.
+  exercised_by:
+  - 'PRC-04 S1: Request activation of the eligible records in the batch'
+  - 'PRC-04 S3: Process activation asynchronously, so the batch continues without the user staying in the workflow'
+  - 'PRC-04 S6: Show progress and the final or attention-required state'
+  roles:
+    performing_in_steps:
+    - STK-001
+    - System
+    owning: STK-004
+    accountable: STK-004
+    consulted:
+    - STK-005
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-13
+  - EXC-14
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-006
+  - DEC-011
+  - DEC-017
+  coverage: OWN_STEPS
+- id: CAP-023
+  name: Eligible-record activation and record isolation
+  level: 2
+  parent:
+    id: CAP-005
+    name: Asynchronous batch activation and partial commit
+  how_it_operates: Each eligible record activates on its own, and a failing record is isolated without hiding other outcomes. The whole batch stops only for a condition that requires it, which DEC-006 must define.
+  exercised_by:
+  - 'PRC-04 S4: Activate each eligible record; isolate any record that fails, without erasing or hiding other outcomes'
+  - 'PRC-04 S5: Stop the whole batch only for a condition that requires it, reporting the reason and affected scope'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-004
+    accountable: STK-003
+    consulted:
+    - STK-005
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-04 D2 Isolate a record or stop the batch (authority: Rule defined by STK-003; the stop conditions are UNRESOLVED)'
+  exceptions:
+  - EXC-12
+  - EXC-13
+  business_rules:
+  - BR-001
+  - BR-002
+  - BR-003
+  ai:
+    opportunity: null
+    rejected_use: AI-008
+    boundary_rules:
+    - AIB-002
+    - AIB-007
+    - AIB-008
+  open_decisions:
+  - DEC-006
+  - DEC-011
+  coverage: OWN_STEPS
+- id: CAP-024
+  name: Processing recovery without duplicate effects
+  level: 2
+  parent:
+    id: CAP-005
+    name: Asynchronous batch activation and partial commit
+  how_it_operates: After an interruption, the payroll operations user resumes processing without duplicating completed activation effects, or the retry is refused and reported (BR-008).
+  exercised_by:
+  - 'PRC-04 S7: Recover interrupted processing without duplicating completed activation effects'
+  roles:
+    performing_in_steps:
+    - STK-005
+    owning: STK-004
+    accountable: STK-004
+    consulted:
+    - STK-003
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-04 D3 Can a retry proceed safely? (authority: STK-005 performs; STK-004 accountable)'
+  exceptions:
+  - EXC-14
+  business_rules:
+  - BR-008
+  ai: None
+  open_decisions:
+  - DEC-017
+  coverage: OWN_STEPS
+- id: CAP-025
+  name: Record- and field-level error diagnosis
+  level: 2
+  parent:
+    id: CAP-006
+    name: Remediation and bulk fixes
+  how_it_operates: The administrator opens a failing record and sees the record- and field-level reason. An optional plain-language explanation may help; errors with no safe recommendation are marked for manual investigation.
+  exercised_by:
+  - 'PRC-05 S1: Open a failing record and read the record- and field-level reason'
+  - 'PRC-05 S2: Offer an optional plain-language explanation of the message'
+  roles:
+    performing_in_steps:
+    - STK-001
+    - System
+    owning: STK-004
+    accountable: STK-004
+    consulted:
+    - STK-002
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-15
+  business_rules: []
+  ai:
+    opportunity: AI-003
+    rejected_use: null
+    boundary_rules:
+    - AIB-001
+    - AIB-002
+    - AIB-003
+    - AIB-004
+    - AIB-006
+    - AIB-010
+    - AIB-012
+  open_decisions:
+  - DEC-020
+  coverage: OWN_STEPS
+- id: CAP-026
+  name: Record correction and revalidation
+  level: 2
+  parent:
+    id: CAP-006
+    name: Remediation and bulk fixes
+  how_it_operates: The administrator corrects the record with supported data, and only that record goes back to validation. Other completed records are not reprocessed (BR-005).
+  exercised_by:
+  - 'PRC-05 S3: Offer an optional corrective suggestion tied to the reported issue'
+  - 'PRC-05 S4: Correct the record using supported data'
+  - 'PRC-05 S8: Submit only the corrected records for revalidation in PRC-03; other completed records are not reprocessed'
+  roles:
+    performing_in_steps:
+    - STK-001
+    - System
+    owning: STK-004
+    accountable: STK-001
+    consulted:
+    - STK-002
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-05 D1 Accept, edit or reject a corrective suggestion (authority: STK-001)'
+  exceptions:
+  - EXC-11
+  - EXC-15
+  - EXC-16
+  business_rules:
+  - BR-005
+  ai:
+    opportunity: AI-004
+    rejected_use: null
+    boundary_rules:
+    - AIB-001
+    - AIB-002
+    - AIB-004
+    - AIB-006
+    - AIB-007
+    - AIB-008
+    - AIB-010
+  open_decisions:
+  - DEC-020
+  coverage: OWN_STEPS
+- id: CAP-027
+  name: Reviewed bulk correction
+  level: 2
+  parent:
+    id: CAP-006
+    name: Remediation and bulk fixes
+  how_it_operates: For records with the same eligible issue, the administrator prepares one fix and sees every affected record and field before it is applied. Fields not eligible for bulk correction are blocked or routed for approval.
+  exercised_by:
+  - 'PRC-05 S5: Prepare a bulk fix for records with the same eligible issue, showing affected records and fields before application'
+  - 'PRC-05 S7: Apply the correction or the approved bulk fix to the selected records and fields only'
+  roles:
+    performing_in_steps:
+    - STK-001
+    - System
+    owning: STK-004
+    accountable: STK-003
+    consulted:
+    - STK-002
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-05 D2 Is a field eligible for bulk correction? (authority: Rule defined by STK-003; eligible fields are UNRESOLVED)'
+  exceptions:
+  - EXC-17
+  business_rules:
+  - BR-007
+  ai:
+    opportunity: null
+    rejected_use: AI-009
+    boundary_rules:
+    - AIB-002
+    - AIB-007
+    - AIB-008
+  open_decisions:
+  - DEC-007
+  - DEC-019
+  coverage: OWN_STEPS
+- id: CAP-028
+  name: Batch and record outcome reporting
+  level: 2
+  parent:
+    id: CAP-007
+    name: Activation diagnostics and audit
+  how_it_operates: The batch summary separates activated, failed and attention-required records, and each record not activated shows its reason or next action. A batch still processing is never shown as complete.
+  exercised_by:
+  - 'PRC-06 S1: Show the batch summary, distinguishing activated, failed and attention-required records; a batch still processing is not shown as complete'
+  - 'PRC-06 S2: Show, for each record not activated, its current reason or next required action'
+  - 'PRC-06 S8: Mark the batch reviewed; the hand-off to the first live payroll is a boundary (VSB-01)'
+  roles:
+    performing_in_steps:
+    - STK-001
+    - System
+    owning: STK-004
+    accountable: STK-004
+    consulted:
+    - STK-002
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-06 D2 Is the batch ready to leave review (authority: STK-001 for the batch; whether a cohort with unresolved records may go live is UNRESOLVED)'
+  exceptions:
+  - EXC-21
+  - EXC-23
+  business_rules:
+  - BR-002
+  ai: None
+  open_decisions:
+  - DEC-007
+  - DEC-021
+  coverage: OWN_STEPS
+- id: CAP-029
+  name: Activation history recording
+  level: 2
+  parent:
+    id: CAP-007
+    name: Activation diagnostics and audit
+  how_it_operates: Mapping changes, corrections, validation results, approvals and outcomes are recorded as the batch moves, so an authorized reviewer can trace how each profile reached its state.
+  exercised_by:
+  - 'PRC-06 S3: Record mapping changes, corrections, validation results, approvals and outcomes for review'
+  - 'PRC-06 S4: Review activation changes and decisions'
+  roles:
+    performing_in_steps:
+    - STK-006
+    - System
+    owning: STK-004
+    accountable: STK-006
+    consulted:
+    - STK-003
+    - STK-011
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions: []
+  business_rules: []
+  ai: None
+  open_decisions: []
+  coverage: OWN_STEPS
+- id: CAP-030
+  name: Activation outcome measurement
+  level: 2
+  parent:
+    id: CAP-007
+    name: Activation diagnostics and audit
+  how_it_operates: 'Outcomes are measured against the program targets. This is provisional: it is in scope only if DEC-023 is decided, and baselines are pending (DEC-005).'
+  exercised_by:
+  - 'PRC-06 S7: Report outcomes against the target metrics'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-004
+    accountable: STK-010
+    consulted:
+    - STK-002
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions: []
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-023
+  coverage: OWN_STEPS
+- id: CAP-031
+  name: Activation approval
+  level: 2
+  parent:
+    id: CAP-008
+    name: Activation authorization and approval
+  how_it_operates: Before processing starts, an authorized person approves activation of the eligible records. Who that person is, and at what scope, is not decided (DEC-007); AI can never approve.
+  exercised_by:
+  - 'PRC-04 S2: Approve activation of the batch or of the eligible records'
+  roles:
+    performing_in_steps:
+    - UNRESOLVED (DEC-007)
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-04 D1 Approve activation (authority: UNRESOLVED)'
+  exceptions:
+  - EXC-19
+  business_rules: []
+  ai:
+    opportunity: null
+    rejected_use: AI-008
+    boundary_rules:
+    - AIB-002
+    - AIB-007
+    - AIB-008
+  open_decisions:
+  - DEC-007
+  coverage: OWN_STEPS
+- id: CAP-032
+  name: Sensitive change authorization
+  level: 2
+  parent:
+    id: CAP-008
+    name: Activation authorization and approval
+  how_it_operates: A sensitive correction, or a bulk fix that needs approval, is held until an authorized person decides, and the decision and decider are recorded. The approver is not decided (DEC-007).
+  exercised_by:
+  - 'PRC-05 S6: Authorize a sensitive change or a bulk fix that needs approval'
+  roles:
+    performing_in_steps:
+    - UNRESOLVED (DEC-007)
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-001
+    - STK-011
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-05 D3 Authorize a sensitive change or bulk fix (authority: UNRESOLVED)'
+  exceptions:
+  - EXC-18
+  - EXC-22
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-007
+  - DEC-008
+  coverage: OWN_STEPS
+- id: CAP-033
+  name: Role-based access to activation detail
+  level: 2
+  parent:
+    id: CAP-009
+    name: Activation data protection
+  how_it_operates: Sensitive employee details are visible only to roles authorized to see them (BR-009). The visibility rules are not decided (DEC-008).
+  exercised_by:
+  - 'PRC-06 S5: Limit visibility of sensitive activation detail to authorized roles'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-011
+    accountable: STK-011
+    consulted:
+    - STK-012
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points:
+  - 'PRC-06 D1 Who may see sensitive activation detail (authority: Rules owned by STK-011 (inferred role); the rules themselves are UNRESOLVED)'
+  exceptions: []
+  business_rules:
+  - BR-009
+  ai: None
+  open_decisions:
+  - DEC-008
+  coverage: OWN_STEPS
+- id: CAP-034
+  name: Activation data retention control
+  level: 2
+  parent:
+    id: CAP-009
+    name: Activation data protection
+  how_it_operates: Activation data is kept only as long as agreed, then handled according to the retention rules, which are not decided (DEC-008).
+  exercised_by:
+  - 'PRC-06 S6: Keep activation data only as long as agreed, and handle it according to the retention rules'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-011
+    accountable: STK-011
+    consulted:
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions: []
+  business_rules: []
+  ai: None
+  open_decisions: []
+  coverage: OWN_STEPS
+- id: CAP-035
+  name: Compensation framework validation
+  level: 3
+  parent:
+    id: CAP-019
+    name: Pre-activation data and configuration validation
+  how_it_operates: Each record's compensation framework settings are checked against the approved rules before activation, and a failure is reported with the record and field.
+  exercised_by:
+  - 'PRC-03 S3: Validate the compensation framework settings of each record'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-06
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-006
+  - DEC-015
+  coverage: OWN_STEPS
+- id: CAP-036
+  name: Tax jurisdiction and withholding validation
+  level: 3
+  parent:
+    id: CAP-019
+    name: Pre-activation data and configuration validation
+  how_it_operates: Each record's tax jurisdiction and statutory withholding settings are checked against the approved rules. No jurisdiction or rule set is assumed (DEC-001, DEC-015).
+  exercised_by:
+  - 'PRC-03 S4: Validate tax jurisdiction and statutory withholding settings of each record'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-07
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-001
+  - DEC-006
+  - DEC-015
+  coverage: OWN_STEPS
+- id: CAP-037
+  name: Benefit plan assignment validation
+  level: 3
+  parent:
+    id: CAP-019
+    name: Pre-activation data and configuration validation
+  how_it_operates: Each record's benefit plan assignments are checked against the approved rules before activation.
+  exercised_by:
+  - 'PRC-03 S5: Validate benefit plan assignments of each record'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-004
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-06
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-006
+  - DEC-015
+  coverage: OWN_STEPS
+- id: CAP-038
+  name: Direct-deposit banking detail validation
+  level: 3
+  parent:
+    id: CAP-019
+    name: Pre-activation data and configuration validation
+  how_it_operates: Each record's direct-deposit banking details are validated before activation, without exposing full values to unauthorized users. An unexpected change to banking details may need review as a possible risk indicator (EXC-22, proposed).
+  exercised_by:
+  - 'PRC-03 S6: Validate direct-deposit banking details of each record, without exposing full values'
+  roles:
+    performing_in_steps:
+    - System
+    owning: STK-003
+    accountable: STK-003
+    consulted:
+    - STK-004
+    - STK-011
+    basis: ASSUMPTION (ARC-004)
+  decision_points: []
+  exceptions:
+  - EXC-08
+  - EXC-22
+  business_rules: []
+  ai: None
+  open_decisions:
+  - DEC-006
+  - DEC-007
+  - DEC-008
+  coverage: OWN_STEPS
