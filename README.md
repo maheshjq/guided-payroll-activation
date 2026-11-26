@@ -37,6 +37,7 @@ Read in this order for the full picture.
 | [Tech stack and architecture](./tech-stack.md) | Proposed Google Cloud stack, security posture, and architecture diagrams |
 | [Solution architecture diagram](./docs/solution-architecture.svg) | Layered one-page diagram (SVG) |
 | [Architecture Requirements Assessment](./docs/solution/SOL-001-architecture-requirements-assessment.md) | Task 04.1 draft: capabilities, systems, actors, integrations, data, requirements, gaps and decisions for solution architecture |
+| [Enterprise Architecture View](./docs/solution/SOL-002-enterprise-architecture-view.md) | Task 04.2 draft: six architecture domains, relationship matrix, registers and enterprise diagram |
 | [Project recap](./docs/project-recap.md) | Plain-language summary of what was done so far and why, with diagrams |
 | [Claude Code task prompts](./docs/prompts/) | Ready-to-run prompts in order: Task 01, Task 02, Task 03 Part 1 (operational process foundation), Task 04.2 (enterprise architecture view). The Task 03 Part 2 prompt will be written when its learning guide is available |
 
