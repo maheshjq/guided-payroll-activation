@@ -1,0 +1,28 @@
+flowchart LR
+    %% ARC-005 Level 1 capability dependencies. DRAFT.
+    %% An arrow runs from the provider to the dependent capability. Dashed is the revalidation loop.
+    CAP001["CAP-001 Guided batch intake and setup"]
+    CAP002["CAP-002 Data mapping and normalization"]
+    CAP003["CAP-003 Entity and jurisdiction resolution"]
+    CAP004["CAP-004 Pre-activation validation and simulation"]
+    CAP005["CAP-005 Asynchronous batch activation and partial commit"]
+    CAP006["CAP-006 Remediation and bulk fixes"]
+    CAP007["CAP-007 Activation diagnostics and audit"]
+    CAP008["CAP-008 Activation authorization and approval"]
+    CAP009["CAP-009 Activation data protection"]
+    CAP001 -->|"CD-001"| CAP002
+    CAP001 -->|"CD-002"| CAP003
+    CAP002 -->|"CD-003"| CAP003
+    CAP002 -->|"CD-004"| CAP004
+    CAP003 -->|"CD-005"| CAP004
+    CAP004 -->|"CD-006"| CAP005
+    CAP008 -->|"CD-007"| CAP005
+    CAP004 -->|"CD-008"| CAP006
+    CAP005 -->|"CD-009"| CAP006
+    CAP006 -.->|"CD-010"| CAP004
+    CAP008 -->|"CD-011"| CAP006
+    CAP005 -->|"CD-012"| CAP007
+    CAP002 -->|"CD-013"| CAP007
+    CAP004 -->|"CD-014"| CAP007
+    CAP006 -->|"CD-015"| CAP007
+    CAP009 -->|"CD-016"| CAP007

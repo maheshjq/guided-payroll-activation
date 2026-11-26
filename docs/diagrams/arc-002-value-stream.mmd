@@ -1,0 +1,22 @@
+flowchart LR
+    %% ARC-002 guided activation value stream. DRAFT.
+    %% VSB-01 is a boundary pending DEC-021, not an in-scope stage.
+    VS01["VS-01 Prepare batch"]
+    VS02["VS-02 Map and resolve"]
+    VS03["VS-03 Validate and simulate"]
+    VS04["VS-04 Process activation"]
+    VS05["VS-05 Remediate exceptions"]
+    VS06["VS-06 Review outcome"]
+    VSB01["VSB-01 Hand-off to first live payroll, boundary pending DEC-021"]
+    XC["CAP-008 and CAP-009 apply across all stages"]
+    VS01 --> VS02 --> VS03
+    VS03 -->|"Eligible records"| VS04
+    VS03 -->|"Records with errors"| VS05
+    VS04 -->|"Isolated record failures"| VS05
+    VS05 -->|"Corrected records revalidated"| VS03
+    VS04 --> VS06
+    VS05 -.->|"Unresolved records stay visible"| VS06
+    VS06 -.-> VSB01
+    XC -.- VS04
+    XC -.- VS05
+    XC -.- VS06

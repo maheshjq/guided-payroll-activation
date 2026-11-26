@@ -1,0 +1,28 @@
+flowchart TB
+    %% OPS-002 operational process overview. DRAFT, proposed processes.
+    %% Hexagons are reserved human decisions whose authority is UNRESOLVED (DEC-007).
+    START(["Administrator starts a batch"])
+    P1["PRC-01 Prepare and inspect batch<br/>VS-01"]
+    P2["PRC-02 Map data and resolve context<br/>VS-02"]
+    P3["PRC-03 Validate and simulate<br/>VS-03"]
+    G1{{"Activation approval<br/>DEC-007 unresolved"}}
+    P4["PRC-04 Process activation, partial commit<br/>VS-04"]
+    P5["PRC-05 Remediate and revalidate<br/>VS-05"]
+    G2{{"Sensitive change or bulk fix approval<br/>DEC-007 unresolved"}}
+    P6["PRC-06 Review outcomes and history<br/>VS-06"]
+    B1["VSB-01 Hand-off to first live payroll<br/>boundary, DEC-021"]
+    START --> P1
+    P1 -->|"usable input"| P2
+    P1 -.->|"EXC-01 unusable input"| P1
+    P2 -->|"reviewed mappings"| P3
+    P3 -->|"eligible records"| G1
+    G1 -->|"approved"| P4
+    P3 -->|"records with findings<br/>EXC-06 to EXC-10"| P5
+    P4 -->|"isolated failures EXC-12"| P5
+    P5 --> G2
+    G2 -->|"authorized"| P5
+    P5 -->|"corrected records only"| P3
+    P4 -->|"outcomes"| P6
+    P5 -.->|"unresolved records stay visible"| P6
+    P6 -.->|"records needing attention"| P5
+    P6 -.-> B1
