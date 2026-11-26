@@ -143,4 +143,4 @@ flowchart LR
 - Still open: the blocking decisions (jurisdiction, KPI baselines, blocking and approval policy, sponsor) and the unvalidated assumptions.
 - Known gaps: the data protection capability supports no objective yet, and three capabilities have no backlog story.
 - Fixed in Task 03: every YAML file now passes a standard parser, and all diagrams render.
-- Next: review the Task 03 Part 1 output, decide or leave open DEC-006 and DEC-007, fill in the REVIEW lines, then run Task 03 Part 2 (state model, rules and decisions, requirements, controls, traceability and the consolidated operational blueprint).
+- Next: review the Task 03 Part 1 output, decide or leave open DEC-006 and DEC-007, then write and run the Task 03 Part 2 prompt once its learning guide is available, covering the state model, rules and decisions, requirements, controls, traceability and the consolidated operational blueprint.
