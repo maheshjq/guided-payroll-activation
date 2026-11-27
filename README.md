@@ -38,7 +38,7 @@ Read in this order for the full picture.
 | [Solution architecture diagram](./docs/solution-architecture.svg) | Layered one-page diagram (SVG) |
 | [Architecture Requirements Assessment](./docs/solution/SOL-001-architecture-requirements-assessment.md) | Task 04.1 draft: capabilities, systems, actors, integrations, data, requirements, gaps and decisions for solution architecture |
 | [Project recap](./docs/project-recap.md) | Plain-language summary of what was done so far and why, with diagrams |
-| [Claude Code task prompts](./docs/prompts/) | Ready-to-run prompts in order: Task 01, Task 02, Task 03 Part 1 (operational process foundation), Task 04.2 (enterprise architecture view). The Task 03 Part 2 prompt will be written when its learning guide is available |
+| [Claude Code task prompts](./docs/prompts/) | Ready-to-run prompts in order: Task 01, Task 02, Task 03 Part 1 (operational process foundation), Task 04.2 (enterprise architecture view), Task 04.3 (solution architecture blueprint). The Task 03 Part 2 prompt will be written when its learning guide is available |
 
 ## Epics
 
